@@ -3,70 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ralph Xpert Platform</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <title>Ralph Xpert</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    img.logo {
+      width: 180px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #ff0000;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: block;
+      margin: 15px auto;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-inscrire {
+      background: linear-gradient(45deg, #ff0000, #ff4d4d);
+      color: white;
+      box-shadow: 0 0 15px #ff0000aa;
+    }
+
+    .btn-rechercher {
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+      color: white;
+      box-shadow: 0 0 15px #00c6ffaa;
+    }
+
+    .btn-copy {
+      background: linear-gradient(45deg, #ff9900, #ffcc00);
+      color: black;
+      box-shadow: 0 0 15px #ffcc00aa;
+    }
+
+    .btn-groupe {
+      background: linear-gradient(45deg, #00cc66, #33ff99);
+      color: white;
+      box-shadow: 0 0 15px #33ff99aa;
+    }
+
+    .btn-chaine {
+      background: linear-gradient(45deg, #9900cc, #cc66ff);
+      color: white;
+      box-shadow: 0 0 15px #cc66ffaa;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <img src="assets/logo.png" alt="Ralph Xpert Logo" class="logo" />
-    <h1>Bienvenue sur la plateforme Ralph Xpert 📈</h1>
-    <p>Inscrivez-vous pour augmenter vos vues 🚀</p>
-  </header>
 
-  <section class="counter-section">
-    <h2>Total de contacts inscrits: <span id="contactCount">0</span></h2>
-    <div class="progress-bar">
-      <div class="progress" id="progressValue" style="width: 0%;">0%</div>
-    </div>
-  </section>
+  <img src="logo.png" alt="Logo Ralph Xpert" class="logo" />
 
-  <section class="form-section">
-    <form id="contactForm">
-      <label for="name">Nom et prénom :</label>
-      <input type="text" id="name" name="name" required /
-      <label for="countryCode">Code du pays :</label>
-      <select id="countryCode" name="countryCode" required>
-        <option value="">Sélectionnez le code du pays</option>
-        <option value="+509">🇭🇹 Haïti (+509)</option>
-        <option value="+1">🇺🇸 USA (+1)</option>
-        <option value="+33">🇫🇷 France (+33)</option>
-        <option value="+1">🇨🇦 Canada (+1)</option>
-        <option value="+229">🇧🇯 Bénin (+229)</option>
-        <!-- ajoute plis si ou vle -->
-      </select>
+  <h1>Bienvenue sur Ralph Xpert</h1>
 
-      <label for="phone">Numéro de téléphone :</label>
-      <input type="tel" id="phone" name="phone" required />
+  <button class="btn btn-inscrire">📝 S’inscrire</button>
+  <button class="btn btn-rechercher">🔍 Rechercher / Modifier vos contacts</button>
+  <button class="btn btn-copy" onclick="navigator.clipboard.writeText(window.location.href)">📋 Copier le lien</button>
+  <button class="btn btn-groupe" onclick="window.open('https://wa.me/YOUR-GROUP-LINK', '_blank')">👥 Rejoindre le groupe</button>
+  <button class="btn btn-chaine" onclick="window.open('https://wa.me/YOUR-CHANNEL-LINK', '_blank')">📢 Rejoindre la chaîne</button>
 
-      <div class="terms">
-        <input type="checkbox" id="terms" required />
-        <label for="terms">J’accepte les <a href="#">conditions générales</a></label>
-      </div>
-
-      <button type="submit">Vérifier votre nom</button>
-    </form>
-  </section>
-
-  <section class="guides">
-    <h3>Comment ça marche ?</h3>
-    <ul>
-      <li>✅ Télécharger votre fichier VCF</li>
-      <li>📈 Rejoignez la communauté Ralph Xpert</li>
-      <li>🔥 Boostez vos vues</li>
-    </ul>
-
-    <h3>Partage & Réseaux</h3>
-    <ul>
-      <li>🔗 Copier le lien WhatsApp</li>
-      <li>👥 Rejoignez le groupe WhatsApp</li>
-      <li>📢 Rejoignez la chaîne WhatsApp</li>
-    </ul>
-
-    <h3>❓ Questions fréquemment posées</h3>
-    <p>À venir...</p>
-  </section>
-
-  <script src="script.js"></script>
 </body>
 </html>
