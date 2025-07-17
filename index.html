@@ -1,23 +1,19 @@
 <!DOCTYPE html><html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ralph Xpert</title>
-  <style>
-<body>
-  <div style="max-width: 400px; margin: 50px auto; background: #121212; border-radius: 16px; padding: 30px 25px; box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4); color: white; font-family: 'Segoe UI', sans-serif;">
+<body style="background-color: #000; font-family: 'Segoe UI', sans-serif; padding: 40px 20px; color: #ddd;">
+
+  <div style="max-width: 400px; margin: 50px auto; background: #121212; border-radius: 16px; padding: 30px 25px; box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4);">
     <img src="logo.png" alt="Logo Ralph Xpert" style="width: 150px; display: block; margin: 0 auto 30px;" />
     <h1 style="color: #ff3b3b; font-weight: 700; font-size: 28px; text-align: center; margin-bottom: 20px;">
       🎯 Bienvenue sur Ralph Xpert
     </h1>
-    <p style="font-size: 15px; line-height: 1.5; color: #ddd; text-align: center; margin-bottom: 30px;">
+    <p style="font-size: 15px; line-height: 1.5; color: #bbb; text-align: center; margin-bottom: 30px;">
       Ralph Xpert vous ouvre les portes d’un nouveau niveau de visibilité.<br>
       Préparez-vous à faire passer votre statut WhatsApp à un tout autre niveau !
     </p>
 
     <form onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 15px;">
-      <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" required style="padding: 12px 15px; border-radius: 12px; border: none; font-size: 14px;"/>
-      <select id="code-pays" required style="padding: 12px 15px; border-radius: 12px; border: none; font-size: 14px;">
+      <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" required style="padding: 12px 15px; border-radius: 12px; border: none; font-size: 14px; background: #222; color: #eee;" />
+      <select id="code-pays" required style="padding: 12px 15px; border-radius: 12px; border: none; font-size: 14px; background: #222; color: #eee;">
         <option value="+509">🇭🇹 Haïti (+509)</option>
         <option value="+1">🇺🇸 USA (+1)</option>
         <option value="+33">🇫🇷 France (+33)</option>
@@ -25,15 +21,13 @@
         <option value="+229">🇷🇫 Bénin (+229)</option>
         <option value="+221">🇸🇳 Sénégal (+221)</option>
       </select>
-      <input type="tel" id="numero" placeholder="Numéro (ex: 45xx xxxx)" required pattern="[0-9\s]+" style="padding: 12px 15px; border-radius: 12px; border: none; font-size: 14px;"/>
+      <input type="tel" id="numero" placeholder="Numéro (ex: 45xx xxxx)" required pattern="[0-9\s]+" style="padding: 12px 15px; border-radius: 12px; border: none; font-size: 14px; background: #222; color: #eee;" />
       <button type="submit" style="background: linear-gradient(45deg, #ff0000, #ff4d4d); color: white; padding: 14px 0; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 16px; transition: background 0.3s ease;">
         📝 S’inscrire
       </button>
     </form>
   </div>
 </body>
-</form>
-
 <button class="btn btn-rechercher" onclick="window.location.href='recherche.html'">🔍 Rechercher / Modifier vos contacts</button>
 <button class="btn btn-copy" onclick="navigator.clipboard.writeText(window.location.href)">📋 Copier le lien</button>
 
