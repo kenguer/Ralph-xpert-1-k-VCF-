@@ -13,13 +13,14 @@
       padding: 40px 20px;
     }
 
-    input {
+    input, select {
       padding: 12px;
       margin: 10px auto;
       width: 90%;
       border-radius: 10px;
       border: none;
       font-size: 16px;
+      display: block;
     }
 
     .btn {
@@ -30,17 +31,63 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 15px;
+      margin: 20px auto;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <h1>🔍 Rechercher ou Modifier votre contact</h1>
+  <h1>🔍 Rechercher ou Modifier</h1>
 
-  <input type="text" placeholder="Entrez votre nom complet" />
-  <input type="text" placeholder="Nouveau nom (si vous voulez modifier)" />
-  <button class="btn">✅ Rechercher / Modifier</button>
+  <!-- Rechèch non -->
+  <input type="text" id="searchName" placeholder="Antre non ou (ex: Ralph Xpert)" />
+  <button class="btn" onclick="rechercher()">Rechercher</button>
+
+  <!-- Fòm modifikasyon (ap parèt aprè rechèch) -->
+  <div id="modifierSection" class="hidden">
+    <input type="text" id="nomModif" placeholder="Non" />
+    
+    <select id="codePays">
+      <option value="+509">🇭🇹 Haïti (+509)</option>
+      <option value="+1">🇺🇸 USA (+1)</option>
+      <option value="+33">🇫🇷 France (+33)</option>
+      <option value="+44">🇬🇧 UK (+44)</option>
+    </select>
+    
+    <input type="text" id="numeroModif" placeholder="Numéro (ex: 45xx xxxx)" />
+    
+    <button class="btn" onclick="modifier()">✅ Modifye</button>
+  </div>
+
+  <script>
+    function rechercher() {
+      const name = document.getElementById("searchName").value.trim();
+
+      if (name === "") {
+        alert("Tanpri antre non ou pou w chèche!");
+        return;
+      }
+
+      // Imajine w jwenn done sa yo
+      document.getElementById("nomModif").value = name;
+      document.getElementById("codePays").value = "+509";
+      document.getElementById("numeroModif").value = "4599 9999";
+
+      document.getElementById("modifierSection").classList.remove("hidden");
+    }
+
+    function modifier() {
+      const newName = document.getElementById("nomModif").value;
+      const newCode = document.getElementById("codePays").value;
+      const newNumber = document.getElementById("numeroModif").value;
+
+      alert("Done modifye!\nNouvo non: " + newName + "\nPeyi: " + newCode + "\nNuméro: " + newNumber);
+    }
+  </script>
 
 </body>
 </html>
