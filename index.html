@@ -100,6 +100,17 @@
   <button class="btn btn-copy" onclick="navigator.clipboard.writeText(window.location.href)">📋 Copier le lien</button>
   <button class="btn btn-groupe" onclick="window.open('https://wa.me/YOUR-GROUP-LINK', '_blank')">👥 Rejoindre le groupe</button>
   <button class="btn btn-chaine" onclick="window.open('https://wa.me/YOUR-CHANNEL-LINK', '_blank')">📢 Rejoindre la chaîne</button>
+<script>
+  function submitForm(event) {
+    event.preventDefault();
+    const nom = document.getElementById("nom").value;
+    const code = document.getElementById("code-pays").value;
+    const numero = document.getElementById("numero").value;
 
+    const fullNumber = code + " " + numero;
+
+    alert("Merci " + nom + "!\nNous avons bien reçu votre numéro : " + fullNumber);
+  }
+</script>
 </body>
 </html>
