@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,84 +10,83 @@
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       padding: 40px 20px;
-    }
+    }img.logo {
+  width: 180px;
+  margin-bottom: 30px;
+}
 
-    img.logo {
-      width: 180px;
-      margin-bottom: 30px;
-    }
+.btn {
+  display: block;
+  margin: 15px auto;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-    h1 {
-      font-size: 32px;
-      color: #ff0000;
-      margin-bottom: 20px;
-    }
+.btn:hover {
+  transform: scale(1.05);
+}
 
-    .btn {
-      display: block;
-      margin: 15px auto;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+.btn-inscrire {
+  background: linear-gradient(45deg, #ff0000, #ff4d4d);
+  color: white;
+  box-shadow: 0 0 15px #ff0000aa;
+}
 
-    .btn:hover {
-      transform: scale(1.05);
-    }
+.btn-rechercher {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  color: white;
+  box-shadow: 0 0 15px #00c6ffaa;
+}
 
-    .btn-inscrire {
-      background: linear-gradient(45deg, #ff0000, #ff4d4d);
-      color: white;
-      box-shadow: 0 0 15px #ff0000aa;
-    }
+.btn-copy {
+  background: linear-gradient(45deg, #ff9900, #ffcc00);
+  color: black;
+  box-shadow: 0 0 15px #ffcc00aa;
+}
 
-    .btn-rechercher {
-      background: linear-gradient(45deg, #007bff, #00c6ff);
-      color: white;
-      box-shadow: 0 0 15px #00c6ffaa;
-    }
+.btn-groupe {
+  background: linear-gradient(45deg, #00cc66, #33ff99);
+  color: white;
+  box-shadow: 0 0 15px #33ff99aa;
+}
 
-    .btn-copy {
-      background: linear-gradient(45deg, #ff9900, #ffcc00);
-      color: black;
-      box-shadow: 0 0 15px #ffcc00aa;
-    }
+.btn-chaine {
+  background: linear-gradient(45deg, #9900cc, #cc66ff);
+  color: white;
+  box-shadow: 0 0 15px #cc66ffaa;
+}
 
-    .btn-groupe {
-      background: linear-gradient(45deg, #00cc66, #33ff99);
-      color: white;
-      box-shadow: 0 0 15px #33ff99aa;
-    }
-
-    .btn-chaine {
-      background: linear-gradient(45deg, #9900cc, #cc66ff);
-      color: white;
-      box-shadow: 0 0 15px #cc66ffaa;
-    }
   </style>
 </head>
 <body>
-
-  <img src="logo.png" alt="Logo Ralph Xpert" class="logo" />
-  <h1>Bienvenue sur Ralph Xpert</h1>
-<p style="font-size: 18px; margin-top: -10px; color: #ccc;">
-  Dès aujourd’hui, Ralph Xpert vous ouvre les portes d’un nouveau niveau de visibilité. <br />
-  Préparez-vous à faire passer votre statut WhatsApp à un tout autre niveau !
-</p>
-
-<form onsubmit="submitForm(event)">
+  <img src="logo.png" alt="Logo Ralph Xpert" class="logo" />  <!-- Header avec background pro -->  <div style="
+    background-color: #111;
+    color: #ccc;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    max-width: 800px;
+    margin: 40px auto;
+  ">
+    <h1 style="font-size: 32px; color: #ff0000;">🎯 Bienvenue sur Ralph Xpert</h1>
+    <p style="font-size: 16px; margin-bottom: 30px;">
+      Ralph Xpert vous ouvre les portes d’un nouveau niveau de visibilité.<br>
+      Préparez-vous à faire passer votre statut WhatsApp à un tout autre niveau !
+    </p><form onsubmit="submitForm(event)">
   <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" style="margin-bottom:10px; padding:10px; width:90%; border-radius:8px; border:none;" />
-  
+
   <select style="margin-bottom:10px; padding:10px; width:90%; border-radius:8px; border:none;" id="code-pays">
     <option value="+509">🇭🇹 Haïti (+509)</option>
     <option value="+1">🇺🇸 USA (+1)</option>
     <option value="+33">🇫🇷 France (+33)</option>
     <option value="+44">🇬🇧 UK (+44)</option>
-    <option value="+229">🇧🇯 Bénin (+229)</option>
+    <option value="+229">🇷🇫 Bénin (+229)</option>
     <option value="+221">🇸🇳 Sénégal (+221)</option>
   </select>
 
@@ -96,100 +94,85 @@
 
   <button type="submit" class="btn btn-inscrire">📝 S’inscrire</button>
 </form>
-  <button class="btn btn-rechercher" onclick="window.location.href='recherche.html'">🔍 Rechercher / Modifier vos contacts</button>
 
-  <div style="margin-top: 30px; text-align: left; background-color: #111; padding: 20px; border-radius: 12px; color: #ccc; max-width: 700px; margin-left: auto; margin-right: auto;">
-  <h2 style="color: #fff; font-size: 22px;">📘 Comment ça marche</h2>
-  <ol style="line-height: 1.7;">
-    <li><strong>Téléchargez le modèle de contact</strong><br>Obtenez un fichier VCF à personnaliser avec vos informations.</li>
-    <li><strong>Ajoutez vos coordonnées</strong><br>Remplissez votre nom, code pays et numéro WhatsApp dans le fichier.</li>
-    <li><strong>Intégrez la communauté</strong><br>Une fois votre contact ajouté, il sera partagé avec tous les membres.</li>
-    <li><strong>Générez plus de vues</strong><br>Profitez d’un système de vues croisées pour booster vos statuts WhatsApp.</li>
-  </ol>
-  </div>
-  <!-- TITRE: Groupe WhatsApp -->
-<h2 style="
-  font-weight: bold;
-  color: #00cc66;
-  margin-top: 40px;
-">🔗 Rejoignez le groupe WhatsApp</h2>
+<button class="btn btn-rechercher" onclick="window.location.href='recherche.html'">🔍 Rechercher / Modifier vos contacts</button>
+<button class="btn btn-copy" onclick="navigator.clipboard.writeText(window.location.href)">📋 Copier le lien</button>
 
-<!-- Bouton Groupe -->
-<a href="https://wa.me/votre-lien-groupe" target="_blank" style="
-  display: inline-block;
-  background: linear-gradient(45deg, #00cc66, #33ff99);
-  color: white;
-  font-weight: bold;
-  padding: 12px 20px;
-  margin-top: 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 0 10px #33ff99aa;
-">👥 Rejoindre le groupe</a>
-
-<!-- TITRE: Chaîne WhatsApp -->
-<h2 style="
-  font-weight: bold;
-  color: #9900cc;
-  margin-top: 40px;
-">📢 Rejoignez la chaîne WhatsApp</h2>
-
-<!-- Bouton Chaîne -->
-<a href="https://wa.me/votre-lien-chaine" target="_blank" style="
-  display: inline-block;
-  background: linear-gradient(45deg, #9900cc, #cc66ff);
-  color: white;
-  font-weight: bold;
-  padding: 12px 20px;
-  margin-top: 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 0 10px #cc66ffaa;
-">📢 Rejoindre la chaîne</a>
-</div>
-<script>
-  function submitForm(event) {
-    event.preventDefault();
-    const nom = document.getElementById("nom").value;
-    const code = document.getElementById("code-pays").value;
-    const numero = document.getElementById("numero").value;
-
-    const fullNumber = code + " " + numero;
-
-    alert("Merci " + nom + "!\nNous avons bien reçu votre numéro : " + fullNumber);
-  }
-</script>
-<div style="
-  background-color: #111;
-  color: #ccc;
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 40px;
-  text-align: left;
-  backdrop-filter: blur(5px);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-">
-  <h2 style="color: #00c6ff;">❓ Questions fréquemment posées</h2>
-  <ul style="line-height: 1.8;">
-    <li>
-      <span style="color: #00c6ff;"><strong>📁 Comment obtenir le fichier ?</strong></span><br>
-      Il vous suffit de rejoindre le groupe ou la chaîne WhatsApp.
-    </li>
-    <li>
-      <span style="color: #00c6ff;"><strong>💸 Est-ce gratuit ?</strong></span><br>
-      Oui, c’est 100% gratuit et ouvert à tous.
-    </li>
-    <li>
-      <span style="color: #00c6ff;"><strong>📈 Combien de vues je peux gagner ?</strong></span><br>
-      Ça dépend du nombre de participants actifs — plus on est, mieux c’est.
-    </li>
-    <li>
-      <span style="color: #00c6ff;"><strong>🔒 Mon numéro est-il visible ?</strong></span><br>
-      Oui, uniquement par les membres du groupe/chaîne dans le fichier partagé.
-    </li>
-  </ul>
-</div>
-</body>
-</html>
+  </div>  <!-- Comment ça marche -->  <div style="margin-top: 30px; text-align: left; background-color: #111; padding: 20px; border-radius: 12px; color: #ccc; max-width: 700px; margin-left: auto; margin-right: auto;">
+    <h2 style="color: #fff; font-size: 22px;">📘 Comment ça marche</h2>
+    <ol style="line-height: 1.7;">
+      <li><strong>Téléchargez le modèle de contact</strong><br>Obtenez un fichier VCF à personnaliser avec vos informations.</li>
+      <li><strong>Ajoutez vos coordonnées</strong><br>Remplissez votre nom, code pays et numéro WhatsApp dans le fichier.</li>
+      <li><strong>Intégrez la communauté</strong><br>Une fois votre contact ajouté, il sera partagé avec tous les membres.</li>
+      <li><strong>Générez plus de vues</strong><br>Profitez d’un système de vues croisées pour booster vos statuts WhatsApp.</li>
+    </ol>
+  </div>  <!-- Groupe WhatsApp -->  <div style="
+    background-color: #111;
+    color: #ccc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 40px;
+    text-align: left;
+    backdrop-filter: blur(5px);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  ">
+    <h2 style="color: #00cc66;">🔗 Rejoignez le groupe WhatsApp</h2>
+    <a href="https://wa.me/votre-lien-groupe" target="_blank" style="
+      display: inline-block;
+      background: linear-gradient(45deg, #00cc66, #33ff99);
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      margin-top: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 0 10px #33ff99aa;
+    ">👥 Rejoindre le groupe</a>
+  </div>  <!-- Chaine WhatsApp -->  <div style="
+    background-color: #111;
+    color: #ccc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 40px;
+    text-align: left;
+    backdrop-filter: blur(5px);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  ">
+    <h2 style="color: #9900cc;">📢 Rejoignez la chaîne WhatsApp</h2>
+    <a href="https://wa.me/votre-lien-chaine" target="_blank" style="
+      display: inline-block;
+      background: linear-gradient(45deg, #9900cc, #cc66ff);
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      margin-top: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 0 10px #cc66ffaa;
+    ">📢 Rejoindre la chaîne</a>
+  </div>  <!-- FAQ -->  <div style="
+    background-color: #111;
+    color: #ccc;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 40px;
+    text-align: left;
+    backdrop-filter: blur(5px);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  ">
+    <h2 style="color: #00c6ff;">❓ Questions fréquemment posées</h2>
+    <ul style="line-height: 1.8;">
+      <li><span style="color: #00c6ff;"><strong>📁 Comment obtenir le fichier ?</strong></span><br>Il vous suffit de rejoindre le groupe ou la chaîne WhatsApp.</li>
+      <li><span style="color: #00c6ff;"><strong>💸 Est-ce gratuit ?</strong></span><br>Oui, c’est 100% gratuit et ouvert à tous.</li>
+      <li><span style="color: #00c6ff;"><strong>📈 Combien de vues je peux gagner ?</strong></span><br>Ça dépend du nombre de participants actifs — plus on est, mieux c’est.</li>
+      <li><span style="color: #00c6ff;"><strong>🔒 Mon numéro est-il visible ?</strong></span><br>Oui, uniquement par les membres du groupe/chaîne dans le fichier partagé.</li>
+    </ul>
+  </div>  <script>
+    function submitForm(event) {
+      event.preventDefault();
