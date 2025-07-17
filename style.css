@@ -1,0 +1,140 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f6f8fa;
+  color: #222;
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+/* Logo + Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  color: #0a58ca;
+}
+
+header p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Counter Section */
+.counter-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.counter-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  background: #ddd;
+  border-radius: 30px;
+  overflow: hidden;
+  height: 24px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.progress {
+  background-color: #0a58ca;
+  color: #fff;
+  text-align: center;
+  height: 100%;
+  line-height: 24px;
+  font-size: 0.9rem;
+}
+
+/* Form Section */
+.form-section {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.form-section label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+.form-section input,
+.form-section select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-section .terms {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-section button {
+  background-color: #0a58ca;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-section button:hover {
+  background-color: #0848a5;
+}
+
+/* Guides Section */
+.guides {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.guides h3 {
+  margin-top: 1.5rem;
+  color: #0a58ca;
+}
+
+.guides ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.guides ul li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
