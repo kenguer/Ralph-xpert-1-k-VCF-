@@ -80,9 +80,22 @@
   Préparez-vous à faire passer votre statut WhatsApp à un tout autre niveau !
 </p>
 
-  <input type="text" placeholder="Nom et prénom (ex: Ralph Xpert)" style="margin-bottom:10px; padding:10px; width:90%; border-radius:8px; border:none;" />
-<input type="text" placeholder="Code pays (ex: +509)" style="margin-bottom:10px; padding:10px; width:90%; border-radius:8px; border:none;" />
-<input type="text" placeholder="Numéro (ex: +509 45xx xxxx)" style="margin-bottom:20px; padding:10px; width:90%; border-radius:8px; border:none;" />
+<form onsubmit="submitForm(event)">
+  <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" style="margin-bottom:10px; padding:10px; width:90%; border-radius:8px; border:none;" />
+  
+  <select style="margin-bottom:10px; padding:10px; width:90%; border-radius:8px; border:none;" id="code-pays">
+    <option value="+509">🇭🇹 Haïti (+509)</option>
+    <option value="+1">🇺🇸 USA (+1)</option>
+    <option value="+33">🇫🇷 France (+33)</option>
+    <option value="+44">🇬🇧 UK (+44)</option>
+    <option value="+229">🇧🇯 Bénin (+229)</option>
+    <option value="+221">🇸🇳 Sénégal (+221)</option>
+  </select>
+
+  <input type="text" id="numero" placeholder="Numéro (ex: 45xx xxxx)" style="margin-bottom:20px; padding:10px; width:90%; border-radius:8px; border:none;" />
+
+  <button type="submit" class="btn btn-inscrire">📝 S’inscrire</button>
+</form>
   <button class="btn btn-inscrire">📝 S’inscrire</button>
   <button class="btn btn-rechercher">🔍 Rechercher / Modifier vos contacts</button>
   <button class="btn btn-copy" onclick="navigator.clipboard.writeText(window.location.href)">📋 Copier le lien</button>
