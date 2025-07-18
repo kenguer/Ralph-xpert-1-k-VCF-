@@ -1,98 +1,116 @@
-<style>
-  .form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: #111;
-    padding: 30px;
-    border-radius: 12px;
-    color: #eee;
-    font-family: 'Segoe UI', sans-serif;
-    box-shadow: 0 4px 20px rgba(0, 204, 102, 0.4);
-  }
-  .form-container h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #00cc66;
-  }
-  .form-group {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  .form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 14px;
-  }
-  .form-group input,
-  .form-group select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background: #222;
-    color: #eee;
-    font-size: 16px;
-  }
-  .btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(45deg, #007bff, #00c6ff);
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Page avec Background Blur</title>
+  <style>
+    /* Background total paj nwa ak blur */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #ccc;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(5px);
+    }
 
-<div class="form-container">
-  <h1>🔍 Rechercher ou Modifier</h1>
-  <div class="form-group">
-    <label for="searchName">Nom:</label>
-    <input type="text" id="searchName" placeholder="Ex : Ralph Xpert">
-  </div>
-  <button class="btn" onclick="rechercher()">Rechercher</button>
+    /* Container prensipal ak transparans, blur, ak style */
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background-color: rgba(17, 17, 17, 0.85);
+      color: #ccc;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
+      backdrop-filter: blur(5px);
+    }
 
-  <div id="modifierSection" style="display: none;">
-    <div class="form-group">
-      <label for="nomModif">Nouveau nom:</label>
-      <input type="text" id="nomModif">
-    </div>
-    <div class="form-group">
-      <label for="codePays">Code Pays:</label>
-      <select id="codePays">
-        <!-- Quelques codes pour exemple -->
+    /* Egzanp stil tit */
+    h1 {
+      text-align: center;
+      color: #00cc66;
+      margin-bottom: 30px;
+    }
+
+    /* Stil bouton */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(45deg, #00c6ff, #007bff);
+    }
+
+    /* Input & select */
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background: #222;
+      color: #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Rechercher ou Modifier</h1>
+
+    <!-- Rechèch non -->
+    <input type="text" id="searchName" placeholder="Entrez un nom (ex : Ralph Xpert)" />
+    <button class="btn" onclick="rechercher()">Rechercher</button>
+
+    <!-- Fòm modifikasyon (aparèt aprè rechèch) -->
+    <div id="modifierSection" style="display: none; margin-top: 30px;">
+      <input type="text" id="nomModif" placeholder="Nouveau nom" />
+      <select id="codePays" style="margin-top: 15px;">
         <option value="+1">🇺🇸 USA (+1)</option>
         <option value="+33">🇫🇷 France (+33)</option>
-        <option value="+44">🇬🇧 UK (+44)</option>
+        <option value="+44">🇬🇧 Royaume-Uni (+44)</option>
         <option value="+509">🇭🇹 Haïti (+509)</option>
-        <!-- Ajoute yon lis 120+... -->
+        <!-- Ajoute plis kòd peyi isit si ou vle -->
       </select>
+      <input type="text" id="numeroModif" placeholder="Numéro (ex : 45xx xxxx)" style="margin-top: 15px;" />
+      <button class="btn" onclick="modifier()">✅ Modifier</button>
     </div>
-    <div class="form-group">
-      <label for="numeroModif">Numéro:</label>
-      <input type="text" id="numeroModif" placeholder="ex : 4599 9999">
-    </div>
-    <button class="btn" onclick="modifier()">✅ Modifier</button>
   </div>
-</div>
 
-<script>
-  function rechercher() {
-    const name = document.getElementById("searchName").value.trim();
-    if (!name) return alert("Veuillez entrer un nom !");
-    document.getElementById("nomModif").value = name;
-    document.getElementById("codePays").value = "+509";
-    document.getElementById("modifierSection").style.display = "block";
-    document.getElementById("numeroModif").value = "4599 9999";
-  }
+  <script>
+    function rechercher() {
+      const name = document.getElementById("searchName").value.trim();
+      if (!name) {
+        alert("Veuillez entrer un nom !");
+        return;
+      }
+      document.getElementById("nomModif").value = name;
+      document.getElementById("codePays").value = "+509";
+      document.getElementById("numeroModif").value = "4599 9999";
+      document.getElementById("modifierSection").style.display = "block";
+    }
 
-  function modifier() {
-    const newName = document.getElementById("nomModif").value;
-    const newCode = document.getElementById("codePays").value;
-    const newNum = document.getElementById("numeroModif").value;
-    alert(`Données mises à jour 📌\nNom : ${newName}\nPays : ${newCode}\nNuméro: ${newNum}`);
-  }
-</script>
+    function modifier() {
+      const newName = document.getElementById("nomModif").value;
+      const newCode = document.getElementById("codePays").value;
+      const newNum = document.getElementById("numeroModif").value;
+      alert(`Données mises à jour 🎉\nNom : ${newName}\nPays : ${newCode}\nNuméro : ${newNum}`);
+    }
+  </script>
+</body>
+</html>
