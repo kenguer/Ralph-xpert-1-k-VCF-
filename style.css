@@ -138,3 +138,22 @@ header p {
   margin: 0.5rem 0;
   font-size: 1rem;
 }
+.faq-item {
+  margin-top: 15px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: bold;
+  color: #00c6ff;
+}
+
+.faq-answer {
+  display: none;
+  margin-top: 8px;
+  color: #ccc;
+}
