@@ -1,85 +1,98 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rechercher / Modifier</title>
-  <style>
-    body {
-      background-color: #000;
-      color: white;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    input, select {
-      padding: 12px;
-      margin: 10px auto;
-      width: 90%;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      display: block;
-      background-color: #222;
-      color: white;
-    }
-    .btn {
-      padding: 12px 24px;
-      background: linear-gradient(45deg, #007bff, #00c6ff);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 20px auto;
-    }
-    .hidden { display: none; }
-  </style>
-</head>
-<body>
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #111;
+    padding: 30px;
+    border-radius: 12px;
+    color: #eee;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 204, 102, 0.4);
+  }
+  .form-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #00cc66;
+  }
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #222;
+    color: #eee;
+    font-size: 16px;
+  }
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+</style>
 
+<div class="form-container">
   <h1>🔍 Rechercher ou Modifier</h1>
-
-  <input type="text" id="searchName" placeholder="Entrez un nom (ex : Ralph Xpert)" />
+  <div class="form-group">
+    <label for="searchName">Nom:</label>
+    <input type="text" id="searchName" placeholder="Ex : Ralph Xpert">
+  </div>
   <button class="btn" onclick="rechercher()">Rechercher</button>
 
-  <div id="modifierSection" class="hidden">
-    <input type="text" id="nomModif" placeholder="Nom" />
-
-    <select id="codePays">
-      <option value="+1">🇺🇸 États‑Unis (+1)</option>
-      <option value="+33">🇫🇷 France (+33)</option>
-      <option value="+44">🇬🇧 Royaume‑Uni (+44)</option>
-      <option value="+509">🇭🇹 Haïti (+509)</option>
-      <!-- Ajouter ici tous les autres codes, ex : -->
-      <option value="+91">🇮🇳 Inde (+91)</option>
-      <option value="+49">🇩🇪 Allemagne (+49)</option>
-      <option value="+86">🇨🇳 Chine (+86)</option>
-      <option value="+61">🇦🇺 Australie (+61)</option>
-      <!-- etc. Ajouter environ 120+ options réelles, basées sur la liste officielle E.164 1 -->
-    </select>
-
-    <input type="text" id="numeroModif" placeholder="Numéro (ex : 45xx xxxx)" />
+  <div id="modifierSection" style="display: none;">
+    <div class="form-group">
+      <label for="nomModif">Nouveau nom:</label>
+      <input type="text" id="nomModif">
+    </div>
+    <div class="form-group">
+      <label for="codePays">Code Pays:</label>
+      <select id="codePays">
+        <!-- Quelques codes pour exemple -->
+        <option value="+1">🇺🇸 USA (+1)</option>
+        <option value="+33">🇫🇷 France (+33)</option>
+        <option value="+44">🇬🇧 UK (+44)</option>
+        <option value="+509">🇭🇹 Haïti (+509)</option>
+        <!-- Ajoute yon lis 120+... -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="numeroModif">Numéro:</label>
+      <input type="text" id="numeroModif" placeholder="ex : 4599 9999">
+    </div>
     <button class="btn" onclick="modifier()">✅ Modifier</button>
   </div>
+</div>
 
-  <script>
-    function rechercher() {
-      const name = document.getElementById("searchName").value.trim();
-      if (!name) return alert("Veuillez entrer un nom !");
-      // Exemple de données
-      document.getElementById("nomModif").value = name;
-      document.getElementById("codePays").value = "+509";
-      document.getElementById("numeroModif").value = "4599 9999";
-      document.getElementById("modifierSection").classList.remove("hidden");
-    }
-    function modifier() {
-      const newName = document.getElementById("nomModif").value;
-      const newCountry = document.getElementById("codePays").value;
-      const newNum = document.getElementById("numeroModif").value;
-      alert(`Données mises à jour 🎉\nNom : ${newName}\nPays : ${newCountry}\nNuméro : ${newNum}`);
-    }
-  </script>
+<script>
+  function rechercher() {
+    const name = document.getElementById("searchName").value.trim();
+    if (!name) return alert("Veuillez entrer un nom !");
+    document.getElementById("nomModif").value = name;
+    document.getElementById("codePays").value = "+509";
+    document.getElementById("modifierSection").style.display = "block";
+    document.getElementById("numeroModif").value = "4599 9999";
+  }
 
-</body>
-</html>
+  function modifier() {
+    const newName = document.getElementById("nomModif").value;
+    const newCode = document.getElementById("codePays").value;
+    const newNum = document.getElementById("numeroModif").value;
+    alert(`Données mises à jour 📌\nNom : ${newName}\nPays : ${newCode}\nNuméro: ${newNum}`);
+  }
+</script>
