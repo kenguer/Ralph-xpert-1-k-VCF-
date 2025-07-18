@@ -11,6 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const progressBar = document.querySelector('.progress');
   progressBar.style.width = percentProgress + '%';
   progressBar.innerText = Math.floor(percentProgress) + '%';
+  function displayRecent() {
+  const entries = JSON.parse(localStorage.getItem("recentUsers")) || [];
+  const list = document.getElementById("recentEntries");
+  list.innerHTML = ""; // netwaye lis la
+
+  entries.forEach(e => {
+    const li = document.createElement("li");
+    li.textContent = `👤 ${e.name} — ${e.number}`;
+    li.style.padding = "5px 0";
+    list.appendChild(li);
+  });
+  }
 
   // Limite modifikasyon non apre
   const nameInput = document.getElementById('fullname');
@@ -57,3 +69,4 @@ function toggleFAQ(el) {
   answer.style.display = isOpen ? 'none' : 'block';
   icon.textContent = isOpen ? '➕' : '➖';
 }
+window.onload = displayRecent;
