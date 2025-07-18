@@ -138,7 +138,52 @@
     color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 0 15px #00c6ffaa;">
     🔍 Rechercher / Modifier vos contacts
   </button>
+<script>
+  // Clé pour stocker les utilisateurs récents dans localStorage
+  const cléStockage = 'utilisateursRécents';
+  const listeElement = document.getElementById("recentEntries");
 
+  // Fonction pour charger les 5 derniers inscrits depuis localStorage
+  function chargerUtilisateurs() {
+    const utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
+    listeElement.innerHTML = ""; // Effacer l'ancien contenu
+
+    utilisateurs.slice(0, 5).forEach(utilisateur => {
+      const élémentLi = document.createElement("li");
+      élémentLi.innerHTML = `👤 <strong style="color:#00cc66">${utilisateur.nom}</strong> — <span style="color:#ccc">${utilisateur.numeroComplet}</span>`;
+      listeElement.appendChild(élémentLi);
+    });
+  }
+
+  // Fonction appelée lors de la soumission du formulaire
+  function soumettreFormulaire(event) {
+    event.preventDefault();
+
+    const nom = document.getElementById("nom").value;
+    const codePays = document.getElementById("code-pays").value;
+    const numero = document.getElementById("numero").value;
+    const numeroComplet = codePays + " " + numero;
+
+    const nouvelUtilisateur = { nom: nom, numeroComplet: numeroComplet };
+
+    // Récupérer la liste existante et ajouter le nouvel utilisateur au début
+    let utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
+    utilisateurs.unshift(nouvelUtilisateur); // Ajouter en tête
+    utilisateurs = utilisateurs.slice(0, 5); // Ne garder que les 5 derniers
+
+    localStorage.setItem(cléStockage, JSON.stringify(utilisateurs));
+
+    chargerUtilisateurs(); // Actualiser l'affichage
+
+    // Réinitialiser le formulaire
+    document.getElementById("nom").value = "";
+    document.getElementById("code-pays").selectedIndex = 0;
+    document.getElementById("numero").value = "";
+  }
+
+  // Charger la liste des utilisateurs lors du chargement de la page
+  window.onload = chargerUtilisateurs;
+                               </script>
 </body>
 </html>
 
