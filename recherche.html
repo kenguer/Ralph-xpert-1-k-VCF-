@@ -162,11 +162,49 @@
   }
 
   
-function modifier() {
-    const newName = document.getElementById("nomModif").value;
+<script>
+  function modifier() {
+    const newName = document.getElementById("nomModif").value.trim();
     const newCode = document.getElementById("codePays").value;
-    const newNum = document.getElementById("numeroModif").value;
-    alert(`Données mises à jour 🎉\nNom : ${newName}\nPays : ${newCode}\nNuméro : ${newNum}`);
+    const newNum = document.getElementById("numeroModif").value.trim();
+
+    if (!newName) {
+      alert("Veuillez entrer un nom valide !");
+      return;
+    }
+    if (!newNum || !/^\d{4,15}$/.test(newNum.replace(/\s+/g, ''))) {
+      alert("Veuillez entrer un numéro valide (4 à 15 chiffres) !");
+      return;
+    }
+
+    const fullNumber = `${newCode} ${newNum}`;
+    document.getElementById("result").innerHTML = `
+      ✅ Merci <strong>${newName}</strong><br/>
+      Votre numéro : <strong>${fullNumber}</strong> a bien été enregistré !
+    `;
+
+    // Sove li nan localStorage
+    const entry = { name: newName, number: fullNumber };
+    let entries = JSON.parse(localStorage.getItem("recentUsers")) || [];
+    entries.unshift(entry);
+    if (entries.length > 3) entries = entries.slice(0, 3);
+    localStorage.setItem("recentUsers", JSON.stringify(entries));
+
+    // Afiche lis la
+    displayRecent();
   }
-  </script>
-  
+
+  function displayRecent() {
+    const entries = JSON.parse(localStorage.getItem("recentUsers")) || [];
+    const list = document.getElementById("recentEntries");
+    list.innerHTML = "";
+    entries.forEach(e => {
+      const li = document.createElement("li");
+      li.innerHTML = `👤 <strong>${e.name}</strong> — ${e.number}`;
+      list.appendChild(li);
+    });
+  }
+
+  // Afiche si gen deja done
+  window.onload = displayRecent;
+</script>
