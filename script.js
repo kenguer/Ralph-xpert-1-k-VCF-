@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     list.appendChild(li);
   });
   }
-
+// Afiche lis 5 dènye moun ki enskri yo lè paj la louvri
+window.onload = displayRecent;
+  
   // Limite modifikasyon non apre
   const nameInput = document.getElementById('fullname');
   let alreadySubmitted = false;
