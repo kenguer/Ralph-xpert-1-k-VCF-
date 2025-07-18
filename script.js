@@ -49,3 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+function toggleFAQ(el) {
+  const answer = el.nextElementSibling;
+  const icon = el.querySelector('.faq-icon');
+  const isOpen = answer.style.display === 'block';
+
+  answer.style.display = isOpen ? 'none' : 'block';
+  icon.textContent = isOpen ? '➕' : '➖';
+}
