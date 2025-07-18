@@ -197,3 +197,32 @@ header p {
   max-height: 500px;
   padding: 15px 10px;
 }
+#recentEntries {
+  margin-top: 30px;
+  list-style: none;
+  padding-left: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  color: #eee; /* blan klè pou tèks la */
+  background-color: #222; /* yon background nwa ki fè kontrast */
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 204, 102, 0.4);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 20px;
+}
+
+#recentEntries li {
+  margin-bottom: 12px;
+  padding: 10px;
+  background: #111;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+#recentEntries li:hover {
+  background-color: #00cc66;  /* koulè vèt pou efè hover modèn */
+  color: #000;                /* tèks nwa lè hover */
+}
