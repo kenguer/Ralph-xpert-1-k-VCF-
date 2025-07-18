@@ -163,20 +163,10 @@
 
   
 function modifier() {
-  const newName = document.getElementById("nomModif").value.trim();
-  const newCode = document.getElementById("code-pays").value;  // Asire id a koresponn ak sa nan HTML ou
-  const newNum = document.getElementById("numeroModif").value.trim();
-
-  if (!newName) {
-    alert("Veuillez entrer un nom valide !");
-    return;
+    const newName = document.getElementById("nomModif").value;
+    const newCode = document.getElementById("codePays").value;
+    const newNum = document.getElementById("numeroModif").value;
+    alert(`Données mises à jour 🎉\nNom : ${newName}\nPays : ${newCode}\nNuméro : ${newNum}`);
   }
-  // Retire espas avan verifye nimewo a
-  const numSansEspaces = newNum.replace(/\s+/g, '');
-  if (!numSansEspaces || !/^\d{4,15}$/.test(numSansEspaces)) {
-    alert("Veuillez entrer un numéro valide (4 à 15 chiffres) !");
-    return;
-  }
-
-  alert(`Données mises à jour 🎉\nNom : ${newName}\nPays : ${newCode}\nNuméro : ${newNum}`);
-      }
+  </script>
+  
