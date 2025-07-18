@@ -80,12 +80,73 @@
     <!-- Fòm modifikasyon (aparèt aprè rechèch) -->
     <div id="modifierSection" style="display: none; margin-top: 30px;">
       <input type="text" id="nomModif" placeholder="Nouveau nom" />
-      <select id="codePays" style="margin-top: 15px;">
-        <option value="+1">🇺🇸 USA (+1)</option>
-        <option value="+33">🇫🇷 France (+33)</option>
-        <option value="+44">🇬🇧 Royaume-Uni (+44)</option>
-        <option value="+509">🇭🇹 Haïti (+509)</option>
-        <!-- Ajoute plis kòd peyi isit si ou vle -->
+      <select id="code-pays" required 
+  style="padding: 12px 15px; border-radius: 12px; border: 1px solid #333; font-size: 14px; background: #222; color: #eee;
+  box-shadow: inset 0 0 8px #ff000020;">
+  <option value="+509">🇭🇹 Haïti (+509)</option>
+  <option value="+1">🇺🇸 USA (+1)</option>
+  <option value="+33">🇫🇷 France (+33)</option>
+  <option value="+44">🇬🇧 UK (+44)</option>
+  <option value="+229">🇧🇯 Bénin (+229)</option>
+  <option value="+221">🇸🇳 Sénégal (+221)</option>
+  <option value="+213">🇩🇿 Algérie (+213)</option>
+  <option value="+49">🇩🇪 Allemagne (+49)</option>
+  <option value="+54">🇦🇷 Argentine (+54)</option>
+  <option value="+61">🇦🇺 Australie (+61)</option>
+  <option value="+32">🇧🇪 Belgique (+32)</option>
+  <option value="+55">🇧🇷 Brésil (+55)</option>
+  <option value="+1">🇨🇦 Canada (+1)</option>
+  <option value="+86">🇨🇳 Chine (+86)</option>
+  <option value="+45">🇩🇰 Danemark (+45)</option>
+  <option value="+20">🇪🇬 Égypte (+20)</option>
+  <option value="+34">🇪🇸 Espagne (+34)</option>
+  <option value="+372">🇪🇪 Estonie (+372)</option>
+  <option value="+251">🇪🇹 Éthiopie (+251)</option>
+  <option value="+358">🇫🇮 Finlande (+358)</option>
+  <option value="+33">🇫🇷 France (+33)</option>
+  <option value="+44">🇬🇧 Royaume-Uni (+44)</option>
+  <option value="+91">🇮🇳 Inde (+91)</option>
+  <option value="+62">🇮🇩 Indonésie (+62)</option>
+  <option value="+39">🇮🇹 Italie (+39)</option>
+  <option value="+81">🇯🇵 Japon (+81)</option>
+  <option value="+254">🇰🇪 Kenya (+254)</option>
+  <option value="+371">🇱🇻 Lettonie (+371)</option>
+  <option value="+370">🇱🇹 Lituanie (+370)</option>
+  <option value="+352">🇱🇺 Luxembourg (+352)</option>
+  <option value="+261">🇲🇬 Madagascar (+261)</option>
+  <option value="+60">🇲🇾 Malaisie (+60)</option>
+  <option value="+223">🇲🇱 Mali (+223)</option>
+  <option value="+222">🇲🇷 Mauritanie (+222)</option>
+  <option value="+230">🇲🇺 Maurice (+230)</option>
+  <option value="+52">🇲🇽 Mexique (+52)</option>
+  <option value="+212">🇲🇦 Maroc (+212)</option>
+  <option value="+234">🇳🇬 Nigéria (+234)</option>
+  <option value="+31">🇳🇱 Pays-Bas (+31)</option>
+  <option value="+92">🇵🇰 Pakistan (+92)</option>
+  <option value="+507">🇵🇦 Panama (+507)</option>
+  <option value="+51">🇵🇪 Pérou (+51)</option>
+  <option value="+63">🇵🇭 Philippines (+63)</option>
+  <option value="+351">🇵🇹 Portugal (+351)</option>
+  <option value="+974">🇶🇦 Qatar (+974)</option>
+  <option value="+7">🇷🇺 Russie (+7)</option>
+  <option value="+966">🇸🇦 Arabie Saoudite (+966)</option>
+  <option value="+221">🇸🇳 Sénégal (+221)</option>
+  <option value="+27">🇿🇦 Afrique du Sud (+27)</option>
+  <option value="+82">🇰🇷 Corée du Sud (+82)</option>
+  <option value="+94">🇱🇰 Sri Lanka (+94)</option>
+  <option value="+46">🇸🇪 Suède (+46)</option>
+  <option value="+41">🇨🇭 Suisse (+41)</option>
+  <option value="+66">🇹🇭 Thaïlande (+66)</option>
+  <option value="+216">🇹🇳 Tunisie (+216)</option>
+  <option value="+90">🇹🇷 Turquie (+90)</option>
+  <option value="+380">🇺🇦 Ukraine (+380)</option>
+  <option value="+598">🇺🇾 Uruguay (+598)</option>
+  <option value="+998">🇺🇿 Ouzbékistan (+998)</option>
+  <option value="+58">🇻🇪 Venezuela (+58)</option>
+  <option value="+84">🇻🇳 Vietnam (+84)</option>
+  <option value="+967">🇾🇪 Yémen (+967)</option>
+  <!-- Ajoute plis si ou vle rive 120 -->
+      </select>
       </select>
       <input type="text" id="numeroModif" placeholder="Numéro (ex : 45xx xxxx)" style="margin-top: 15px;" />
       <button class="btn" onclick="modifier()">✅ Modifier</button>
