@@ -182,25 +182,49 @@
       text-decoration: none;
       box-shadow: 0 0 10px #cc66ffaa;
     ">📢 Rejoindre la chaîne</a>
-  </div>  <!-- FAQ -->  <div style="
-    background-color: #111;
-    color: #ccc;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 40px;
-    text-align: left;
-    backdrop-filter: blur(5px);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  ">
-    <h2 style="color: #00c6ff;">❓ Questions fréquemment posées</h2>
-    <ul style="line-height: 1.8;">
-      <li><span style="color: #00c6ff;"><strong>📁 Comment obtenir le fichier ?</strong></span><br>Il vous suffit de rejoindre le groupe ou la chaîne WhatsApp.</li>
-      <li><span style="color: #00c6ff;"><strong>💸 Est-ce gratuit ?</strong></span><br>Oui, c’est 100% gratuit et ouvert à tous.</li>
-      <li><span style="color: #00c6ff;"><strong>📈 Combien de vues je peux gagner ?</strong></span><br>Ça dépend du nombre de participants actifs — plus on est, mieux c’est.</li>
-      <li><span style="color: #00c6ff;"><strong>🔒 Mon numéro est-il visible ?</strong></span><br>Oui, uniquement par les membres du groupe/chaîne dans le fichier partagé.</li>
-    </ul>
-  </div>  <script>
-    function submitForm(event) {
-      event.preventDefault();
+<div style="
+  background-color: #111;
+  color: #ccc;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 40px;
+  text-align: left;
+  backdrop-filter: blur(5px);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+">
+  <h2 style="color: #00c6ff;">❓ Questions fréquemment posées</h2>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      <span>📁 Comment obtenir le fichier ?</span>
+      <span class="faq-icon">➕</span>
+    </div>
+    <div class="faq-answer">Il vous suffit de rejoindre le groupe ou la chaîne WhatsApp.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      <span>💸 Est-ce gratuit ?</span>
+      <span class="faq-icon">➕</span>
+    </div>
+    <div class="faq-answer">Oui, c’est 100% gratuit et ouvert à tous.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      <span>📈 Combien de vues je peux gagner ?</span>
+      <span class="faq-icon">➕</span>
+    </div>
+    <div class="faq-answer">Ça dépend du nombre de participants actifs — plus on est, mieux c’est.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+      <span>🔒 Mon numéro est-il visible ?</span>
+      <span class="faq-icon">➕</span>
+    </div>
+    <div class="faq-answer">Oui, uniquement par les membres du groupe/chaîne dans le fichier partagé.</div>
+  </div>
+</div>
