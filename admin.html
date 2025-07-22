@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel Ralph</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    nav {
+      background-color: #00cc66;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-bottom: 3px solid #00994d;
+    }
+
+    nav button {
+      background: transparent;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      text-decoration: underline;
+    }
+
+    .section {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .logout-btn {
+      margin-top: 40px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="text-align: center; color: #00cc66;">🔐 Admin Panel Ralph</h1>
+
+    <nav>
+      <button onclick="showSection('contact')">Contact</button>
+      <button onclick="showSection('stats')">Statistiques</button>
+      <button onclick="showSection('footer')">Footer</button>
+      <button onclick="showSection('config')">Configuration</button>
+    </nav>
+
+    <!-- Contact Section -->
+    <div id="contact" class="section active">
+      <h2>📇 Gestion des Contacts</h2>
+      <p>Itilizatè ki enskri yo ap parèt isit la.</p>
+      <!-- Placeholder -->
+      <ul id="contact-list">
+        <li>Jean Paul - +509 1234 5678</li>
+        <li>Marie Lou - +509 9876 5432</li>
+      </ul>
+    </div>
+
+    <!-- Statistiques Section -->
+    <div id="stats" class="section">
+      <h2>📊 Statistiques</h2>
+      <p>Statistik sou itilizatè yo:</p>
+      <ul>
+        <li>Total Enskri: 124</li>
+        <li>Klik WhatsApp: 76</li>
+        <li>Vizit total: 402</li>
+      </ul>
+    </div>
+
+    <!-- Footer Section -->
+    <div id="footer" class="section">
+      <h2>⚙️ Modifier Footer</h2>
+      <label for="footer-text">Tèks Footer la:</label><br />
+      <input type="text" id="footer-text" value="Ce projet est réalisé par Ralph" style="width: 100%; padding: 10px; margin-top: 10px;" />
+      <br><br>
+      <button onclick="saveFooter()" style="padding: 8px 16px;">💾 Sove</button>
+    </div>
+
+    <!-- Configuration Section -->
+    <div id="config" class="section">
+      <h2>🧩 Configuration</h2>
+      <label for="new-pass">Nouvo modpas admin:</label><br />
+      <input type="password" id="new-pass" placeholder="Antre nouvo modpas" style="padding: 10px; width: 100%; margin-top: 10px;" />
+      <br><br>
+      <button onclick="changePassword()">🔒 Chanje Modpas</button>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">🚪 Dekonekte</button>
+  </div>
+
+  <script>
+    // Verify login
+    if (localStorage.getItem("admin") !== "true") {
+      const username = prompt("Antre non itilizatè:");
+      const password = prompt("Antre modpas:");
+
+      if (username === "Ralph" && password === "Ralph509") {
+        localStorage.setItem("admin", "true");
+      } else {
+        alert("Aksè refize!");
+        window.location.href = "/";
+      }
+    }
+
+    function showSection(id) {
+      const sections = document.querySelectorAll(".section");
+      sections.forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    function logout() {
+      localStorage.removeItem("admin");
+      location.reload();
+    }
+
+    function saveFooter() {
+      const text = document.getElementById("footer-text").value;
+      localStorage.setItem("footer", text);
+      alert("Footer mete ajou!");
+    }
+
+    function changePassword() {
+      const newPass = document.getElementById("new-pass").value;
+      if (newPass.length >= 5) {
+        alert("Modpas chanje pou: " + newPass);
+        // Note: Pou sekirite, ou ta dwe sove l nan baz done oswa verifye sou backend.
+      } else {
+        alert("Modpas dwe gen omwen 5 karaktè.");
+      }
+    }
+  </script>
+</body>
+</html>
