@@ -1,269 +1,555 @@
-<!DOCTYPE html><html lang="fr"><head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin | Ralph Xpert</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-    }header {
-  background-color: #111;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin Ralph Xpert - Connexion</title>
+<style>
+  /* Styles de base et reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin:0; padding:0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    color: #ddd;
+  }
+  a {
+    color: #00cc66;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 
-header h1 {
-  font-size: 1.5rem;
-  margin: 0;
-}
+  /* Header */
+  header {
+    background: #1e1e1e;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px #00cc6611;
+  }
+  header nav a {
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  header nav a.active {
+    color: #00cc66;
+    border-bottom: 2px solid #00cc66;
+    padding-bottom: 3px;
+  }
 
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #ccc;
-  font-weight: 500;
-}
+  main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 20px auto 40px auto;
+  }
 
-nav a:hover {
-  color: white;
-}
+  /* Sections - affichage */
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
 
-.container {
-  padding: 30px 20px;
-}
+  /* -- Contact Section -- */
+  #contactSection {
+    margin-bottom: 30px;
+  }
+  #contactSearch {
+    margin-bottom: 15px;
+  }
+  #contactSearch input {
+    padding: 8px 12px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    border: none;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    text-align: left;
+  }
+  th {
+    background: #007f3f;
+    color: #fff;
+  }
+  tr:hover {
+    background: #004422aa;
+  }
+  .num-box {
+    background: #333;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-weight: 600;
+    width: fit-content;
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .action-btn {
+    cursor: pointer;
+    font-size: 18px;
+    color: #00cc66;
+    transition: color 0.2s ease;
+  }
+  .action-btn.delete {
+    color: #cc3300;
+  }
+  .action-btn:hover {
+    opacity: 0.7;
+  }
+  #downloadAllVCFBtn {
+    margin: 15px 0;
+    background: #00cc66;
+    border: none;
+    color: #121212;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+  }
 
-.login-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #111;
-  color: white;
-}
+  /* -- Messages Section -- */
+  #messagesSection table {
+    margin-top: 15px;
+  }
+  #messagesSection th, #messagesSection td {
+    word-break: break-word;
+  }
 
-.login-box {
-  background: #1e1e1e;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  max-width: 350px;
-  width: 100%;
-}
+  /* -- Statistiques -- */
+  #statsSection .stats-filters {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  #statsSection .stats-filters button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #333;
+    color: #eee;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  #statsSection .stats-filters button.active {
+    background: #00cc66;
+    color: #121212;
+  }
+  #statsSection .stats-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00cc66;
+    margin-bottom: 15px;
+  }
+  .progress-bar-container {
+    background: #333;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 25px;
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00cc66, #009944);
+    width: 0%;
+    transition: width 1s ease;
+  }
 
-.login-box input {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-}
+  /* -- Footer Edition -- */
+  #footerSection textarea {
+    width: 100%;
+    min-height: 150px;
+    background: #222;
+    color: #ddd;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+  }
+  #footerSection button {
+    margin-top: 10px;
+    background: #00cc66;
+    border: none;
+    padding: 12px 18px;
+    color: #121212;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #footerSection button:hover {
+    background: #009944;
+  }
 
-.login-box button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
-  background-color: #2ecc71;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-}
+  /* Responsive */
+  @media(max-width: 600px) {
+    header nav a {
+      margin: 0 8px;
+      font-size: 1rem;
+    }
+    .actions {
+      gap: 8px;
+    }
+    .action-btn {
+      font-size: 16px;
+    }
+  }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
+  /* Login Modal */
+  #loginModal {
+    position: fixed;
+    top: 0; left: 0; right:0; bottom:0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  #loginModal.hidden {
+    display: none;
+  }
+  #loginBox {
+    background: #222;
+    padding: 30px 35px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00cc66aa;
+    width: 320px;
+    color: #ddd;
+  }
+  #loginBox h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #00cc66;
+  }
+  #loginBox label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  #loginBox input[type="text"],
+  #loginBox input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  #loginBox button {
+    width: 100%;
+    padding: 12px;
+    background: #00cc66;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #121212;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #loginBox button:hover {
+    background: #009944;
+  }
+  #loginError {
+    color: #cc3300;
+    font-weight: 700;
+    text-align: center;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    display: none;
+  }
+</style>
+</head>
+<body>
 
-.actions button,
-.actions input[type="text"] {
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
+<!-- Login Modal -->
+<div id="loginModal">
+  <div id="loginBox">
+    <h2>Connexion Admin</h2>
+    <div id="loginError">Identifiants incorrects.</div>
+    <label for="usernameInput">Nom d'utilisateur</label>
+    <input type="text" id="usernameInput" placeholder="Nom d'utilisateur" autofocus />
+    <label for="passwordInput">Mot de passe</label>
+    <input type="password" id="passwordInput" placeholder="Mot de passe" />
+    <button id="loginBtn">Se connecter</button>
+  </div>
+</div>
 
-.actions button {
-  background-color: #2ecc71;
-  color: white;
-  cursor: pointer;
-}
+<header>
+  <div><strong>Admin Ralph Xpert</strong></div>
+  <nav>
+    <a href="#" id="navContact" class="active">Contact</a>
+    <a href="#" id="navMessages">Messages</a>
+    <a href="#" id="navStats">Statistiques</a>
+    <a href="#" id="navFooter">Footer</a>
+  </nav>
+</header>
 
-.contact-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-}
-
-.contact-card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contact-card h4 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.contact-card .number {
-  font-size: 1.1rem;
-  color: #2ecc71;
-}
-
-.card-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.card-actions i {
-  cursor: pointer;
-  font-size: 1.1rem;
-}
-
-.stats {
-  margin: 40px 0;
-}
-
-.stats .stat-box {
-  background: white;
-  padding: 20px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-footer {
-  background-color: #121212;
-  color: #ccc;
-  padding: 40px 20px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-  </style>
-</head><body>
-  <div class="login-screen" id="loginScreen">
-    <div class="login-box">
-      <h2>Connexion Admin</h2>
-      <input type="text" id="username" placeholder="Nom d'utilisateur" />
-      <input type="password" id="password" placeholder="Mot de passe" />
-      <button onclick="login()">Se connecter</button>
-    </div>
-  </div>  <div id="adminPanel" style="display: none;">
-    <header>
-      <h1>Admin Ralph Xpert</h1>
-      <nav>
-        <a href="#contacts">Contacts</a>
-        <a href="#stats">Statistiques</a>
-        <a href="#footer">Footer</a>
-      </nav>
-    </header><main class="container">
-  <section id="contacts">
-    <h2>Liste des Contacts</h2>
-    <div class="actions">
-      <input type="text" id="search" placeholder="🔍 Rechercher un contact..." />
-      <button onclick="deleteAll()">🗑️ Supprimer tout</button>
-      <button onclick="downloadVCF()">📥 Télécharger VCF</button>
-    </div>
-    <div class="contact-list" id="contactList"></div>
+<main style="display:none;" id="adminMain">
+  <!-- CONTACT -->
+  <section id="contactSection" class="active">
+    <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
+    <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Numéro</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="contactTableBody">
+        <!-- Liste des contacts -->
+      </tbody>
+    </table>
   </section>
 
-  <section id="stats" class="stats">
-    <h2>Statistiques</h2>
-    <div class="stat-box">Immédiat: <strong id="stat-now">0</strong></div>
-    <div class="stat-box">Aujourd'hui: <strong id="stat-today">0</strong></div>
-    <div class="stat-box">Cette semaine: <strong id="stat-week">0</strong></div>
-    <div class="stat-box">Total: <strong id="stat-total">0</strong></div>
+  <!-- MESSAGES -->
+  <section id="messagesSection">
+    <h2>Messages reçus</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Sujet</th>
+          <th>Message</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="messagesTableBody">
+        <!-- Messages list -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- STATISTIQUES -->
+  <section id="statsSection">
+    <div class="stats-filters">
+      <button class="active" data-filter="immediate">Immédiat</button>
+      <button data-filter="today">Aujourd'hui</button>
+      <button data-filter="week">Cette semaine</button>
+    </div>
+    <div class="stats-total" id="statsTotal">Total visiteurs: 0 | Total inscrits: 0</div>
+    <div class="progress-bar-container" title="Progression">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section id="footerSection">
+    <h2>Modifier le Footer</h2>
+    <textarea id="footerTextArea"></textarea>
+    <button id="saveFooterBtn">Sauvegarder</button>
   </section>
 </main>
 
-<footer id="footer">
-  <p>&copy; 2025 Ralph Xpert - Tous droits réservés</p>
-  <p><a href="contact.html" style="color: #2ecc71; text-decoration: underline;">📞 Contactez-nous aujourd'hui</a></p>
-</footer>
+<script>
+  // Login logic
+  const loginModal = document.getElementById('loginModal');
+  const adminMain = document.getElementById('adminMain');
+  const loginBtn = document.getElementById('loginBtn');
+  const usernameInput = document.getElementById('usernameInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const loginError = document.getElementById('loginError');
 
-  </div>  <script>
-    const validUsername = "Ralph";
-    const validPassword = "Ralph509";
+  const USERNAME = 'Ralph';
+  const PASSWORD = 'Ralph509';
 
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
+  function showAdmin() {
+    loginModal.classList.add('hidden');
+    adminMain.style.display = 'block';
+    afficherContacts();
+  }
 
-      if (user === validUsername && pass === validPassword) {
-        document.getElementById("loginScreen").style.display = "none";
-        document.getElementById("adminPanel").style.display = "block";
-        loadContacts();
-        loadStats();
-      } else {
-        alert("Identifiants incorrects");
+  loginBtn.onclick = () => {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if(username === USERNAME && password === PASSWORD) {
+      loginError.style.display = 'none';
+      showAdmin();
+    } else {
+      loginError.style.display = 'block';
+    }
+  };
+
+  // Navigation
+  const navContact = document.getElementById('navContact');
+  const navMessages = document.getElementById('navMessages');
+  const navStats = document.getElementById('navStats');
+  const navFooter = document.getElementById('navFooter');
+
+  const contactSection = document.getElementById('contactSection');
+  const messagesSection = document.getElementById('messagesSection');
+  const statsSection = document.getElementById('statsSection');
+  const footerSection = document.getElementById('footerSection');
+
+  function switchSection(section) {
+    [contactSection, messagesSection, statsSection, footerSection].forEach(s => s.classList.remove('active'));
+    [navContact, navMessages, navStats, navFooter].forEach(n => n.classList.remove('active'));
+
+    if (section === 'contact') {
+      contactSection.classList.add('active');
+      navContact.classList.add('active');
+      afficherContacts();
+    } else if (section === 'messages') {
+      messagesSection.classList.add('active');
+      navMessages.classList.add('active');
+      afficherMessages();
+    } else if (section === 'stats') {
+      statsSection.classList.add('active');
+      navStats.classList.add('active');
+      afficherStats();
+    } else if (section === 'footer') {
+      footerSection.classList.add('active');
+      navFooter.classList.add('active');
+      chargerFooter();
+    }
+  }
+
+  navContact.addEventListener('click', e => { e.preventDefault(); switchSection('contact'); });
+  navMessages.addEventListener('click', e => { e.preventDefault(); switchSection('messages'); });
+  navStats.addEventListener('click', e => { e.preventDefault(); switchSection('stats'); });
+  navFooter.addEventListener('click', e => { e.preventDefault(); switchSection('footer'); });
+
+  // Gestion Contacts
+  function getContacts() {
+    return JSON.parse(localStorage.getItem('utilisateursRécents')) || [];
+  }
+  function saveContacts(contacts) {
+    localStorage.setItem('utilisateursRécents', JSON.stringify(contacts));
+  }
+
+  function afficherContacts() {
+    const contacts = getContacts().slice().reverse(); // ordre monte (dernier en premier)
+    const filter = document.getElementById('contactSearch').value.toLowerCase();
+
+    const tbody = document.getElementById('contactTableBody');
+    tbody.innerHTML = '';
+
+    contacts.filter(c => c.nom.toLowerCase().includes(filter) || c.numeroComplet.includes(filter))
+      .forEach((contact, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${contact.nom}</strong></td>
+          <td><div class="num-box">${contact.numeroComplet}</div></td>
+          <td class="actions">
+            <span class="action-btn edit" title="Modifier" data-index="${contacts.length - 1 - idx}" style="color:#00cc66;">✏️</span>
+            <span class="action-btn delete" title="Supprimer" data-index="${contacts.length - 1 - idx}" style="color:#cc3300;">🗑️</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+  }
+
+  document.getElementById('contactSearch').addEventListener('input', afficherContacts);
+
+  // Supprimer contact
+  document.getElementById('contactTableBody').addEventListener('click', e => {
+    if(e.target.classList.contains('delete')) {
+      const index = parseInt(e.target.getAttribute('data-index'));
+      const contacts = getContacts();
+      if(confirm(`Voulez-vous vraiment supprimer ${contacts[index].nom} ?`)) {
+        contacts.splice(index, 1);
+        saveContacts(contacts);
+        afficherContacts();
+        alert('Contact supprimé.');
       }
     }
+    if(e.target.classList.contains('edit')) {
+      alert('Fonction modifier pas encore implémentée.');
+    }
+  });
 
-    function loadContacts() {
-      const contacts = JSON.parse(localStorage.getItem("contacts") || "[]");
-      const container = document.getElementById("contactList");
-      container.innerHTML = "";
-      contacts.forEach((c, i) => {
-        container.innerHTML += `
-        <div class="contact-card">
-          <h4>${c.name}</h4>
-          <div class="number">${c.phone}</div>
-          <div class="card-actions">
-            <i class="fas fa-edit" title="Modifier"></i>
-            <i class="fas fa-trash" title="Supprimer" onclick="deleteContact(${i})"></i>
-          </div>
-        </div>`;
-      });
+  // Télécharger tous les contacts en VCF
+  document.getElementById('downloadAllVCFBtn').addEventListener('click', () => {
+    const contacts = getContacts();
+    if(contacts.length === 0) {
+      alert('Aucun contact à télécharger.');
+      return;
+    }
+    let vcfAll = '';
+    contacts.forEach(c => {
+      vcfAll +=
+`BEGIN:VCARD
+VERSION:3.0
+FN:${c.nom}
+TEL;TYPE=CELL:${c.numeroComplet}
+END:VCARD
+`;
+    });
+    const blob = new Blob([vcfAll], {type: 'text/vcard'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'contacts_all.vcf';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Gestion Messages
+  function getMessages() {
+    return JSON.parse(localStorage.getItem('messagesContact')) || [];
+  }
+  function saveMessages(msgs) {
+    localStorage.setItem('messagesContact', JSON.stringify(msgs));
+  }
+
+  function afficherMessages() {
+    const messages = getMessages().slice().reverse();
+    const tbody = document.getElementById('messagesTableBody');
+    tbody.innerHTML = '';
+
+    if(messages.length === 0){
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">Aucun message reçu.</td></tr>';
+      return;
     }
 
-    function deleteAll() {
-      if (confirm("Êtes-vous sûr de vouloir tout supprimer ?")) {
-        localStorage.removeItem("contacts");
-        loadContacts();
-      }
-    }
+    messages.forEach(msg => {
+      const tr = document.createElement('tr');
+      const date = new Date(msg.date || Date.now());
+      tr.innerHTML = `
+        <td>${msg.nom}</td>
+        <td>${msg.email}</td>
+        <td>${msg.sujet}</td>
+        <td>${msg.message}</td>
+        <td>${date.toLocaleString()}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
 
-    function deleteContact(index) {
-      const contacts = JSON.parse(localStorage.getItem("contacts") || "[]");
-      contacts.splice(index, 1);
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-      loadContacts();
-    }
-
-    function downloadVCF() {
-      const contacts = JSON.parse(localStorage.getItem("contacts") || "[]");
-      let vcf = "";
-      contacts.forEach(c => {
-        vcf += `BEGIN:VCARD\nVERSION:3.0\nFN:${c.name}\nTEL:${c.phone}\nEND:VCARD\n`;
-      });
-      const blob = new Blob([vcf], { type: "text/vcard" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "contacts.vcf";
-      link.click();
-    }
-
-    function loadStats() {
-      const now = JSON.parse(localStorage.getItem("contacts") || "[]").length;
-      document.getElementById("stat-now").textContent = now;
-      document.getElementById("stat-today").textContent = now; // adjust logic if needed
-      document.getElementById("stat-week").textContent = now; // adjust logic if needed
-      document.getElementById("stat-total").textContent = now;
-    }
-  </script></body></html>
+  // Statistiques (visiteurs et inscrits)
+  function getVisiteurs() {
+    return JSON.parse(localStorage.getItem('visiteursStats')) || [];
+  }
+  function compterVisiteurs(filter) {
+    const visites = getVisiteurs();
+    const now = Date.now
