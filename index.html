@@ -5,197 +5,618 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ralph Xpert</title>
   <style>
-    body {
-      background-color: #000; 
-      font-family: 'Segoe UI', sans-serif; 
-      color: #ccc; 
-      padding: 40px 20px;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    .container {
-      background-color: #111;
-      color: #ccc;
-      padding: 30px 25px;
-      border-radius: 12px;
-      margin-top: 40px;
-      text-align: center;
-      backdrop-filter: blur(5px);
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 20px #ff000088;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    h1 {
-      color: #ff3b3b; 
-      font-weight: 700; 
-      font-size: 28px; 
-      margin-bottom: 20px;
-    }
+body {
+  background-color: #0D1117;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+  color: #E6EDF3; 
+  padding: 40px 20px;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.6;
+}
 
-    p {
-      font-size: 15px; 
-      line-height: 1.5; 
-      color: #bbb; 
-      margin-bottom: 30px;
-    }
+.container {
+  background-color: #161B22;
+  color: #E6EDF3;
+  padding: 40px 35px;
+  border-radius: 20px;
+  margin-top: 40px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #30363D;
+}
 
-    form {
-      display: flex; 
-      flex-direction: column; 
-      gap: 15px;
-    }
+h1 {
+  color: #2FD771; 
+  font-weight: 700; 
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 10px rgba(47, 215, 113, 0.3);
+}
 
-    input, select {
-      padding: 12px 15px; 
-      border-radius: 12px; 
-      border: 1px solid #333; 
-      font-size: 14px; 
-      background: #222; 
-      color: #eee;
-      box-shadow: inset 0 0 8px #ff000020;
-    }
+p {
+  font-size: 1.1rem;
+  line-height: 1.6; 
+  color: #C9D1D9; 
+  margin-bottom: 30px;
+  font-weight: 400;
+}
 
-    button.submit-btn {
-      background: linear-gradient(45deg, #ff0000, #ff4d4d); 
-      color: white; 
-      padding: 14px 0; 
-      border: none; 
-      border-radius: 12px; 
-      font-weight: 700; 
-      cursor: pointer; 
-      font-size: 16px; 
-      transition: background 0.3s ease;
-    }
+form {
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-    button.submit-btn:hover {
-      background: linear-gradient(45deg, #ff4d4d, #ff0000);
-    }
+input, select {
+  padding: 15px 20px;
+  border-radius: 12px; 
+  border: 2px solid #30363D; 
+  font-size: 1rem;
+  background: #21262D; 
+  color: #E6EDF3;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
 
-    /* Statistiques */
-    .stats-container {
-      max-width: 700px; 
-      margin: 50px auto; 
-      background-color: #111; 
-      color: #ccc; 
-      padding: 30px; 
-      border-radius: 12px; 
-      box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
-    }
+input:focus, select:focus {
+  outline: none;
+  border-color: #2FD771;
+  box-shadow: 0 0 0 3px rgba(47, 215, 113, 0.2);
+  background: #161B22;
+}
 
-    .stats-container h2 {
-      text-align: center; 
-      color: #00cc66; 
-      margin-bottom: 20px;
-    }
+input::placeholder {
+  color: #7D8590;
+  font-weight: 400;
+}
 
-    .progress-bar-bg {
-      background-color: #333; 
-      border-radius: 20px; 
-      overflow: hidden; 
-      height: 25px; 
-      margin-top: 10px;
-    }
+button.submit-btn {
+  background: linear-gradient(135deg, #2FD771, #26C65A); 
+  color: #0D1117; 
+  padding: 16px 0;
+  border: none; 
+  border-radius: 12px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(47, 215, 113, 0.4);
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-    .progress-bar-fill {
-      height: 100%; 
-      background-color: #00cc66;
-      width: 78%; /* Valeur dynamique possible */
-    }
+button.submit-btn:hover {
+  background: linear-gradient(135deg, #26C65A, #2FD771);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(47, 215, 113, 0.5);
+}
 
-    #recentEntries {
-      list-style: none; 
-      padding-left: 0; 
-      font-size: 16px; 
-      color: #eee; 
-      max-height: 150px; 
-      overflow-y: auto;
-      margin-top: 10px;
-    }
+/* Statistiques */
+.stats-container {
+  max-width: 800px; 
+  margin: 60px auto; 
+  background-color: #161B22; 
+  color: #E6EDF3; 
+  padding: 40px 35px; 
+  border-radius: 20px; 
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid #30363D;
+}
 
-    /* FAQ Styles */
-    .faq-container {
-      max-width: 700px;
-      margin: 50px auto;
-      background: #1e1e1e;
-      border-radius: 12px;
-      padding: 30px 20px;
-      box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
-      color: #eee;
-    }
+.stats-container h2 {
+  text-align: center; 
+  color: #2FD771; 
+  margin-bottom: 25px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(47, 215, 113, 0.3);
+}
 
-    .faq-container h2 {
-      color: #00cc66;
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: 700;
-    }
+.stats-container p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
 
-    .faq-item {
-      border-bottom: 1px solid #333;
-    }
+.stats-container strong {
+  color: #2FD771;
+  font-weight: 700;
+}
 
-    .faq-question {
-      cursor: pointer;
-      padding: 15px 10px;
-      font-weight: 600;
-      position: relative;
-      transition: background-color 0.3s;
-    }
+.progress-bar-bg {
+  background-color: #21262D; 
+  border-radius: 15px; 
+  overflow: hidden; 
+  height: 25px;
+  margin-top: 20px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
 
-    .faq-question:hover {
-      background-color: #00cc66;
-      color: #111;
-    }
+.progress-bar-fill {
+  height: 100%; 
+  background: linear-gradient(90deg, #2FD771, #26C65A);
+  width: 78%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0D1117;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
 
-    .faq-question::after {
-      content: '+';
-      position: absolute;
-      right: 20px;
-      font-size: 22px;
-      transition: transform 0.3s;
-    }
+#recentEntries {
+  list-style: none; 
+  padding-left: 0; 
+  font-size: 1rem;
+  color: #E6EDF3; 
+  max-height: 300px; 
+  overflow-y: auto;
+  margin-top: 25px;
+  background: #0D1117;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #30363D;
+}
 
-    .faq-question.active::after {
-      content: '^';
-      transform: rotate(180deg);
-    }
+#recentEntries li {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: #161B22;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-left: 3px solid #2FD771;
+  transition: all 0.3s ease;
+}
 
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 10px;
-      color: #bbb;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
+#recentEntries li:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 
-    .faq-answer.show {
-      max-height: 500px;
-      padding: 15px 10px;
-    }
+/* FAQ Styles */
+.faq-container {
+  max-width: 800px;
+  margin: 60px auto;
+  background: #161B22;
+  border-radius: 20px;
+  padding: 40px 35px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  color: #E6EDF3;
+  border: 1px solid #30363D;
+}
 
-    /* Boutons Rechercher et Contacter */
-    .btn {
-      display: block;
-      margin: 30px auto;
-      padding: 12px 24px;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(0, 198, 255, 0.67);
-      text-align: center;
-      text-decoration: none;
-    }
-    .btn-rechercher {
-      background: linear-gradient(45deg, #007bff, #00c6ff);
-    }
-    .btn-contacter {
-      background: linear-gradient(45deg, #007bff, #00c6ff);
-      box-shadow: 0 0 15px #00c6ffaa;
-    }
+.faq-container h2 {
+  color: #2FD771;
+  text-align: center;
+  margin-bottom: 35px;
+  font-weight: 700;
+  font-size: 2rem;
+  text-shadow: 0 2px 10px rgba(47, 215, 113, 0.3);
+}
+
+.faq-item {
+  border-bottom: 1px solid #30363D;
+  margin-bottom: 15px;
+}
+
+.faq-question {
+  cursor: pointer;
+  padding: 20px 15px;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  color: #E6EDF3;
+  font-size: 1.1rem;
+}
+
+.faq-question:hover {
+  background-color: #21262D;
+  color: #2FD771;
+}
+
+.faq-question::after {
+  content: '+';
+  position: absolute;
+  right: 20px;
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+  color: #2FD771;
+  font-weight: 700;
+}
+
+.faq-question.active {
+  background-color: #2FD771;
+  color: #0D1117;
+}
+
+.faq-question.active::after {
+  content: '−';
+  color: #0D1117;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 15px;
+  color: #C9D1D9;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  background-color: #0D1117;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.faq-answer.show {
+  max-height: 500px;
+  padding: 20px 15px;
+}
+
+/* Boutons */
+.btn {
+  display: block;
+  margin: 40px auto;
+  padding: 16px 30px;
+  color: #0D1117;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-rechercher {
+  background: linear-gradient(135deg, #2FD771, #26C65A);
+  box-shadow: 0 6px 20px rgba(47, 215, 113, 0.4);
+}
+
+.btn-rechercher:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(47, 215, 113, 0.5);
+}
+
+.btn-contacter {
+  background: linear-gradient(135deg, #2FD771, #26C65A);
+  box-shadow: 0 6px 20px rgba(47, 215, 113, 0.4);
+}
+
+.btn-contacter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(47, 215, 113, 0.5);
+}
+
+/* Testimonials */
+#temoignages {
+  padding: 60px 30px; 
+  background: #0D1117; 
+  color: #E6EDF3;
+  margin: 60px 0;
+}
+
+#temoignages h2 {
+  text-align: center; 
+  font-size: 2rem;
+  margin-bottom: 40px; 
+  font-weight: 700;
+  color: #2FD771;
+  text-shadow: 0 2px 10px rgba(47, 215, 113, 0.3);
+}
+
+.testimonial-card {
+  background-color: #161B22; 
+  border-radius: 16px; 
+  padding: 30px; 
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4); 
+  display: flex; 
+  flex-direction: column;
+  margin-bottom: 30px;
+  border: 1px solid #30363D;
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.testimonial-header {
+  display: flex; 
+  align-items: center; 
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.testimonial-header h3 {
+  margin: 0; 
+  font-size: 1.3rem;
+  color: #2FD771;
+  font-weight: 600;
+}
+
+.testimonial-header p {
+  margin: 0; 
+  color: #C9D1D9;
+  font-size: 1rem;
+}
+
+.testimonial-stats {
+  color: #2FD771; 
+  margin: 15px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.testimonial-comparison {
+  display: flex; 
+  justify-content: space-between; 
+  margin-top: 15px; 
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Newsletter */
+.newsletter-section {
+  background: linear-gradient(135deg, #161B22, #21262D); 
+  color: #E6EDF3; 
+  padding: 50px 30px; 
+  text-align: center; 
+  font-family: 'Inter', sans-serif;
+  margin: 60px 0;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid #30363D;
+}
+
+.newsletter-section h2 {
+  color: #2FD771;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(47, 215, 113, 0.3);
+}
+
+.newsletter-section p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.newsletter-form {
+  max-width: 600px; 
+  margin: 0 auto; 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 15px; 
+  justify-content: center;
+}
+
+.newsletter-form input {
+  background-color: #21262D; 
+  color: #E6EDF3;
+  border: 2px solid #30363D;
+  flex: 1;
+  min-width: 250px;
+}
+
+.newsletter-form button {
+  background: linear-gradient(135deg, #2FD771, #26C65A); 
+  color: #0D1117; 
+  border: none; 
+  border-radius: 12px; 
+  font-weight: 700; 
+  cursor: pointer;
+  padding: 16px 25px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, #2FD771, #26C65A); 
+  padding: 50px 30px; 
+  border-radius: 20px; 
+  text-align: center; 
+  font-family: 'Inter', sans-serif; 
+  margin: 60px 20px;
+  color: #0D1117;
+  box-shadow: 0 15px 40px rgba(47, 215, 113, 0.4);
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  margin-bottom: 15px; 
+  color: #0D1117;
+  font-weight: 700;
+}
+
+.cta-section p {
+  font-size: 1.1rem;
+  color: #0D1117;
+  margin-bottom: 30px;
+}
+
+.cta-section button {
+  background-color: #0D1117; 
+  color: #2FD771; 
+  padding: 16px 30px; 
+  font-size: 1rem;
+  border: none; 
+  border-radius: 12px; 
+  font-weight: 700; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cta-section button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13, 17, 23, 0.3);
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, #161B22, #21262D); 
+  color: #E6EDF3; 
+  padding: 50px 30px; 
+  font-family: 'Inter', sans-serif;
+  border-radius: 20px;
+  margin-top: 60px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid #30363D;
+}
+
+.footer-content {
+  max-width: 1000px; 
+  margin: auto; 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  gap: 30px;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+}
+
+.footer-section h2, .footer-section h3 {
+  color: #2FD771; 
+  margin-bottom: 15px; 
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 10px rgba(47, 215, 113, 0.3);
+}
+
+.footer-section h3 {
+  font-size: 1.3rem;
+}
+
+.footer-section p {
+  font-size: 1rem;
+  color: #C9D1D9;
+}
+
+.footer-section ul {
+  list-style: none; 
+  padding: 0; 
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.footer-section a {
+  color: #C9D1D9; 
+  text-decoration: none; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.footer-section a:hover {
+  color: #2FD771;
+}
+
+.footer-bottom {
+  max-width: 1000px; 
+  margin: 30px auto 0; 
+  font-size: 0.9rem;
+  color: #7D8590; 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  gap: 15px;
+  border-top: 1px solid #30363D;
+  padding-top: 20px;
+}
+
+.footer-bottom a {
+  color: #7D8590; 
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+  color: #2FD771;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 10px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .container, .stats-container, .faq-container {
+    margin: 20px;
+    padding: 30px 25px;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+  }
+  
+  .newsletter-form input {
+    min-width: 100%;
+  }
+  
+  .testimonial-comparison {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .container, .stats-container, .faq-container {
+    padding: 25px 20px;
+  }
+  
+  .stats-container h2, .faq-container h2, #temoignages h2 {
+    font-size: 1.8rem;
+  }
+  
+  .newsletter-section h2, .cta-section h2 {
+    font-size: 1.8rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -203,7 +624,7 @@
   <div class="container">
     <h1>🎯 Bienvenue sur Ralph Xpert</h1>
     <p>
-      Ralph Xpert vous ouvre les portes d’un nouveau niveau de visibilité.<br>
+      Ralph Xpert vous ouvre les portes d'un nouveau niveau de visibilité.<br>
       Préparez-vous à faire passer votre statut WhatsApp à un tout autre niveau !
     </p>
 
@@ -211,484 +632,155 @@
       <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" required />
       
       <select id="code-pays" required>
-  <option value="">Choisissez un pays</option>
-
-  <!-- Haïti d'abord -->
-  <option value="+509">🇭🇹 Haïti (+509)</option>
-
-  <!-- Peyi +1 yo apre Haïti -->
-  <option value="+1">🇨🇦 Canada (+1)</option>
-  <option value="+1">🇺🇸 États-Unis (+1)</option>
-  <option value="+1">🇧🇸 Bahamas (+1)</option>
-  <option value="+1">🇧🇧 Barbade (+1)</option>
-  <option value="+1">🇦🇬 Antigua-et-Barbuda (+1)</option>
-  <option value="+1">🇯🇲 Jamaïque (+1)</option
-  >
-  <option value="+1">🇩🇲 Dominique (+1)</option>
-  <option value="+1">🇬🇩 Grenade (+1)</option>
-  <option value="+1">🇰🇳 Saint-Kitts-et-Nevis (+1)</option>
-  <option value="+1">🇱🇨 Sainte-Lucie (+1)</option>
-  <option value="+1">🇻🇨 Saint-Vincent-et-les-Grenadines (+1)</option>
-  <option value="+1">🇹🇹 Trinité-et-Tobago (+1)</option>
-
-  <!-- Rès peyi yo pa òd alfabetik -->
-  <option value="+213">🇩🇿 Algérie (+213)</option>
-  <option value="+49">🇩🇪 Allemagne (+49)</option>
-  <option value="+376">🇦🇩 Andorre (+376)</option>
-  <option value="+244">🇦🇴 Angola (+244)</option>
-  <option value="+54">🇦🇷 Argentine (+54)</option>
-  <option value="+61">🇦🇺 Australie (+61)</option>
-  <option value="+43">🇦🇹 Autriche (+43)</option>
-  <option value="+32">🇧🇪 Belgique (+32)</option>
-  <option value="+229">🇧🇯 Bénin (+229)</option>
-  <option value="+591">🇧🇴 Bolivie (+591)</option>
-  <option value="+226">🇧🇫 Burkina Faso (+226)</option>
-  <option value="+257">🇧🇮 Burundi (+257)</option>
-  <option value="+855">🇰🇭 Cambodge (+855)</option>
-  <option value="+237">🇨🇲 Cameroun (+237)</option>
-  <option value="+56">🇨🇱 Chili (+56)</option>
-  <option value="+86">🇨🇳 Chine (+86)</option>
-  <option value="+57">🇨🇴 Colombie (+57)</option>
-  <option value="+506">🇨🇷 Costa Rica (+506)</option>
-  <option value="+385">🇭🇷 Croatie (+385)</option>
-  <option value="+420">🇨🇿 République Tchèque (+420)</option>
-  <option value="+45">🇩🇰 Danemark (+45)</option>
-  <option value="+253">🇩🇯 Djibouti (+253)</option>
-  <option value="+20">🇪🇬 Égypte (+20)</option>
-  <option value="+971">🇦🇪 Émirats arabes unis (+971)</option>
-  <option value="+593">🇪🇨 Équateur (+593)</option>
-  <option value="+34">🇪🇸 Espagne (+34)</option>
-  <option value="+1">🇺🇸 États-Unis (+1)</option>
-  <option value="+372">🇪🇪 Estonie (+372)</option>
-  <option value="+251">🇪🇹 Éthiopie (+251)</option>
-  <option value="+679">🇫🇯 Fidji (+679)</option>
-  <option value="+358">🇫🇮 Finlande (+358)</option>
-  <option value="+33">🇫🇷 France (+33)</option>
-  <option value="+241">🇬🇦 Gabon (+241)</option>
-  <option value="+220">🇬🇲 Gambie (+220)</option>
-  <option value="+995">🇬🇪 Géorgie (+995)</option>
-  <option value="+233">🇬🇭 Ghana (+233)</option>
-  <option value="+30">🇬🇷 Grèce (+30)</option>
-  <option value="+502">🇬🇹 Guatemala (+502)</option>
-  <option value="+224">🇬🇳 Guinée (+224)</option>
-  <option value="+245">🇬🇼 Guinée-Bissau (+245)</option>
-  <option value="+240">🇬🇶 Guinée équatoriale (+240)</option>
-  <option value="+36">🇭🇺 Hongrie (+36)</option>
-  <option value="+91">🇮🇳 Inde (+91)</option>
-  <option value="+62">🇮🇩 Indonésie (+62)</option>
-  <option value="+98">🇮🇷 Iran (+98)</option>
-  <option value="+964">🇮🇶 Irak (+964)</option>
-  <option value="+353">🇮🇪 Irlande (+353)</option>
-  <option value="+972">🇮🇱 Israël (+972)</option>
-  <option value="+39">🇮🇹 Italie (+39)</option>
-  <option value="+81">🇯🇵 Japon (+81)</option>
-  <option value="+962">🇯🇴 Jordanie (+962)</option>
-  <option value="+254">🇰🇪 Kenya (+254)</option>
-  <option value="+82">🇰🇷 Corée du Sud (+82)</option>
-  <option value="+370">🇱🇹 Lituanie (+370)</option>
-  <option value="+352">🇱🇺 Luxembourg (+352)</option>
-  <option value="+261">🇲🇬 Madagascar (+261)</option>
-  <option value="+265">🇲🇼 Malawi (+265)</option>
-  <option value="+223">🇲🇱 Mali (+223)</option>
-  <option value="+212">🇲🇦 Maroc (+212)</option>
-  <option value="+222">🇲🇷 Mauritanie (+222)</option>
-  <option value="+230">🇲🇺 Maurice (+230)</option>
-  <option value="+52">🇲🇽 Mexique (+52)</option>
-  <option value="+377">🇲🇨 Monaco (+377)</option>
-  <option value="+976">🇲🇳 Mongolie (+976)</option>
-  <option value="+212">🇪🇭 Sahara Occidental (+212)</option>
-  <option value="+31">🇳🇱 Pays-Bas (+31)</option>
-  <option value="+227">🇳🇪 Niger (+227)</option>
-  <option value="+234">🇳🇬 Nigéria (+234)</option>
-  <option value="+47">🇳🇴 Norvège (+47)</option>
-  <option value="+92">🇵🇰 Pakistan (+92)</option>
-  <option value="+507">🇵🇦 Panama (+507)</option>
-  <option value="+595">🇵🇾 Paraguay (+595)</option>
-  <option value="+51">🇵🇪 Pérou (+51)</option>
-  <option value="+48">🇵🇱 Pologne (+48)</option>
-  <option value="+351">🇵🇹 Portugal (+351)</option>
-  <option value="+974">🇶🇦 Qatar (+974)</option>
-  <option value="+236">🇨🇫 République Centrafricaine (+236)</option>
-  <option value="+40">🇷🇴 Roumanie (+40)</option>
-  <option value="+7">🇷🇺 Russie (+7)</option>
-  <option value="+250">🇷🇼 Rwanda (+250)</option>
-  <option value="+966">🇸🇦 Arabie Saoudite (+966)</option>
-  <option value="+221">🇸🇳 Sénégal (+221)</option>
-  <option value="+248">🇸🇨 Seychelles (+248)</option>
-  <option value="+232">🇸🇱 Sierra Leone (+232)</option>
-  <option value="+65">🇸🇬 Singapour (+65)</option>
-  <option value="+421">🇸🇰 Slovaquie (+421)</option>
-  <option value="+386">🇸🇮 Slovénie (+386)</option>
-  <option value="+27">🇿🇦 Afrique du Sud (+27)</option>
-  <option value="+82">🇰🇷 Corée du Sud (+82)</option>
-  <option value="+211">🇸🇸 Soudan du Sud (+211)</option>
-  <option value="+249">🇸🇩 Soudan (+249)</option>
-  <option value="+46">🇸🇪 Suède (+46)</option>
-  <option value="+41">🇨🇭 Suisse (+41)</option>
-  <option value="+963">🇸🇾 Syrie (+963)</option>
-  <option value="+886">🇹🇼 Taïwan (+886)</option>
-  <option value="+992">🇹🇯 Tadjikistan (+992)</option>
-  <option value="+255">🇹🇿 Tanzanie (+255)</option>
-  <option value="+66">🇹🇭 Thaïlande (+66)</option>
-  <option value="+228">🇹🇬 Togo (+228)</option>
-  <option value="+216">🇹🇳 Tunisie (+216)</option>
-  <option value="+90">🇹🇷 Turquie (+90)</option>
-  <option value="+380">🇺🇦 Ukraine (+380)</option>
-  <option value="+256">🇺🇬 Ouganda (+256)</option>
-  <option value="+598">🇺🇾 Uruguay (+598)</option>
-  <option value="+998">🇺🇿 Ouzbékistan (+998)</option>
-  <option value="+58">🇻🇪 Venezuela (+58)</option>
-  <option value="+84">🇻🇳 Vietnam (+84)</option>
-  <option value="+260">🇿🇲 Zambie (+260)</option>
-  <option value="+263">🇿🇼 Zimbabwe (+263)</option>
+        <option value="">Choisissez un pays</option>
+        <!-- Haïti d'abord -->
+        <option value="+509">🇭🇹 Haïti (+509)</option>
+        <!-- Peyi +1 yo apre Haïti -->
+        <option value="+1">🇨🇦 Canada (+1)</option>
+        <option value="+1">🇺🇸 États-Unis (+1)</option>
+        <option value="+1">🇧🇸 Bahamas (+1)</option>
+        <option value="+1">🇧🇧 Barbade (+1)</option>
+        <option value="+1">🇦🇬 Antigua-et-Barbuda (+1)</option>
+        <option value="+1">🇯🇲 Jamaïque (+1)</option>
+        <option value="+1">🇩🇲 Dominique (+1)</option>
+        <option value="+1">🇬🇩 Grenade (+1)</option>
+        <option value="+1">🇰🇳 Saint-Kitts-et-Nevis (+1)</option>
+        <option value="+1">🇱🇨 Sainte-Lucie (+1)</option>
+        <option value="+1">🇻🇨 Saint-Vincent-et-les-Grenadines (+1)</option>
+        <option value="+1">🇹🇹 Trinité-et-Tobago (+1)</option>
+        <!-- Rès peyi yo pa òd alfabetik -->
+        <option value="+213">🇩🇿 Algérie (+213)</option>
+        <option value="+49">🇩🇪 Allemagne (+49)</option>
+        <option value="+376">🇦🇩 Andorre (+376)</option>
+        <option value="+244">🇦🇴 Angola (+244)</option>
+        <option value="+54">🇦🇷 Argentine (+54)</option>
+        <option value="+61">🇦🇺 Australie (+61)</option>
+        <option value="+43">🇦🇹 Autriche (+43)</option>
+        <option value="+32">🇧🇪 Belgique (+32)</option>
+        <option value="+229">🇧🇯 Bénin (+229)</option>
+        <option value="+591">🇧🇴 Bolivie (+591)</option>
+        <option value="+226">🇧🇫 Burkina Faso (+226)</option>
+        <option value="+257">🇧🇮 Burundi (+257)</option>
+        <option value="+855">🇰🇭 Cambodge (+855)</option>
+        <option value="+237">🇨🇲 Cameroun (+237)</option>
+        <option value="+56">🇨🇱 Chili (+56)</option>
+        <option value="+86">🇨🇳 Chine (+86)</option>
+        <option value="+57">🇨🇴 Colombie (+57)</option>
+        <option value="+506">🇨🇷 Costa Rica (+506)</option>
+        <option value="+385">🇭🇷 Croatie (+385)</option>
+        <option value="+420">🇨🇿 République Tchèque (+420)</option>
+        <option value="+45">🇩🇰 Danemark (+45)</option>
+        <option value="+253">🇩🇯 Djibouti (+253)</option>
+        <option value="+20">🇪🇬 Égypte (+20)</option>
+        <option value="+971">🇦🇪 Émirats arabes unis (+971)</option>
+        <option value="+593">🇪🇨 Équateur (+593)</option>
+        <option value="+34">🇪🇸 Espagne (+34)</option>
+        <option value="+1">🇺🇸 États-Unis (+1)</option>
+        <option value="+372">🇪🇪 Estonie (+372)</option>
+        <option value="+251">🇪🇹 Éthiopie (+251)</option>
+        <option value="+679">🇫🇯 Fidji (+679)</option>
+        <option value="+358">🇫🇮 Finlande (+358)</option>
+        <option value="+33">🇫🇷 France (+33)</option>
+        <option value="+241">🇬🇦 Gabon (+241)</option>
+        <option value="+220">🇬🇲 Gambie (+220)</option>
+        <option value="+995">🇬🇪 Géorgie (+995)</option>
+        <option value="+233">🇬🇭 Ghana (+233)</option>
+        <option value="+30">🇬🇷 Grèce (+30)</option>
+        <option value="+502">🇬🇹 Guatemala (+502)</option>
+        <option value="+224">🇬🇳 Guinée (+224)</option>
+        <option value="+245">🇬🇼 Guinée-Bissau (+245)</option>
+        <option value="+240">🇬🇶 Guinée équatoriale (+240)</option>
+        <option value="+36">🇭🇺 Hongrie (+36)</option>
+        <option value="+91">🇮🇳 Inde (+91)</option>
+        <option value="+62">🇮🇩 Indonésie (+62)</option>
+        <option value="+98">🇮🇷 Iran (+98)</option>
+        <option value="+964">🇮🇶 Irak (+964)</option>
+        <option value="+353">🇮🇪 Irlande (+353)</option>
+        <option value="+972">🇮🇱 Israël (+972)</option>
+        <option value="+39">🇮🇹 Italie (+39)</option>
+        <option value="+81">🇯🇵 Japon (+81)</option>
+        <option value="+962">🇯🇴 Jordanie (+962)</option>
+        <option value="+254">🇰🇪 Kenya (+254)</option>
+        <option value="+82">🇰🇷 Corée du Sud (+82)</option>
+        <option value="+370">🇱🇹 Lituanie (+370)</option>
+        <option value="+352">🇱🇺 Luxembourg (+352)</option>
+        <option value="+261">🇲🇬 Madagascar (+261)</option>
+        <option value="+265">🇲🇼 Malawi (+265)</option>
+        <option value="+223">🇲🇱 Mali (+223)</option>
+        <option value="+212">🇲🇦 Maroc (+212)</option>
+        <option value="+222">🇲🇷 Mauritanie (+222)</option>
+        <option value="+230">🇲🇺 Maurice (+230)</option>
+        <option value="+52">🇲🇽 Mexique (+52)</option>
+        <option value="+377">🇲🇨 Monaco (+377)</option>
+        <option value="+976">🇲🇳 Mongolie (+976)</option>
+        <option value="+212">🇪🇭 Sahara Occidental (+212)</option>
+        <option value="+31">🇳🇱 Pays-Bas (+31)</option>
+        <option value="+227">🇳🇪 Niger (+227)</option>
+        <option value="+234">🇳🇬 Nigéria (+234)</option>
+        <option value="+47">🇳🇴 Norvège (+47)</option>
+        <option value="+92">🇵🇰 Pakistan (+92)</option>
+        <option value="+507">🇵🇦 Panama (+507)</option>
+        <option value="+595">🇵🇾 Paraguay (+595)</option>
+        <option value="+51">🇵🇪 Pérou (+51)</option>
+        <option value="+48">🇵🇱 Pologne (+48)</option>
+        <option value="+351">🇵🇹 Portugal (+351)</option>
+        <option value="+974">🇶🇦 Qatar (+974)</option>
+        <option value="+236">🇨🇫 République Centrafricaine (+236)</option>
+        <option value="+40">🇷🇴 Roumanie (+40)</option>
+        <option value="+7">🇷🇺 Russie (+7)</option>
+        <option value="+250">🇷🇼 Rwanda (+250)</option>
+        <option value="+966">🇸🇦 Arabie Saoudite (+966)</option>
+        <option value="+221">🇸🇳 Sénégal (+221)</option>
+        <option value="+248">🇸🇨 Seychelles (+248)</option>
+        <option value="+232">🇸🇱 Sierra Leone (+232)</option>
+        <option value="+65">🇸🇬 Singapour (+65)</option>
+        <option value="+421">🇸🇰 Slovaquie (+421)</option>
+        <option value="+386">🇸🇮 Slovénie (+386)</option>
+        <option value="+27">🇿🇦 Afrique du Sud (+27)</option>
+        <option value="+82">🇰🇷 Corée du Sud (+82)</option>
+        <option value="+211">🇸🇸 Soudan du Sud (+211)</option>
+        <option value="+249">🇸🇩 Soudan (+249)</option>
+        <option value="+46">🇸🇪 Suède (+46)</option>
+        <option value="+41">🇨🇭 Suisse (+41)</option>
+        <option value="+963">🇸🇾 Syrie (+963)</option>
+        <option value="+886">🇹🇼 Taïwan (+886)</option>
+        <option value="+992">🇹🇯 Tadjikistan (+992)</option>
+        <option value="+255">🇹🇿 Tanzanie (+255)</option>
+        <option value="+66">🇹🇭 Thaïlande (+66)</option>
+        <option value="+228">🇹🇬 Togo (+228)</option>
+        <option value="+216">🇹🇳 Tunisie (+216)</option>
+        <option value="+90">🇹🇷 Turquie (+90)</option>
+        <option value="+380">🇺🇦 Ukraine (+380)</option>
+        <option value="+256">🇺🇬 Ouganda (+256)</option>
+        <option value="+598">🇺🇾 Uruguay (+598)</option>
+        <option value="+998">🇺🇿 Ouzbékistan (+998)</option>
+        <option value="+58">🇻🇪 Venezuela (+58)</option>
+        <option value="+84">🇻🇳 Vietnam (+84)</option>
+        <option value="+260">🇿🇲 Zambie (+260)</option>
+        <option value="+263">🇿🇼 Zimbabwe (+263)</option>
       </select>
       
       <input type="tel" id="numero" placeholder="Numéro (ex: 45xx xxxx)" required pattern="[0-9\s]+" />
       
-      <button type="submit" class="submit-btn">📝 S’inscrire</button>
+      <button type="submit" class="submit-btn">📝 S'inscrire</button>
     </form>
   </div>
 
-<script>
-  function getContacts() {
-    const contacts = localStorage.getItem('contacts');
-    return contacts ? JSON.parse(contacts) : [];
-  }
-
-  function saveContact(name, phone) {
-    const contacts = getContacts();
-    contacts.push({ name, phone });
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }
-
-  document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    if (name && phone) {
-      saveContact(name, phone);
-      alert("Kontak lan sove ✅");
-      this.reset();
-    } else {
-      alert("Tanpri ranpli tout chan yo.");
-    }
-  });
-</script>
-  
   <!-- Statistiques + Derniers inscrits -->
   <div class="stats-container">
     <h2>📊 Statistiques Communauté</h2>
 
-    <p>👥 Total membres inscrits: <strong style="color: #00c6ff;">1 267</strong></p>
+    <p>👥 Total membres inscrits: <strong>1 267</strong></p>
 
-    <p>📈 Objectif atteint: <strong style="color: #00c6ff;">78%</strong></p>
+    <p>📈 Objectif atteint: <strong>78%</strong></p>
 
     <div class="progress-bar-bg">
-      <div class="progress-bar-fill"></div>
+      <div class="progress-bar-fill">78%</div>
     </div>
 
-    <h3 style="color: #00cc66; margin-top: 30px;">👥 Derniers inscrits</h3>
+    <h3 style="color: #2FD771; margin-top: 30px;">👥 Derniers inscrits</h3>
     <ul id="recentEntries"></ul>
   </div>
 
   <!-- Boutons -->
-  <button class="btn btn-rechercher" onclick="window.location.href='recherche.html'">
-    🔍 Rechercher / Modifier vos contacts
-  </button>
-
-
-<section id="temoignages" style="padding: 60px 20px; background-color: #0e0e0e; color: #fff;">
-  <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px; font-weight: bold;">Ils ont déjà explosé grâce à nous 💥</h2>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-
-    <section id="temoignages" style="padding: 60px 20px; background-color: #0e0e0e; color: #fff;">
-  <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px; font-weight: bold;">Ils ont déjà explosé grâce à nous 💥</h2>
-
-  <div style="display: flex; flex-direction: column; gap: 30px;">
-
-    <!-- Témoignage 1 -->
-    <div style="background-color: #1a1a1a; border-radius: 20px; padding: 25px; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="font-size: 1.8rem;">📱</div>
-        <div>
-          <h3 style="margin: 0; font-size: 1.1rem;">Maya Influence</h3>
-          <p style="margin: 0; color: #bbb;">Créatrice digitale • Paris</p>
-          <div style="color: #FFD700; margin: 5px 0;">★★★★★</div>
-        </div>
-      </div>
-
-      <h4 style="color: #4caf50; margin: 15px 0;">+400% de vues</h4>
-      <p style="font-size: 0.95rem;">Mes statuts WhatsApp ont littéralement explosé ! ML Contact Hub m’a donné une visibilité incroyable.</p>
-
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.9rem;">
-        <span style="color: #bbb;"><strong style="color:#999;">Avant :</strong> <span style="color: #f44336;">250 vues</span></span>
-        <span style="color: #bbb;"><strong style="color:#999;">Après :</strong> <span style="color: #4caf50;">1 200 vues</span></span>
-      </div>
-    </div>
-
-    <!-- Témoignage 2 -->
-    <div style="background-color: #1a1a1a; border-radius: 20px; padding: 25px; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="font-size: 1.8rem;">💼</div>
-        <div>
-          <h3 style="margin: 0; font-size: 1.1rem;">Jean-Marc CEO</h3>
-          <p style="margin: 0; color: #bbb;">Entrepreneur • Port-au-Prince</p>
-          <div style="color: #FFD700; margin: 5px 0;">★★★★★</div>
-        </div>
-      </div>
-
-      <h4 style="color: #4caf50; margin: 15px 0;">+2 000 nouveaux contacts</h4>
-      <p style="font-size: 0.95rem;">Mon business a pris un tournant fou ! En 1 mois, j’ai gagné plus de 2 000 contacts WhatsApp.</p>
-
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.9rem;">
-        <span style="color: #bbb;"><strong style="color:#999;">Avant :</strong> <span style="color: #f44336;">150 contacts</span></span>
-        <span style="color: #bbb;"><strong style="color:#999;">Après :</strong> <span style="color: #4caf50;">2 150 contacts</span></span>
-      </div>
-    </div>
-
-    <!-- Témoignage 3 -->
-    <div style="background-color: #1a1a1a; border-radius: 20px; padding: 25px; box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; flex-direction: column;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="font-size: 1.8rem;">🎨</div>
-        <div>
-          <h3 style="margin: 0; font-size: 1.1rem;">Léna Design</h3>
-          <p style="margin: 0; color: #bbb;">Graphiste freelance • Lyon</p>
-          <div style="color: #FFD700; margin: 5px 0;">★★★★☆</div>
-        </div>
-      </div>
-
-      <h4 style="color: #4caf50; margin: 15px 0;">+350% d’engagement</h4>
-      <p style="font-size: 0.95rem;">Une interface intuitive, des résultats concrets. J’ai triplé ma portée sur WhatsApp en quelques semaines.</p>
-
-      <div style="display: flex; justify-content: space-between; margin-top: 15px; font-size: 0.9rem;">
-        <span style="color: #bbb;"><strong style="color:#999;">Avant :</strong> <span style="color: #f44336;">180 vues</span></span>
-        <span style="color: #bbb;"><strong style="color:#999;">Après :</strong> <span style="color: #4caf50;">810 vues</span></span>
-      </div>
-    </div>
-
-  </div>
-    </section>
-
-<section style="background-color: #111; color: #ccc; padding: 60px 20px; text-align: center; font-family: 'Segoe UI', sans-serif;">
-
-  <section style="background-color: #111; color: #ccc; padding: 60px 20px; text-align: center; font-family: 'Segoe UI', sans-serif;">
-  <h2 style="color: #fff; font-size: 2rem; margin-bottom: 10px;">🎯 Restez informé(e)</h2>
-  <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1rem; color: #aaa;">
-    Inscrivez-vous pour recevoir nos dernières actualités, conseils exclusifs et astuces pour booster votre réseau WhatsApp.
-  </p>
-
-  <form onsubmit="event.preventDefault(); alert('Merci ! Vous êtes maintenant inscrit(e).');" style="max-width: 500px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-    <input type="email" placeholder="Votre adresse Gmail" required
-      style="width: 100%; max-width: 350px; height: 45px; padding: 10px 15px; border: none; border-radius: 10px; background-color: #222; color: #eee; font-size: 1rem;" />
-    <button type="submit"
-      style="height: 45px; padding: 0 25px; background-color: #2ecc71; color: #fff; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
-      S’inscrire
-    </button>
-  </form>
-
-  <p style="font-size: 0.85rem; margin-top: 20px; color: #666; max-width: 500px; margin-left: auto; margin-right: auto;">
-    En vous inscrivant, vous acceptez de recevoir nos emails. Vous pouvez vous désabonner à tout moment.
-  </p>
-  </section>
-    
-  <!-- FAQ -->
-  <div class="faq-container">
-    <h2>Questions Fréquemment Posées</h2>
-
-    <div class="faq-item">
-      <div class="faq-question">Comment mes vues vont-elles augmenter avec Ralph Xpert ?</div>
-      <div class="faq-answer">
-        Il suffit d’enregistrer votre nom et de rejoindre la communauté sur le groupe WhatsApp. Ensuite, vous recevrez le fichier à publier dans le groupe pour activer le système de vues.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Est-ce que mon compte WhatsApp est en sécurité ?</div>
-      <div class="faq-answer">
-        Oui, votre compte est 100% sécurisé. Aucune information personnelle n’est compromise.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Est-ce gratuit ?</div>
-      <div class="faq-answer">
-        Oui, le service est totalement gratuit. Aucun paiement n’est requis.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Est-ce que cela fonctionne dans tous les pays ?</div>
-      <div class="faq-answer">
-        Oui, le système fonctionne dans tous les pays sans exception.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Comment puis-je obtenir le fichier ?</div>
-      <div class="faq-answer">
-        En enregistrant simplement votre nom et en rejoignant le groupe WhatsApp, vous recevrez le fichier directement dans le groupe.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">Est-ce que cela fonctionne sur tous les types d’appareils ?</div>
-      <div class="faq-answer">
-        Oui, le système fonctionne sur tous les appareils : Android, iPhone, tablette et ordinateur.
-      </div>
-    </div>
-  </div>
-
-<section style="background-color: #2ecc71; padding: 50px 20px; border-radius: 16px; text-align: center; font-family: 'Segoe UI', sans-serif; margin: 60px 20px;">
-  <h2 style="font-size: 2rem; margin-bottom: 15px; color: #fff;">
-    🚀 Augmentez votre visibilité dès aujourd'hui
-  </h2>
-  <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; color: #fff;">
-    Rejoignez des centaines de créateurs qui utilisent déjà Ralph Xpert pour faire rayonner leur activité sur WhatsApp et ailleurs.
-  </p>
-  <button onclick="window.location.href='contact.html'"
-    style="background-color: #fff; color: #2ecc71; padding: 12px 25px; font-size: 1rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-    📞 Contacter nous / dès aujourd'hui
-  </button>
-</section>
-  
-<script>
-  // Gestion FAQ toggle
-  const questions = document.querySelectorAll('.faq-question');
-  questions.forEach(question => {
-    question.addEventListener('click', () => {
-      const answer = question.nextElementSibling;
-      const isActive = question.classList.contains('active');
-
-      document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
-      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
-
-      if (!isActive) {
-        question.classList.add('active');
-        answer.classList.add('show');
-      }
-    });
-  });
-
-  // Gestion inscription et stockage dans localStorage
-  const cléStockage = 'utilisateursRécents';
-  const listeElement = document.getElementById("recentEntries");
-
-  function chargerUtilisateurs() {
-    const utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
-    listeElement.innerHTML = "";
-
-    utilisateurs.forEach(utilisateur => {
-      const élémentLi = document.createElement("li");
-      élémentLi.innerHTML = `👤 <strong style="color:#00cc66">${utilisateur.nom}</strong> — <span style="color:#ccc">${utilisateur.numeroComplet}</span>`;
-      listeElement.appendChild(élémentLi);
-    });
-  }
-
-  function soumettreFormulaire(event) {
-    event.preventDefault();
-
-    const nom = document.getElementById("nom").value.trim();
-    const codePays = document.getElementById("code-pays").value;
-    const numero = document.getElementById("numero").value.trim();
-
-    if (!nom || !numero) {
-      alert("Veuillez remplir tous les champs correctement.");
-      return;
-    }
-
-    const numeroComplet = codePays + " " + numero;
-    const nouvelUtilisateur = { nom: nom + " (RXP)", numeroComplet: numeroComplet };
-
-    // Récupérer les utilisateurs existants
-    let utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
-
-    // Vérifier si numéro complet déjà inscrit
-    const dejaInscrit = utilisateurs.some(u => u.numeroComplet === numeroComplet);
-    if (dejaInscrit) {
-      alert("Ce numéro est déjà inscrit !");
-      return;
-    }
-
-    // Ajouter nouvel utilisateur en tête
-    utilisateurs.unshift(nouvelUtilisateur);
-
-    // Garder max 5 derniers
-    utilisateurs = utilisateurs.slice(0, 5);
-
-    // Sauvegarder
-    localStorage.setItem(cléStockage, JSON.stringify(utilisateurs));
-
-    chargerUtilisateurs();
-
-    alert("Votre numéro a été enregistré avec succès !");
-
-    // Réinitialiser formulaire
-    document.getElementById("nom").value = "";
-    document.getElementById("code-pays").selectedIndex = 0;
-    document.getElementById("numero").value = "";
-  }
-
-  // Charger liste au chargement de page
-  window.onload = chargerUtilisateurs;
-</script>
-
-<footer style="background-color: #0d0d0d; color: #ccc; padding: 40px 20px; font-family: 'Segoe UI', sans-serif;">
-  <div style="max-width: 1100px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
-
-    <!-- Logo ak Tit -->
-    <div style="flex: 1 1 250px;">
-      <h2 style="color: #fff; margin: 0; font-weight: 700; font-size: 1.8rem;">RALPH XPERT PROGRAMME</h2>
-      <p style="margin-top: 8px; font-size: 0.95rem; color: #aaa;">
-        La plateforme de référence pour développer votre réseau WhatsApp et maximiser l'impact de vos statuts.
-      </p>
-    </div>
-
-    <!-- Services -->
-    <div style="flex: 1 1 200px;">
-      <h3 style="color: #fff; margin-bottom: 12px; font-weight: 600;">Services</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; color: #bbb; font-size: 0.9rem;">
-        <li>Boost de contacts</li>
-        <li>Vues de statut</li>
-        <li>Analytics avancées</li>
-        <li>Formation premium</li>
-      </ul>
-    </div>
-
-    <!-- Contact & Réseaux -->
-    <div style="flex: 1 1 220px;">
-      <h3 style="color: #fff; margin-bottom: 12px; font-weight: 600;">Contact & Support</h3>
-      <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; color: #bbb;">
-        <li style="margin-bottom: 8px;">
-          <a href="mailto:elogekenguer@gmail.com" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-            <img src="https://cdn-icons-png.flaticon.com/24/561/561127.png" alt="Email" style="width: 20px; height: 20px;">
-            elogekenguer@gmail.com
-          </a>
-        </li>
-        <li style="margin-bottom: 8px;">
-          <a href="tel:+18494597173" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-            <img src="https://cdn-icons-png.flaticon.com/24/597/597177.png" alt="Téléphone" style="width: 20px; height: 20px;">
-            +1 849 459 7173
-          </a>
-        </li>
-        <li>
-          <a href="https://wa.me/18494597173" target="_blank" style="color: #ccc; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 24px; height: 24px;">
-            WhatsApp 24/7 Disponible
-          </a>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div style="max-width: 1100px; margin: 30px auto 0; font-size: 0.8rem; color: #555; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
-    <span>© 2025 RALPH XPERT PROGRAMME. Tous droits réservés.</span>
-    <span>Créé par <strong>Mr RALPH</strong></span>
-    <a href="#" style="color: #555; text-decoration: none;">Conditions d'utilisation</a>
-    <a href="#" style="color: #555; text-decoration: none;">Politique de confidentialité</a>
-  </div>
-</footer>
-    
-</body>
-  </html>
+  <button class="btn btn-rechercher" onclick="window.locatio
