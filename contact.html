@@ -109,40 +109,49 @@
 </head>
 <body>
 
-  <header>
-    <h1>Contactez-nous</h1>
-    <p>Vous avez une question, un projet ou souhaitez simplement discuter ? N'hésitez pas à nous contacter. Notre équipe vous répondra dans les plus brefs délais.</p>
-  </header>
+<header>
+  <h1>Contactez-nous</h1>
+  <p>Vous avez une question, un projet ou souhaitez simplement discuter ? N'hésitez pas à nous contacter. Notre équipe vous répondra dans les plus brefs délais.</p>
+</header>
 
-  <main class="container">
-    <section class="form-section">
-      <h2>Envoyez-nous un message</h2>
-      <p>Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
-      <form>
-        <label for="name">Nom complet *</label>
-        <input type="text" id="name" placeholder="Votre nom complet" required />
-
-        <label for="email">Email *</label>
-        <input type="email" id="email" placeholder="votre@email.com" required />
-
-        <label for="subject">Sujet *</label>
-        <select id="subject" required>
-          <option value="">Choisissez un sujet</option>
-          <option value="support">Support</option>
-          <option value="devis">Demande de devis</option>
-          <option value="autre">Autre</option>
-        </select>
-
-        <label for="message">Message *</label>
-        <textarea id="message" rows="5" placeholder="Décrivez votre demande en détail..." required></textarea>
-
-        <button type="submit">Envoyer le message</button>
-      </form>
-    </section>
+<main class="container">
+  <section class="form-section">
+    <h2>Envoyez-nous un message</h2>
+    <p>Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
     
-<div id="merciMessage" style="display:none; margin-top: 20px; color: green; font-weight: bold; font-size: 1.1rem;">
-  ✅ Merci ! Votre message a été envoyé avec succès.
-</div>
+    <form onsubmit="event.preventDefault(); afficherMessage();">
+      <label for="name">Nom complet *</label>
+      <input type="text" id="name" placeholder="Votre nom complet" required />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" placeholder="votre@email.com" required />
+
+      <label for="subject">Sujet *</label>
+      <select id="subject" required>
+        <option value="">Choisissez un sujet</option>
+        <option value="support">Support</option>
+        <option value="devis">Demande de devis</option>
+        <option value="autre">Autre</option>
+      </select>
+
+      <label for="message">Message *</label>
+      <textarea id="message" rows="5" placeholder="Décrivez votre demande en détail..." required></textarea>
+
+      <button type="submit">Envoyer le message</button>
+    </form>
+
+    <div id="merciMessage" style="display:none; margin-top: 20px; color: green; font-weight: bold; font-size: 1.1rem;">
+      ✅ Merci ! Votre message a été envoyé avec succès.
+    </div>
+  </section>
+</main>
+
+<script>
+  function afficherMessage() {
+    document.getElementById('merciMessage').style.display = 'block';
+  }
+</script>
+    
     <section class="info-section">
       <h2>Informations de contact</h2>
       <p>Plusieurs moyens de nous joindre selon vos préférences.</p>
