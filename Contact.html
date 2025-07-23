@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contactez-nous | Ralph Xpert</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      padding: 60px 20px 30px;
+      text-align: center;
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .form-section {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section h2 {
+      margin-bottom: 20px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .info-section {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-block {
+      margin-bottom: 25px;
+    }
+
+    .info-block h3 {
+      margin-bottom: 5px;
+      color: #2ecc71;
+    }
+
+    .faq-section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+    }
+
+    .faq-item h4 {
+      color: #2ecc71;
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Contactez-nous</h1>
+    <p>Vous avez une question, un projet ou souhaitez simplement discuter ? N'hésitez pas à nous contacter. Notre équipe vous répondra dans les plus brefs délais.</p>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Envoyez-nous un message</h2>
+      <p>Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
+      <form>
+        <label for="name">Nom complet *</label>
+        <input type="text" id="name" placeholder="Votre nom complet" required />
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="votre@email.com" required />
+
+        <label for="subject">Sujet *</label>
+        <select id="subject" required>
+          <option value="">Choisissez un sujet</option>
+          <option value="support">Support</option>
+          <option value="devis">Demande de devis</option>
+          <option value="autre">Autre</option>
+        </select>
+
+        <label for="message">Message *</label>
+        <textarea id="message" rows="5" placeholder="Décrivez votre demande en détail..." required></textarea>
+
+        <button type="submit">Envoyer le message</button>
+      </form>
+    </section>
+
+    <section class="info-section">
+      <h2>Informations de contact</h2>
+      <p>Plusieurs moyens de nous joindre selon vos préférences.</p>
+
+      <div class="info-block">
+        <h3>📧 Email</h3>
+        <p>contact@ralphxpert.fr</p>
+        <p><small>Réponse sous 24h</small></p>
+      </div>
+
+      <div class="info-block">
+        <h3>📞 Téléphone</h3>
+        <p>+33 1 23 45 67 89</p>
+        <p><small>Lun-Ven 9h-18h</small></p>
+      </div>
+
+      <div class="info-block">
+        <h3>📍 Adresse</h3>
+        <p>Paris, France</p>
+        <p><small>Rendez-vous sur demande</small></p>
+      </div>
+
+      <div class="info-block">
+        <h3>🕒 Horaires</h3>
+        <p>9h - 18h</p>
+        <p><small>Du lundi au vendredi</small></p>
+      </div>
+    </section>
+  </main>
+
+  <section class="faq-section">
+    <h2>Questions fréquentes</h2>
+
+    <div class="faq-item">
+      <h4>📩 Délais de réponse</h4>
+      <p>Nous répondons généralement sous 24h en jours ouvrés.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>📝 Devis gratuit</h4>
+      <p>Tous nos devis sont gratuits et sans engagement.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>🚨 Urgences</h4>
+      <p>Pour les urgences, contactez-nous par téléphone.</p>
+    </div>
+  </section>
+
+</body>
+</html>
