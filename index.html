@@ -349,6 +349,32 @@
     </form>
   </div>
 
+<script>
+  function getContacts() {
+    const contacts = localStorage.getItem('contacts');
+    return contacts ? JSON.parse(contacts) : [];
+  }
+
+  function saveContact(name, phone) {
+    const contacts = getContacts();
+    contacts.push({ name, phone });
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (name && phone) {
+      saveContact(name, phone);
+      alert("Kontak lan sove ✅");
+      this.reset();
+    } else {
+      alert("Tanpri ranpli tout chan yo.");
+    }
+  });
+</script>
+  
   <!-- Statistiques + Derniers inscrits -->
   <div class="stats-container">
     <h2>📊 Statistiques Communauté</h2>
