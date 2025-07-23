@@ -139,6 +139,8 @@
     🔍 Rechercher / Modifier vos contacts
   </button>
 <script>
+
+  
   // Clé pour stocker les utilisateurs récents dans localStorage
   const cléStockage = 'utilisateursRécents';
   const listeElement = document.getElementById("recentEntries");
@@ -311,32 +313,49 @@
       }
     });
   });
-
-  <!-- Bouton Connecter nous dès aujourd'hui -->
-<a href="contact.html" class="btn-connect">
+  
+<a href="contact.html" class="btn-connect-animated">
   Connecter nous dès aujourd'hui
 </a>
 
 <style>
-  .btn-connect {
+  .btn-connect-animated {
     display: inline-block;
     background: linear-gradient(45deg, #0078D7, #00BFFF);
     color: white;
-    padding: 14px 28px;
-    font-weight: 600;
-    font-size: 1.1rem;
+    padding: 14px 32px;
+    font-weight: 700;
+    font-size: 1.2rem;
     border-radius: 30px;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 120, 215, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 120, 215, 0.6);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 30px auto 0;
+    text-align: center;
   }
-  .btn-connect:hover {
+
+  /* Pulsate animation */
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 8px rgba(0, 120, 215, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(0, 180, 255, 1);
+    }
+    100% {
+      box-shadow: 0 0 8px rgba(0, 120, 215, 0.7);
+    }
+  }
+
+  .btn-connect-animated:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 18px rgba(0, 120, 215, 0.9);
+    animation: pulseGlow 1.5s infinite;
   }
 </style>
-        </script>
-
+  
 <!-- 🔰 RALPH XPERT PROGRAMME -->
 <div style="max-width: 700px; margin: 50px auto; background-color: #111; color: #ccc; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 204, 102, 0.3); font-family: Arial, sans-serif;">
   <h2 style="color: #00cc66; text-align: center; margin-bottom: 15px; font-size: 22px; font-weight: 700;">🔥 Ralph Xpert Programme</h2>
