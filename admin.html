@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Admin Ralph Xpert</title>
 <style>
+  /* Styles de base et reset */
   * {
     box-sizing: border-box;
   }
@@ -14,52 +15,56 @@
     background: #121212;
     color: #ddd;
   }
+  a {
+    color: #00cc66;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
   header {
     background: #1e1e1e;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 6px #00cc6611;
   }
-  nav a {
-    color: #ccc;
-    text-decoration: none;
+  header nav a {
     margin: 0 15px;
     font-weight: 600;
+    font-size: 1.1rem;
     cursor: pointer;
   }
-  nav a.active {
+  header nav a.active {
     color: #00cc66;
     border-bottom: 2px solid #00cc66;
     padding-bottom: 3px;
   }
-  main {
-    max-width: 1000px;
-    margin: 30px auto 50px auto;
-    padding: 0 20px;
+  #logoutBtn {
+    background: #cc3300;
+    border: none;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
   }
-  /* Sections */
+  main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 20px auto 40px auto;
+  }
+  /* Sections - affichage */
   section {
     display: none;
   }
   section.active {
     display: block;
   }
-
-  /* Contacts */
-  #contactSection button {
-    margin: 10px 10px 20px 0;
-    padding: 10px 20px;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #121212;
-    background-color: #00cc66;
-    transition: background 0.3s ease;
-  }
-  #contactSection button:hover {
-    background-color: #009944;
+  /* -- Contact Section -- */
+  #contactSection {
+    margin-bottom: 30px;
   }
   #contactSearch {
     margin-bottom: 15px;
@@ -71,8 +76,6 @@
     max-width: 300px;
     border-radius: 8px;
     border: none;
-    background: #222;
-    color: #ddd;
   }
   table {
     width: 100%;
@@ -104,6 +107,7 @@
   .actions {
     display: flex;
     gap: 12px;
+    justify-content: center;
   }
   .action-btn {
     cursor: pointer;
@@ -117,10 +121,51 @@
   .action-btn:hover {
     opacity: 0.7;
   }
-
-  /* Statistiques */
-  #statsSection .stats-info {
-    font-size: 1.2rem;
+  #downloadAllVCFBtn, #deleteAllBtn {
+    margin: 15px 10px 15px 0;
+    background: #00cc66;
+    border: none;
+    color: #121212;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  #deleteAllBtn {
+    background: #cc3300;
+  }
+  /* -- Messages Section -- */
+  #messagesSection table {
+    margin-top: 15px;
+  }
+  #messagesSection th, #messagesSection td {
+    word-break: break-word;
+  }
+  /* -- Statistiques -- */
+  #statsSection .stats-filters {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  #statsSection .stats-filters button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #333;
+    color: #eee;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  #statsSection .stats-filters button.active {
+    background: #00cc66;
+    color: #121212;
+  }
+  #statsSection .stats-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00cc66;
     margin-bottom: 15px;
   }
   .progress-bar-container {
@@ -129,6 +174,7 @@
     overflow: hidden;
     height: 25px;
     max-width: 600px;
+    margin-bottom: 40px;
   }
   .progress-bar-fill {
     height: 100%;
@@ -136,8 +182,7 @@
     width: 0%;
     transition: width 1s ease;
   }
-
-  /* Footer */
+  /* -- Footer Edition -- */
   #footerSection textarea {
     width: 100%;
     min-height: 150px;
@@ -153,7 +198,7 @@
     margin-top: 10px;
     background: #00cc66;
     border: none;
-    padding: 12px 20px;
+    padding: 12px 18px;
     color: #121212;
     font-weight: 700;
     border-radius: 12px;
@@ -163,10 +208,9 @@
   #footerSection button:hover {
     background: #009944;
   }
-
   /* Responsive */
   @media(max-width: 600px) {
-    nav a {
+    header nav a {
       margin: 0 8px;
       font-size: 1rem;
     }
@@ -185,19 +229,18 @@
   <div><strong>Admin Ralph Xpert</strong></div>
   <nav>
     <a href="#" id="navContact" class="active">Contact</a>
-    <a href="#" id="navFooter">Footer</a>
     <a href="#" id="navStats">Statistiques</a>
+    <a href="#" id="navFooter">Footer</a>
   </nav>
+  <button id="logoutBtn">Déconnexion</button>
 </header>
 
 <main>
-  <!-- Contact Section -->
+  <!-- CONTACT -->
   <section id="contactSection" class="active">
     <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
-    <div style="margin: 10px 0;">
-      <button id="deleteAllBtn" title="Supprimer tous les contacts">🗑️ Supprimer tout</button>
-      <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tout (VCF)</button>
-    </div>
+    <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
+    <button id="deleteAllBtn" title="Supprimer tous les contacts">🗑️ Supprimer tous les contacts</button>
     <table>
       <thead>
         <tr>
@@ -207,62 +250,78 @@
         </tr>
       </thead>
       <tbody id="contactTableBody">
-        <!-- Contacts list -->
+        <!-- Liste des contacts -->
       </tbody>
     </table>
   </section>
 
-  <!-- Footer Section -->
-  <section id="footerSection">
-    <h2>Modifier le Footer</h2>
-    <textarea id="footerTextArea" placeholder="Éditez le contenu du footer ici..."></textarea>
-    <button id="saveFooterBtn">Sauvegarder</button>
-  </section>
-
-  <!-- Statistiques Section -->
+  <!-- STATISTIQUES -->
   <section id="statsSection">
-    <div class="stats-info" id="statsVisiteurs">Visiteurs : 0</div>
-    <div class="stats-info" id="statsInscrits">Inscriptions : 0</div>
+    <div class="stats-filters">
+      <button class="active" data-filter="immediate">Immédiat</button>
+      <button data-filter="today">Aujourd'hui</button>
+      <button data-filter="week">Cette semaine</button>
+    </div>
+    <div class="stats-total" id="statsTotal">Total visiteurs: 0 | Total inscrits: 0</div>
     <div class="progress-bar-container" title="Progression">
       <div class="progress-bar-fill" id="progressBar"></div>
     </div>
   </section>
+
+  <!-- FOOTER -->
+  <section id="footerSection">
+    <h2>Modifier le Footer</h2>
+    <textarea id="footerTextArea"></textarea>
+    <button id="saveFooterBtn">Sauvegarder</button>
+  </section>
 </main>
 
 <script>
+  // Vérifier si admin connecté sinon rediriger
+  if(localStorage.getItem('adminLoggedIn') !== 'true'){
+    alert('Vous devez être connecté pour accéder à cette page.');
+    window.location.href = 'login.html';
+  }
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('adminLoggedIn');
+    window.location.href = 'login.html';
+  });
+
   // Navigation
   const navContact = document.getElementById('navContact');
-  const navFooter = document.getElementById('navFooter');
   const navStats = document.getElementById('navStats');
+  const navFooter = document.getElementById('navFooter');
 
   const contactSection = document.getElementById('contactSection');
-  const footerSection = document.getElementById('footerSection');
   const statsSection = document.getElementById('statsSection');
+  const footerSection = document.getElementById('footerSection');
 
   function switchSection(section) {
-    [contactSection, footerSection, statsSection].forEach(s => s.classList.remove('active'));
-    [navContact, navFooter, navStats].forEach(n => n.classList.remove('active'));
+    [contactSection, statsSection, footerSection].forEach(s => s.classList.remove('active'));
+    [navContact, navStats, navFooter].forEach(n => n.classList.remove('active'));
 
-    if(section === 'contact'){
+    if (section === 'contact') {
       contactSection.classList.add('active');
       navContact.classList.add('active');
-      loadContacts();
-    } else if(section === 'footer'){
-      footerSection.classList.add('active');
-      navFooter.classList.add('active');
-      loadFooter();
-    } else if(section === 'stats'){
+      afficherContacts();
+    } else if (section === 'stats') {
       statsSection.classList.add('active');
       navStats.classList.add('active');
-      loadStats();
+      afficherStats();
+    } else if (section === 'footer') {
+      footerSection.classList.add('active');
+      navFooter.classList.add('active');
+      chargerFooter();
     }
   }
 
   navContact.addEventListener('click', e => { e.preventDefault(); switchSection('contact'); });
-  navFooter.addEventListener('click', e => { e.preventDefault(); switchSection('footer'); });
   navStats.addEventListener('click', e => { e.preventDefault(); switchSection('stats'); });
+  navFooter.addEventListener('click', e => { e.preventDefault(); switchSection('footer'); });
 
-  // Contacts
+  // Gestion Contacts
   function getContacts() {
     return JSON.parse(localStorage.getItem('utilisateursRécents')) || [];
   }
@@ -270,9 +329,10 @@
     localStorage.setItem('utilisateursRécents', JSON.stringify(contacts));
   }
 
-  function loadContacts(){
+  function afficherContacts() {
     const contacts = getContacts().slice().reverse();
     const filter = document.getElementById('contactSearch').value.toLowerCase();
+
     const tbody = document.getElementById('contactTableBody');
     tbody.innerHTML = '';
 
@@ -291,38 +351,38 @@
       });
   }
 
-  document.getElementById('contactSearch').addEventListener('input', loadContacts);
+  document.getElementById('contactSearch').addEventListener('input', afficherContacts);
 
-  // Delete one contact
+  // Supprimer contact
   document.getElementById('contactTableBody').addEventListener('click', e => {
-    if(e.target.classList.contains('delete')){
+    if(e.target.classList.contains('delete')) {
       const index = parseInt(e.target.getAttribute('data-index'));
       const contacts = getContacts();
-      if(confirm(`Voulez-vous vraiment supprimer ${contacts[index].nom} ?`)){
+      if(confirm(`Voulez-vous vraiment supprimer ${contacts[index].nom} ?`)) {
         contacts.splice(index, 1);
         saveContacts(contacts);
-        loadContacts();
+        afficherContacts();
         alert('Contact supprimé.');
       }
     }
-    if(e.target.classList.contains('edit')){
+    if(e.target.classList.contains('edit')) {
       alert('Fonction modifier pas encore implémentée.');
     }
   });
 
-  // Delete all contacts
+  // Supprimer tous les contacts
   document.getElementById('deleteAllBtn').addEventListener('click', () => {
-    if(confirm('Voulez-vous vraiment supprimer tous les contacts ?')){
-      localStorage.removeItem('utilisateursRécents');
-      loadContacts();
+    if(confirm('Voulez-vous vraiment supprimer tous les contacts ? Cette action est irréversible.')) {
+      saveContacts([]);
+      afficherContacts();
       alert('Tous les contacts ont été supprimés.');
     }
   });
 
-  // Download all contacts as VCF
+  // Télécharger tous les contacts en VCF
   document.getElementById('downloadAllVCFBtn').addEventListener('click', () => {
     const contacts = getContacts();
-    if(contacts.length === 0){
+    if(contacts.length === 0) {
       alert('Aucun contact à télécharger.');
       return;
     }
@@ -345,40 +405,37 @@ END:VCARD
     URL.revokeObjectURL(url);
   });
 
-  // Footer
-  function loadFooter(){
-    const footerContent = localStorage.getItem('footerContent') || `<p>© 2025 RALPH XPERT PROGRAMME. Tous droits réservés.</p>`;
-    document.getElementById('footerTextArea').value = footerContent;
-  }
-
-  document.getElementById('saveFooterBtn').addEventListener('click', () => {
-    const val = document.getElementById('footerTextArea').value;
-    localStorage.setItem('footerContent', val);
-    alert('Footer sauvegardé !');
-  });
-
-  // Statistiques
-  function getVisiteurs(){
+  // Statistiques (visiteurs et inscrits)
+  function getVisiteurs() {
     return JSON.parse(localStorage.getItem('visiteursStats')) || [];
   }
-  function compterVisiteurs(){
-    return getVisiteurs().length;
-  }
-  function getInscrits(){
-    return getContacts().length;
-  }
-  function loadStats(){
-    const visiteurs = compterVisiteurs();
-    const inscrits = getInscrits();
-    document.getElementById('statsVisiteurs').textContent = `Visiteurs : ${visiteurs}`;
-    document.getElementById('statsInscrits').textContent = `Inscriptions : ${inscrits}`;
-    let pct = visiteurs > 0 ? Math.min((inscrits / visiteurs) * 100, 100) : 0;
-    document.getElementById('progressBar').style.width = pct + '%';
+  function compterVisiteurs(filter) {
+    const visites = getVisiteurs();
+
+    if(filter === 'immediate') return visites.length;
+
+    if(filter === 'today') {
+      const startDay = new Date();
+      startDay.setHours(0,0,0,0);
+      return visites.filter(t => t >= startDay.getTime()).length;
+    }
+
+    if(filter === 'week') {
+      const startWeek = new Date();
+      const day = startWeek.getDay();
+      const diff = startWeek.getDate() - day + (day === 0 ? -6 : 1);
+      startWeek.setDate(diff);
+      startWeek.setHours(0,0,0,0);
+      return visites.filter(t => t >= startWeek.getTime()).length;
+    }
+    return visites.length;
   }
 
-  // Initial load
-  switchSection('contact');
-</script>
+  function afficherStats() {
+    const contacts = getContacts();
+    let activeFilter = 'immediate';
+    updateStats(activeFilter, contacts);
 
-</body>
-</html>
+    const statsBtns = document.querySelectorAll('#statsSection .stats-filters button');
+    statsBtns.forEach(btn => {
+      btn.classList.remove('active');
