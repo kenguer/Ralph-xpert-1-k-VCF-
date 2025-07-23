@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Admin Ralph Xpert</title>
 <style>
-  /* Reset & base */
+  /* Styles de base et reset */
   * {
     box-sizing: border-box;
   }
@@ -22,8 +22,6 @@
   a:hover {
     text-decoration: underline;
   }
-
-  /* Header */
   header {
     background: #1e1e1e;
     padding: 15px 20px;
@@ -43,35 +41,32 @@
     border-bottom: 2px solid #00cc66;
     padding-bottom: 3px;
   }
-
   main {
     padding: 20px;
     max-width: 1000px;
     margin: 20px auto 40px auto;
   }
-
-  /* Sections hidden by default */
+  /* Sections - affichage */
   section {
     display: none;
   }
   section.active {
     display: block;
   }
-
-  /* Contact Section */
+  /* -- Contact Section -- */
   #contactSection {
     margin-bottom: 30px;
   }
   #contactSearch {
     margin-bottom: 15px;
-    width: 100%;
-    max-width: 320px;
-    padding: 10px 15px;
+  }
+  #contactSearch input {
+    padding: 8px 12px;
     font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
     border-radius: 8px;
     border: none;
-    background: #222;
-    color: #ddd;
   }
   table {
     width: 100%;
@@ -117,33 +112,25 @@
   .action-btn:hover {
     opacity: 0.7;
   }
-
   #downloadAllVCFBtn {
-    margin: 15px 0 25px 0;
+    margin: 15px 0;
     background: #00cc66;
     border: none;
     color: #121212;
-    padding: 12px 25px;
+    padding: 12px 20px;
     border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 8px #009933aa;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
   }
-  #downloadAllVCFBtn:hover {
-    background-color: #009944;
-  }
-
-  /* Messages Section */
+  /* -- Messages Section -- */
   #messagesSection table {
     margin-top: 15px;
   }
   #messagesSection th, #messagesSection td {
     word-break: break-word;
   }
-
-  /* Stats Section */
+  /* -- Statistiques -- */
   #statsSection .stats-filters {
     margin-bottom: 20px;
     display: flex;
@@ -158,13 +145,10 @@
     color: #eee;
     font-weight: 600;
     transition: background 0.3s ease;
-    box-shadow: 0 0 5px transparent;
   }
-  #statsSection .stats-filters button.active,
-  #statsSection .stats-filters button:hover {
+  #statsSection .stats-filters button.active {
     background: #00cc66;
     color: #121212;
-    box-shadow: 0 0 8px #00cc66;
   }
   #statsSection .stats-total {
     font-size: 20px;
@@ -186,8 +170,7 @@
     width: 0%;
     transition: width 1s ease;
   }
-
-  /* Footer Section */
+  /* -- Footer Edition -- */
   #footerSection textarea {
     width: 100%;
     min-height: 150px;
@@ -198,92 +181,21 @@
     border-radius: 12px;
     font-family: 'Segoe UI', sans-serif;
     font-size: 1rem;
-    resize: vertical;
-    box-shadow: inset 0 0 6px #00cc66aa;
   }
   #footerSection button {
-    margin-top: 12px;
+    margin-top: 10px;
     background: #00cc66;
     border: none;
-    padding: 14px 22px;
+    padding: 12px 18px;
     color: #121212;
     font-weight: 700;
     border-radius: 12px;
     cursor: pointer;
     transition: background 0.3s ease;
-    box-shadow: 0 4px 8px #009933cc;
   }
   #footerSection button:hover {
     background: #009944;
   }
-
-  /* Login Modal */
-  #loginModal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  #loginBox {
-    background: #1e1e1e;
-    padding: 30px 40px;
-    border-radius: 16px;
-    box-shadow: 0 0 25px #00cc66aa;
-    width: 320px;
-    max-width: 90%;
-  }
-  #loginBox h2 {
-    margin-bottom: 25px;
-    color: #00cc66;
-    font-weight: 700;
-    text-align: center;
-    font-size: 1.8rem;
-  }
-  #loginBox label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #ddd;
-  }
-  #loginBox input[type="text"],
-  #loginBox input[type="password"] {
-    width: 100%;
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 20px;
-    background: #222;
-    color: #ddd;
-    font-size: 1rem;
-    box-shadow: inset 0 0 6px #00cc66bb;
-  }
-  #loginBox button {
-    width: 100%;
-    padding: 12px 0;
-    background: #00cc66;
-    border: none;
-    color: #121212;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px #009933cc;
-    transition: background 0.3s ease;
-  }
-  #loginBox button:hover {
-    background: #009944;
-  }
-  #loginError {
-    color: #cc3300;
-    margin-bottom: 10px;
-    font-weight: 700;
-    text-align: center;
-    display: none;
-  }
-
   /* Responsive */
   @media(max-width: 600px) {
     header nav a {
@@ -296,39 +208,23 @@
     .action-btn {
       font-size: 16px;
     }
-    #loginBox {
-      width: 90%;
-      padding: 20px 25px;
-    }
   }
 </style>
 </head>
 <body>
 
-<!-- Login Modal -->
-<div id="loginModal">
-  <div id="loginBox">
-    <h2>Connexion Admin</h2>
-    <div id="loginError">Identifiant ou mot de passe incorrect</div>
-    <label for="usernameInput">Nom d'utilisateur</label>
-    <input type="text" id="usernameInput" autocomplete="off" />
-    <label for="passwordInput">Mot de passe</label>
-    <input type="password" id="passwordInput" />
-    <button id="loginBtn">Se connecter</button>
-  </div>
-</div>
-
-<header style="display:none;">
+<header>
   <div><strong>Admin Ralph Xpert</strong></div>
   <nav>
     <a href="#" id="navContact" class="active">Contact</a>
     <a href="#" id="navMessages">Messages</a>
     <a href="#" id="navStats">Statistiques</a>
     <a href="#" id="navFooter">Footer</a>
+    <a href="#" id="logoutBtn" style="color:#cc3300; cursor:pointer; font-weight:700;">Déconnexion</a>
   </nav>
 </header>
 
-<main style="display:none;">
+<main>
   <!-- CONTACT -->
   <section id="contactSection" class="active">
     <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
@@ -341,7 +237,9 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody id="contactTableBody"></tbody>
+      <tbody id="contactTableBody">
+        <!-- Liste des contacts -->
+      </tbody>
     </table>
   </section>
 
@@ -358,7 +256,9 @@
           <th>Date</th>
         </tr>
       </thead>
-      <tbody id="messagesTableBody"></tbody>
+      <tbody id="messagesTableBody">
+        <!-- Messages list -->
+      </tbody>
     </table>
   </section>
 
@@ -384,45 +284,17 @@
 </main>
 
 <script>
-  // Admin Credentials
-  const ADMIN_USERNAME = 'Ralph';
-  const ADMIN_PASSWORD = 'Ralph509';
-
-  // Elements
-  const loginModal = document.getElementById('loginModal');
-  const usernameInput = document.getElementById('usernameInput');
-  const passwordInput = document.getElementById('passwordInput');
-  const loginBtn = document.getElementById('loginBtn');
-  const loginError = document.getElementById('loginError');
-
-  const header = document.querySelector('header');
-  const main = document.querySelector('main');
-
-  // On login button click
-  loginBtn.addEventListener('click', () => {
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Save login status in sessionStorage
-      sessionStorage.setItem('adminLoggedIn', 'true');
-      loginModal.style.display = 'none';
-      header.style.display = 'flex';
-      main.style.display = 'block';
-      loginError.style.display = 'none';
-      initAdminPage();
-    } else {
-      loginError.style.display = 'block';
-    }
-  });
-
-  // Auto redirect if already logged in
-  if(sessionStorage.getItem('adminLoggedIn') === 'true') {
-    loginModal.style.display = 'none';
-    header.style.display = 'flex';
-    main.style.display = 'block';
-    initAdminPage();
+  // Vérifier si admin connecté
+  if(localStorage.getItem('adminLoggedIn') !== 'true'){
+    alert('Veuillez vous connecter d\'abord.');
+    window.location.href = 'login.html';
   }
+
+  // Déconnexion
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('adminLoggedIn');
+    window.location.href = 'login.html';
+  });
 
   // Navigation
   const navContact = document.getElementById('navContact');
@@ -472,7 +344,7 @@
   }
 
   function afficherContacts() {
-    const contacts = getContacts().slice().reverse();
+    const contacts = getContacts().slice().reverse(); // ordre monte (dernier en premier)
     const filter = document.getElementById('contactSearch').value.toLowerCase();
 
     const tbody = document.getElementById('contactTableBody');
@@ -532,3 +404,30 @@ END:VCARD
     const blob = new Blob([vcfAll], {type: 'text/vcard'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
+    a.href = url;
+    a.download = 'contacts_all.vcf';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Gestion Messages
+  function getMessages() {
+    return JSON.parse(localStorage.getItem('messagesContact')) || [];
+  }
+  function saveMessages(msgs) {
+    localStorage.setItem('messagesContact', JSON.stringify(msgs));
+  }
+
+  function afficherMessages() {
+    const messages = getMessages().slice().reverse();
+    const tbody = document.getElementById('messagesTableBody');
+    tbody.innerHTML = '';
+
+    if(messages.length === 0){
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">Aucun message reçu.</td></tr>';
+      return;
+    }
+
+    messages.forEach(msg => {
+      const tr = document.createElement('tr');
+      const date = new Date(msg.date ||
