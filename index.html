@@ -4,309 +4,425 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ralph Xpert</title>
-</head>
-<body style="background-color: #000; font-family: 'Segoe UI', sans-serif; color: #ccc; padding: 40px 20px;">
+  <style>
+    body {
+      background-color: #000; 
+      font-family: 'Segoe UI', sans-serif; 
+      color: #ccc; 
+      padding: 40px 20px;
+    }
 
-  <div style="
-    background-color: #111;
-    color: #ccc;
-    padding: 30px 25px;
-    border-radius: 12px;
-    margin-top: 40px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 0 20px #ff000088;">
-    
-    <h1 style="color: #ff3b3b; font-weight: 700; font-size: 28px; margin-bottom: 20px;">
-      🎯 Bienvenue sur Ralph Xpert
-    </h1>
-    
-    <p style="font-size: 15px; line-height: 1.5; color: #bbb; margin-bottom: 30px;">
+    .container {
+      background-color: #111;
+      color: #ccc;
+      padding: 30px 25px;
+      border-radius: 12px;
+      margin-top: 40px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 20px #ff000088;
+    }
+
+    h1 {
+      color: #ff3b3b; 
+      font-weight: 700; 
+      font-size: 28px; 
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 15px; 
+      line-height: 1.5; 
+      color: #bbb; 
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex; 
+      flex-direction: column; 
+      gap: 15px;
+    }
+
+    input, select {
+      padding: 12px 15px; 
+      border-radius: 12px; 
+      border: 1px solid #333; 
+      font-size: 14px; 
+      background: #222; 
+      color: #eee;
+      box-shadow: inset 0 0 8px #ff000020;
+    }
+
+    button.submit-btn {
+      background: linear-gradient(45deg, #ff0000, #ff4d4d); 
+      color: white; 
+      padding: 14px 0; 
+      border: none; 
+      border-radius: 12px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      font-size: 16px; 
+      transition: background 0.3s ease;
+    }
+
+    button.submit-btn:hover {
+      background: linear-gradient(45deg, #ff4d4d, #ff0000);
+    }
+
+    /* Statistiques */
+    .stats-container {
+      max-width: 700px; 
+      margin: 50px auto; 
+      background-color: #111; 
+      color: #ccc; 
+      padding: 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
+    }
+
+    .stats-container h2 {
+      text-align: center; 
+      color: #00cc66; 
+      margin-bottom: 20px;
+    }
+
+    .progress-bar-bg {
+      background-color: #333; 
+      border-radius: 20px; 
+      overflow: hidden; 
+      height: 25px; 
+      margin-top: 10px;
+    }
+
+    .progress-bar-fill {
+      height: 100%; 
+      background-color: #00cc66;
+      width: 78%; /* Valeur dynamique possible */
+    }
+
+    #recentEntries {
+      list-style: none; 
+      padding-left: 0; 
+      font-size: 16px; 
+      color: #eee; 
+      max-height: 150px; 
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    /* FAQ Styles */
+    .faq-container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
+      color: #eee;
+    }
+
+    .faq-container h2 {
+      color: #00cc66;
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #333;
+    }
+
+    .faq-question {
+      cursor: pointer;
+      padding: 15px 10px;
+      font-weight: 600;
+      position: relative;
+      transition: background-color 0.3s;
+    }
+
+    .faq-question:hover {
+      background-color: #00cc66;
+      color: #111;
+    }
+
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      font-size: 22px;
+      transition: transform 0.3s;
+    }
+
+    .faq-question.active::after {
+      content: '^';
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 10px;
+      color: #bbb;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-answer.show {
+      max-height: 500px;
+      padding: 15px 10px;
+    }
+
+    /* Boutons Rechercher et Contacter */
+    .btn {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 24px;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 198, 255, 0.67);
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-rechercher {
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+    }
+    .btn-contacter {
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+      box-shadow: 0 0 15px #00c6ffaa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎯 Bienvenue sur Ralph Xpert</h1>
+    <p>
       Ralph Xpert vous ouvre les portes d’un nouveau niveau de visibilité.<br>
       Préparez-vous à faire passer votre statut WhatsApp à un tout autre niveau !
     </p>
 
-    <form onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 15px;">
-      <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" required 
-    style="padding: 12px 15px; border-radius: 12px; border: 1px solid #333; font-size: 14px; background: #222; color: #eee;
-        box-shadow: inset 0 0 8px #ff000020;" />
+    <form onsubmit="soumettreFormulaire(event)">
+      <input type="text" id="nom" placeholder="Nom et prénom (ex: Ralph Xpert)" required />
       
-<select id="code-pays" required 
-  style="padding: 12px 15px; border-radius: 12px; border: 1px solid #333; font-size: 14px; background: #222; color: #eee;
-  box-shadow: inset 0 0 8px #ff000020;">
+      <select id="code-pays" required>
+  <option value="">Choisissez un pays</option>
+
+  <!-- Haïti d'abord -->
   <option value="+509">🇭🇹 Haïti (+509)</option>
-  <option value="+1">🇺🇸 USA (+1)</option>
-  <option value="+33">🇫🇷 France (+33)</option>
-  <option value="+44">🇬🇧 UK (+44)</option>
-  <option value="+229">🇧🇯 Bénin (+229)</option>
-  <option value="+221">🇸🇳 Sénégal (+221)</option>
+
+  <!-- Peyi +1 yo apre Haïti -->
+  <option value="+1">🇨🇦 Canada (+1)</option>
+  <option value="+1">🇺🇸 États-Unis (+1)</option>
+  <option value="+1">🇧🇸 Bahamas (+1)</option>
+  <option value="+1">🇧🇧 Barbade (+1)</option>
+  <option value="+1">🇦🇬 Antigua-et-Barbuda (+1)</option>
+  <option value="+1">🇯🇲 Jamaïque (+1)</option
+  >
+  <option value="+1">🇩🇲 Dominique (+1)</option>
+  <option value="+1">🇬🇩 Grenade (+1)</option>
+  <option value="+1">🇰🇳 Saint-Kitts-et-Nevis (+1)</option>
+  <option value="+1">🇱🇨 Sainte-Lucie (+1)</option>
+  <option value="+1">🇻🇨 Saint-Vincent-et-les-Grenadines (+1)</option>
+  <option value="+1">🇹🇹 Trinité-et-Tobago (+1)</option>
+
+  <!-- Rès peyi yo pa òd alfabetik -->
   <option value="+213">🇩🇿 Algérie (+213)</option>
   <option value="+49">🇩🇪 Allemagne (+49)</option>
+  <option value="+376">🇦🇩 Andorre (+376)</option>
+  <option value="+244">🇦🇴 Angola (+244)</option>
   <option value="+54">🇦🇷 Argentine (+54)</option>
   <option value="+61">🇦🇺 Australie (+61)</option>
+  <option value="+43">🇦🇹 Autriche (+43)</option>
   <option value="+32">🇧🇪 Belgique (+32)</option>
-  <option value="+55">🇧🇷 Brésil (+55)</option>
-  <option value="+1">🇨🇦 Canada (+1)</option>
+  <option value="+229">🇧🇯 Bénin (+229)</option>
+  <option value="+591">🇧🇴 Bolivie (+591)</option>
+  <option value="+226">🇧🇫 Burkina Faso (+226)</option>
+  <option value="+257">🇧🇮 Burundi (+257)</option>
+  <option value="+855">🇰🇭 Cambodge (+855)</option>
+  <option value="+237">🇨🇲 Cameroun (+237)</option>
+  <option value="+56">🇨🇱 Chili (+56)</option>
   <option value="+86">🇨🇳 Chine (+86)</option>
+  <option value="+57">🇨🇴 Colombie (+57)</option>
+  <option value="+506">🇨🇷 Costa Rica (+506)</option>
+  <option value="+385">🇭🇷 Croatie (+385)</option>
+  <option value="+420">🇨🇿 République Tchèque (+420)</option>
   <option value="+45">🇩🇰 Danemark (+45)</option>
+  <option value="+253">🇩🇯 Djibouti (+253)</option>
   <option value="+20">🇪🇬 Égypte (+20)</option>
+  <option value="+971">🇦🇪 Émirats arabes unis (+971)</option>
+  <option value="+593">🇪🇨 Équateur (+593)</option>
   <option value="+34">🇪🇸 Espagne (+34)</option>
+  <option value="+1">🇺🇸 États-Unis (+1)</option>
   <option value="+372">🇪🇪 Estonie (+372)</option>
   <option value="+251">🇪🇹 Éthiopie (+251)</option>
+  <option value="+679">🇫🇯 Fidji (+679)</option>
   <option value="+358">🇫🇮 Finlande (+358)</option>
   <option value="+33">🇫🇷 France (+33)</option>
-  <option value="+44">🇬🇧 Royaume-Uni (+44)</option>
+  <option value="+241">🇬🇦 Gabon (+241)</option>
+  <option value="+220">🇬🇲 Gambie (+220)</option>
+  <option value="+995">🇬🇪 Géorgie (+995)</option>
+  <option value="+233">🇬🇭 Ghana (+233)</option>
+  <option value="+30">🇬🇷 Grèce (+30)</option>
+  <option value="+502">🇬🇹 Guatemala (+502)</option>
+  <option value="+224">🇬🇳 Guinée (+224)</option>
+  <option value="+245">🇬🇼 Guinée-Bissau (+245)</option>
+  <option value="+240">🇬🇶 Guinée équatoriale (+240)</option>
+  <option value="+36">🇭🇺 Hongrie (+36)</option>
   <option value="+91">🇮🇳 Inde (+91)</option>
   <option value="+62">🇮🇩 Indonésie (+62)</option>
+  <option value="+98">🇮🇷 Iran (+98)</option>
+  <option value="+964">🇮🇶 Irak (+964)</option>
+  <option value="+353">🇮🇪 Irlande (+353)</option>
+  <option value="+972">🇮🇱 Israël (+972)</option>
   <option value="+39">🇮🇹 Italie (+39)</option>
   <option value="+81">🇯🇵 Japon (+81)</option>
+  <option value="+962">🇯🇴 Jordanie (+962)</option>
   <option value="+254">🇰🇪 Kenya (+254)</option>
-  <option value="+371">🇱🇻 Lettonie (+371)</option>
+  <option value="+82">🇰🇷 Corée du Sud (+82)</option>
   <option value="+370">🇱🇹 Lituanie (+370)</option>
   <option value="+352">🇱🇺 Luxembourg (+352)</option>
   <option value="+261">🇲🇬 Madagascar (+261)</option>
-  <option value="+60">🇲🇾 Malaisie (+60)</option>
+  <option value="+265">🇲🇼 Malawi (+265)</option>
   <option value="+223">🇲🇱 Mali (+223)</option>
+  <option value="+212">🇲🇦 Maroc (+212)</option>
   <option value="+222">🇲🇷 Mauritanie (+222)</option>
   <option value="+230">🇲🇺 Maurice (+230)</option>
   <option value="+52">🇲🇽 Mexique (+52)</option>
-  <option value="+212">🇲🇦 Maroc (+212)</option>
-  <option value="+234">🇳🇬 Nigéria (+234)</option>
+  <option value="+377">🇲🇨 Monaco (+377)</option>
+  <option value="+976">🇲🇳 Mongolie (+976)</option>
+  <option value="+212">🇪🇭 Sahara Occidental (+212)</option>
   <option value="+31">🇳🇱 Pays-Bas (+31)</option>
+  <option value="+227">🇳🇪 Niger (+227)</option>
+  <option value="+234">🇳🇬 Nigéria (+234)</option>
+  <option value="+47">🇳🇴 Norvège (+47)</option>
   <option value="+92">🇵🇰 Pakistan (+92)</option>
   <option value="+507">🇵🇦 Panama (+507)</option>
+  <option value="+595">🇵🇾 Paraguay (+595)</option>
   <option value="+51">🇵🇪 Pérou (+51)</option>
-  <option value="+63">🇵🇭 Philippines (+63)</option>
+  <option value="+48">🇵🇱 Pologne (+48)</option>
   <option value="+351">🇵🇹 Portugal (+351)</option>
   <option value="+974">🇶🇦 Qatar (+974)</option>
+  <option value="+236">🇨🇫 République Centrafricaine (+236)</option>
+  <option value="+40">🇷🇴 Roumanie (+40)</option>
   <option value="+7">🇷🇺 Russie (+7)</option>
+  <option value="+250">🇷🇼 Rwanda (+250)</option>
   <option value="+966">🇸🇦 Arabie Saoudite (+966)</option>
   <option value="+221">🇸🇳 Sénégal (+221)</option>
+  <option value="+248">🇸🇨 Seychelles (+248)</option>
+  <option value="+232">🇸🇱 Sierra Leone (+232)</option>
+  <option value="+65">🇸🇬 Singapour (+65)</option>
+  <option value="+421">🇸🇰 Slovaquie (+421)</option>
+  <option value="+386">🇸🇮 Slovénie (+386)</option>
   <option value="+27">🇿🇦 Afrique du Sud (+27)</option>
   <option value="+82">🇰🇷 Corée du Sud (+82)</option>
-  <option value="+94">🇱🇰 Sri Lanka (+94)</option>
+  <option value="+211">🇸🇸 Soudan du Sud (+211)</option>
+  <option value="+249">🇸🇩 Soudan (+249)</option>
   <option value="+46">🇸🇪 Suède (+46)</option>
   <option value="+41">🇨🇭 Suisse (+41)</option>
+  <option value="+963">🇸🇾 Syrie (+963)</option>
+  <option value="+886">🇹🇼 Taïwan (+886)</option>
+  <option value="+992">🇹🇯 Tadjikistan (+992)</option>
+  <option value="+255">🇹🇿 Tanzanie (+255)</option>
   <option value="+66">🇹🇭 Thaïlande (+66)</option>
+  <option value="+228">🇹🇬 Togo (+228)</option>
   <option value="+216">🇹🇳 Tunisie (+216)</option>
   <option value="+90">🇹🇷 Turquie (+90)</option>
   <option value="+380">🇺🇦 Ukraine (+380)</option>
+  <option value="+256">🇺🇬 Ouganda (+256)</option>
   <option value="+598">🇺🇾 Uruguay (+598)</option>
   <option value="+998">🇺🇿 Ouzbékistan (+998)</option>
   <option value="+58">🇻🇪 Venezuela (+58)</option>
   <option value="+84">🇻🇳 Vietnam (+84)</option>
-  <option value="+967">🇾🇪 Yémen (+967)</option>
-  <!-- Ajoute plis si ou vle rive 120 -->
-</select>
+  <option value="+260">🇿🇲 Zambie (+260)</option>
+  <option value="+263">🇿🇼 Zimbabwe (+263)</option>
+      </select>
       
-      <input type="tel" id="numero" placeholder="Numéro (ex: 45xx xxxx)" required pattern="[0-9\s]+" 
-        style="padding: 12px 15px; border-radius: 12px; border: 1px solid #333; font-size: 14px; background: #222; color: #eee;
-        box-shadow: inset 0 0 8px #ff000020;" />
+      <input type="tel" id="numero" placeholder="Numéro (ex: 45xx xxxx)" required pattern="[0-9\s]+" />
       
-      <button type="submit" 
-        style="background: linear-gradient(45deg, #ff0000, #ff4d4d); color: white; padding: 14px 0; border: none; border-radius: 12px; 
-        font-weight: 700; cursor: pointer; font-size: 16px; transition: background 0.3s ease;">
-        📝 S’inscrire
-      </button>
+      <button type="submit" class="submit-btn">📝 S’inscrire</button>
     </form>
   </div>
-<!-- 🔥 STATISTIQUES + PROGRÈS -->
-<div style="max-width: 700px; margin: 50px auto; background-color: #111; color: #ccc; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);">
 
-  <h2 style="text-align: center; color: #00cc66; margin-bottom: 20px;">📊 Statistiques Communauté</h2>
+  <!-- Statistiques + Derniers inscrits -->
+  <div class="stats-container">
+    <h2>📊 Statistiques Communauté</h2>
 
-  <p style="font-size: 18px;">👥 Total membres inscrits: <strong style="color: #00c6ff;">1 267</strong></p>
+    <p>👥 Total membres inscrits: <strong style="color: #00c6ff;">1 267</strong></p>
 
-  <p style="font-size: 18px;">📈 Objectif atteint: <strong style="color: #00c6ff;">78%</strong></p>
+    <p>📈 Objectif atteint: <strong style="color: #00c6ff;">78%</strong></p>
 
-  <div style="background-color: #333; border-radius: 20px; overflow: hidden; height: 25px; margin-top: 10px;">
-    <div style="width: 78%; height: 100%; background-color: #00cc66;"></div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill"></div>
+    </div>
+
+    <h3 style="color: #00cc66; margin-top: 30px;">👥 Derniers inscrits</h3>
+    <ul id="recentEntries"></ul>
   </div>
 
-  <!-- Nouvo seksyon pou moun ki enskri yo -->
-  <h3 style="color: #00cc66; margin-top: 30px;">👥 Derniers inscrits</h3>
-  <ul id="recentEntries" style="list-style: none; padding-left: 0; font-size: 16px; color: #eee; max-height: 150px; overflow-y: auto;"></ul>
-
-</div>
-
-  <!-- Bouton Rechercher -->
-  <button class="btn btn-rechercher" onclick="window.location.href='recherche.html'"
-    style="display: block; margin: 30px auto; padding: 12px 24px; background: linear-gradient(45deg, #007bff, #00c6ff); 
-    color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 0 15px #00c6ffaa;">
+  <!-- Boutons -->
+  <button class="btn btn-rechercher" onclick="window.location.href='recherche.html'">
     🔍 Rechercher / Modifier vos contacts
   </button>
-<script>
 
-  
-  <!-- Bouton Contact-->
-  <button class="btn btn-contacter" onclick="window.location.href='contact.html'"
-    style="display: block; margin: 30px auto; padding: 12px 24px; background: linear-gradient(45deg, #007bff, #00c6ff); 
-    color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 0 15px #00c6ffaa;">
-    🔍 contacter nous/ des aujourd'hui 
+  <button class="btn btn-contacter" onclick="window.location.href='contact.html'">
+    📞 Contacter nous / dès aujourd'hui
   </button>
-<script>
 
-  
-  // Clé pour stocker les utilisateurs récents dans localStorage
-  const cléStockage = 'utilisateursRécents';
-  const listeElement = document.getElementById("recentEntries");
+  <!-- FAQ -->
+  <div class="faq-container">
+    <h2>Questions Fréquemment Posées</h2>
 
-  // Fonction pour charger les 5 derniers inscrits depuis localStorage
-  function chargerUtilisateurs() {
-    const utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
-    listeElement.innerHTML = ""; // Effacer l'ancien contenu
+    <div class="faq-item">
+      <div class="faq-question">Comment mes vues vont-elles augmenter avec Ralph Xpert ?</div>
+      <div class="faq-answer">
+        Il suffit d’enregistrer votre nom et de rejoindre la communauté sur le groupe WhatsApp. Ensuite, vous recevrez le fichier à publier dans le groupe pour activer le système de vues.
+      </div>
+    </div>
 
-    utilisateurs.slice(0, 5).forEach(utilisateur => {
-      const élémentLi = document.createElement("li");
-      élémentLi.innerHTML = `👤 <strong style="color:#00cc66">${utilisateur.nom}</strong> — <span style="color:#ccc">${utilisateur.numeroComplet}</span>`;
-      listeElement.appendChild(élémentLi);
-    });
-  }
+    <div class="faq-item">
+      <div class="faq-question">Est-ce que mon compte WhatsApp est en sécurité ?</div>
+      <div class="faq-answer">
+        Oui, votre compte est 100% sécurisé. Aucune information personnelle n’est compromise.
+      </div>
+    </div>
 
-  // Fonction appelée lors de la soumission du formulaire
-  function soumettreFormulaire(event) {
-    event.preventDefault();
+    <div class="faq-item">
+      <div class="faq-question">Est-ce gratuit ?</div>
+      <div class="faq-answer">
+        Oui, le service est totalement gratuit. Aucun paiement n’est requis.
+      </div>
+    </div>
 
-    const nom = document.getElementById("nom").value;
-    const codePays = document.getElementById("code-pays").value;
-    const numero = document.getElementById("numero").value;
-    const numeroComplet = codePays + " " + numero;
+    <div class="faq-item">
+      <div class="faq-question">Est-ce que cela fonctionne dans tous les pays ?</div>
+      <div class="faq-answer">
+        Oui, le système fonctionne dans tous les pays sans exception.
+      </div>
+    </div>
 
-    const nouvelUtilisateur = { nom: nom, numeroComplet: numeroComplet };
+    <div class="faq-item">
+      <div class="faq-question">Comment puis-je obtenir le fichier ?</div>
+      <div class="faq-answer">
+        En enregistrant simplement votre nom et en rejoignant le groupe WhatsApp, vous recevrez le fichier directement dans le groupe.
+      </div>
+    </div>
 
-    // Récupérer la liste existante et ajouter le nouvel utilisateur au début
-    let utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
-    utilisateurs.unshift(nouvelUtilisateur); // Ajouter en tête
-    utilisateurs = utilisateurs.slice(0, 5); // Ne garder que les 5 derniers
-
-    localStorage.setItem(cléStockage, JSON.stringify(utilisateurs));
-
-    chargerUtilisateurs(); // Actualiser l'affichage
-
-    // Réinitialiser le formulaire
-    document.getElementById("nom").value = "";
-    document.getElementById("code-pays").selectedIndex = 0;
-    document.getElementById("numero").value = "";
-  }
-
-  // Charger la liste des utilisateurs lors du chargement de la page
-  window.onload = chargerUtilisateurs;
-                               </script>
-</body>
-</html>
-
-<style>
-  .faq-container {
-    max-width: 700px;
-    margin: 50px auto;
-    background: #1e1e1e;
-    border-radius: 12px;
-    padding: 30px 20px;
-    box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
-    color: #eee;
-  }
-
-  .faq-container h2 {
-    color: #00cc66;
-    text-align: center;
-    margin-bottom: 30px;
-    font-weight: 700;
-  }
-
-  .faq-item {
-    border-bottom: 1px solid #333;
-  }
-
-  .faq-question {
-    cursor: pointer;
-    padding: 15px 10px;
-    font-weight: 600;
-    position: relative;
-    transition: background-color 0.3s;
-  }
-
-  .faq-question:hover {
-    background-color: #00cc66;
-    color: #111;
-  }
-
-  .faq-question::after {
-    content: '+';
-    position: absolute;
-    right: 20px;
-    font-size: 22px;
-    transition: transform 0.3s;
-  }
-
-  .faq-question.active::after {
-    content: '^';
-    transform: rotate(180deg);
-  }
-
-  .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    padding: 0 10px;
-    color: #bbb;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-  }
-
-  .faq-answer.show {
-    max-height: 500px;
-    padding: 15px 10px;
-  }
-</style>
-
-<div class="faq-container">
-  <h2>Questions Fréquemment Posées</h2>
-
-  <div class="faq-item">
-    <div class="faq-question">Comment mes vues vont-elles augmenter avec Ralph Xpert ?</div>
-    <div class="faq-answer">
-      Il suffit d’enregistrer votre nom et de rejoindre la communauté sur le groupe WhatsApp. Ensuite, vous recevrez le fichier à publier dans le groupe pour activer le système de vues.
+    <div class="faq-item">
+      <div class="faq-question">Est-ce que cela fonctionne sur tous les types d’appareils ?</div>
+      <div class="faq-answer">
+        Oui, le système fonctionne sur tous les appareils : Android, iPhone, tablette et ordinateur.
+      </div>
     </div>
   </div>
-
-  <div class="faq-item">
-    <div class="faq-question">Est-ce que mon compte WhatsApp est en sécurité ?</div>
-    <div class="faq-answer">
-      Oui, votre compte est 100% sécurisé. Aucune information personnelle n’est compromise.
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question">Est-ce gratuit ?</div>
-    <div class="faq-answer">
-      Oui, le service est totalement gratuit. Aucun paiement n’est requis.
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question">Est-ce que cela fonctionne dans tous les pays ?</div>
-    <div class="faq-answer">
-      Oui, le système fonctionne dans tous les pays sans exception.
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question">Comment puis-je obtenir le fichier ?</div>
-    <div class="faq-answer">
-      En enregistrant simplement votre nom et en rejoignant le groupe WhatsApp, vous recevrez le fichier directement dans le groupe.
-    </div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question">Est-ce que cela fonctionne sur tous les types d’appareils ?</div>
-    <div class="faq-answer">
-      Oui, le système fonctionne sur tous les appareils : Android, iPhone, tablette et ordinateur.
-    </div>
-  </div>
-</div>
 
 <script>
+  // Gestion FAQ toggle
   const questions = document.querySelectorAll('.faq-question');
   questions.forEach(question => {
     question.addEventListener('click', () => {
@@ -322,37 +438,69 @@
       }
     });
   });
-  
-<!-- 🔰 RALPH XPERT PROGRAMME -->
-<div style="max-width: 700px; margin: 50px auto; background-color: #111; color: #ccc; padding: 30px; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 204, 102, 0.3); font-family: Arial, sans-serif;">
-  <h2 style="color: #00cc66; text-align: center; margin-bottom: 15px; font-size: 22px; font-weight: 700;">🔥 Ralph Xpert Programme</h2>
-  <p style="text-align: center; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">
-    Le noyau secret des boss WhatsApp — si t’es pas là, t’existes pas.
-  </p>
 
-  <div style="display: flex; flex-direction: column; gap: 14px; font-size: 14px; line-height: 1.4;">
-    <div>📲 <strong>Fonctionnalités de feu</strong></div>
-    <ul style="list-style: none; padding-left: 18px; margin: 0;">
-      <li>🚀 Ajout auto de contacts ciblés</li>
-      <li>👁️‍🗨️ Statuts vus par des centaines, sans pub</li>
-      <li>📊 Statistiques en live sur ton impact</li>
-      <li>🎓 Formations secrètes pour passer niveau expert</li>
-    </ul>
+  // Gestion inscription et stockage dans localStorage
+  const cléStockage = 'utilisateursRécents';
+  const listeElement = document.getElementById("recentEntries");
 
-    <div>🛡️ <strong>Assistance sans limite</strong></div>
-    <ul style="list-style: none; padding-left: 18px; margin: 0;">
-      <li>📧 Email direct : <a href="mailto:elogekenguer@gmail.com" style="color: #00c6ff; text-decoration: none;">elogekenguer@gmail.com</a></li>
-      <li>📞 Ligne privée : +18494597173</li>
-      <li style="margin-top: 10px;">
-        <a href="https://wa.me/18494597173" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; background-color: #25D366; color: #111; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 20px; height: 20px;">
-          Contacter sur WhatsApp
-        </a>
-      </li>
-    </ul>
-  </div>
+  function chargerUtilisateurs() {
+    const utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
+    listeElement.innerHTML = "";
 
-  <p style="text-align: center; margin-top: 30px; font-size: 13px; color: #666; font-style: italic;">
-    Ce projet est réalisé par Ralph
-  </p>
-</div>
+    utilisateurs.forEach(utilisateur => {
+      const élémentLi = document.createElement("li");
+      élémentLi.innerHTML = `👤 <strong style="color:#00cc66">${utilisateur.nom}</strong> — <span style="color:#ccc">${utilisateur.numeroComplet}</span>`;
+      listeElement.appendChild(élémentLi);
+    });
+  }
+
+  function soumettreFormulaire(event) {
+    event.preventDefault();
+
+    const nom = document.getElementById("nom").value.trim();
+    const codePays = document.getElementById("code-pays").value;
+    const numero = document.getElementById("numero").value.trim();
+
+    if (!nom || !numero) {
+      alert("Veuillez remplir tous les champs correctement.");
+      return;
+    }
+
+    const numeroComplet = codePays + " " + numero;
+    const nouvelUtilisateur = { nom: nom + " (RXP)", numeroComplet: numeroComplet };
+
+    // Récupérer les utilisateurs existants
+    let utilisateurs = JSON.parse(localStorage.getItem(cléStockage)) || [];
+
+    // Vérifier si numéro complet déjà inscrit
+    const dejaInscrit = utilisateurs.some(u => u.numeroComplet === numeroComplet);
+    if (dejaInscrit) {
+      alert("Ce numéro est déjà inscrit !");
+      return;
+    }
+
+    // Ajouter nouvel utilisateur en tête
+    utilisateurs.unshift(nouvelUtilisateur);
+
+    // Garder max 5 derniers
+    utilisateurs = utilisateurs.slice(0, 5);
+
+    // Sauvegarder
+    localStorage.setItem(cléStockage, JSON.stringify(utilisateurs));
+
+    chargerUtilisateurs();
+
+    alert("Votre numéro a été enregistré avec succès !");
+
+    // Réinitialiser formulaire
+    document.getElementById("nom").value = "";
+    document.getElementById("code-pays").selectedIndex = 0;
+    document.getElementById("numero").value = "";
+  }
+
+  // Charger liste au chargement de page
+  window.onload = chargerUtilisateurs;
+</script>
+
+</body>
+  </html>
