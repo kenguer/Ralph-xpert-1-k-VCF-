@@ -5,22 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Admin Ralph Xpert</title>
 <style>
-  /* Styles de base et reset */
-  * {
-    box-sizing: border-box;
-  }
+  /* Styles simplifiés pour clarté */
+  * { box-sizing: border-box; }
   body {
     margin:0; padding:0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #121212;
     color: #ddd;
-  }
-  a {
-    color: #00cc66;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
   }
   header {
     background: #1e1e1e;
@@ -35,45 +26,34 @@
     font-weight: 600;
     font-size: 1.1rem;
     cursor: pointer;
+    color: #aaa;
+    text-decoration: none;
   }
-  header nav a.active {
+  header nav a.active, header nav a:hover {
     color: #00cc66;
     border-bottom: 2px solid #00cc66;
     padding-bottom: 3px;
-  }
-  #logoutBtn {
-    background: #cc3300;
-    border: none;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
   }
   main {
     padding: 20px;
     max-width: 1000px;
     margin: 20px auto 40px auto;
   }
-  /* Sections - affichage */
   section {
     display: none;
   }
   section.active {
     display: block;
   }
-  /* -- Contact Section -- */
+  /* Contact */
   #contactSection {
     margin-bottom: 30px;
   }
   #contactSearch {
     margin-bottom: 15px;
-  }
-  #contactSearch input {
     padding: 8px 12px;
     font-size: 1rem;
-    width: 100%;
-    max-width: 300px;
+    width: 300px;
     border-radius: 8px;
     border: none;
   }
@@ -121,7 +101,7 @@
   .action-btn:hover {
     opacity: 0.7;
   }
-  #downloadAllVCFBtn, #deleteAllBtn {
+  #downloadAllVCFBtn, #deleteAllContactsBtn {
     margin: 15px 10px 15px 0;
     background: #00cc66;
     border: none;
@@ -132,17 +112,14 @@
     cursor: pointer;
     font-size: 1rem;
   }
-  #deleteAllBtn {
-    background: #cc3300;
-  }
-  /* -- Messages Section -- */
+  /* Messages */
   #messagesSection table {
     margin-top: 15px;
   }
   #messagesSection th, #messagesSection td {
     word-break: break-word;
   }
-  /* -- Statistiques -- */
+  /* Statistiques */
   #statsSection .stats-filters {
     margin-bottom: 20px;
     display: flex;
@@ -182,7 +159,7 @@
     width: 0%;
     transition: width 1s ease;
   }
-  /* -- Footer Edition -- */
+  /* Footer */
   #footerSection textarea {
     width: 100%;
     min-height: 150px;
@@ -231,16 +208,18 @@
     <a href="#" id="navContact" class="active">Contact</a>
     <a href="#" id="navStats">Statistiques</a>
     <a href="#" id="navFooter">Footer</a>
+    <a href="#" id="logoutBtn" style="color:#cc3300; cursor:pointer;">Déconnexion</a>
   </nav>
-  <button id="logoutBtn">Déconnexion</button>
 </header>
 
 <main>
   <!-- CONTACT -->
   <section id="contactSection" class="active">
     <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
-    <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
-    <button id="deleteAllBtn" title="Supprimer tous les contacts">🗑️ Supprimer tous les contacts</button>
+    <div>
+      <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
+      <button id="deleteAllContactsBtn" title="Supprimer tous les contacts">❌ Supprimer tous les contacts</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -277,15 +256,15 @@
 </main>
 
 <script>
-  // Vérifier si admin connecté sinon rediriger
-  if(localStorage.getItem('adminLoggedIn') !== 'true'){
-    alert('Vous devez être connecté pour accéder à cette page.');
+  // Vérification de connexion
+  if(localStorage.getItem('isAdminLoggedIn') !== 'true') {
+    // Rediriger vers login
     window.location.href = 'login.html';
   }
 
-  // Logout
+  // Déconnexion
   document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('adminLoggedIn');
+    localStorage.removeItem('isAdminLoggedIn');
     window.location.href = 'login.html';
   });
 
@@ -302,15 +281,15 @@
     [contactSection, statsSection, footerSection].forEach(s => s.classList.remove('active'));
     [navContact, navStats, navFooter].forEach(n => n.classList.remove('active'));
 
-    if (section === 'contact') {
+    if(section === 'contact') {
       contactSection.classList.add('active');
       navContact.classList.add('active');
       afficherContacts();
-    } else if (section === 'stats') {
+    } else if(section === 'stats') {
       statsSection.classList.add('active');
       navStats.classList.add('active');
       afficherStats();
-    } else if (section === 'footer') {
+    } else if(section === 'footer') {
       footerSection.classList.add('active');
       navFooter.classList.add('active');
       chargerFooter();
@@ -353,7 +332,7 @@
 
   document.getElementById('contactSearch').addEventListener('input', afficherContacts);
 
-  // Supprimer contact
+  // Supprimer contact individuel
   document.getElementById('contactTableBody').addEventListener('click', e => {
     if(e.target.classList.contains('delete')) {
       const index = parseInt(e.target.getAttribute('data-index'));
@@ -371,9 +350,9 @@
   });
 
   // Supprimer tous les contacts
-  document.getElementById('deleteAllBtn').addEventListener('click', () => {
+  document.getElementById('deleteAllContactsBtn').addEventListener('click', () => {
     if(confirm('Voulez-vous vraiment supprimer tous les contacts ? Cette action est irréversible.')) {
-      saveContacts([]);
+      localStorage.removeItem('utilisateursRécents');
       afficherContacts();
       alert('Tous les contacts ont été supprimés.');
     }
@@ -405,7 +384,7 @@ END:VCARD
     URL.revokeObjectURL(url);
   });
 
-  // Statistiques (visiteurs et inscrits)
+  // Statistiques
   function getVisiteurs() {
     return JSON.parse(localStorage.getItem('visiteursStats')) || [];
   }
@@ -439,3 +418,26 @@ END:VCARD
     const statsBtns = document.querySelectorAll('#statsSection .stats-filters button');
     statsBtns.forEach(btn => {
       btn.classList.remove('active');
+      if(btn.dataset.filter === activeFilter) btn.classList.add('active');
+
+      btn.onclick = () => {
+        activeFilter = btn.dataset.filter;
+        statsBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateStats(activeFilter, contacts);
+      };
+    });
+  }
+
+  function updateStats(filter, contacts) {
+    const visiteurs = compterVisiteurs(filter);
+    const inscrits = contacts.length;
+
+    document.getElementById('statsTotal').textContent = `Total visiteurs: ${visiteurs} | Total inscrits: ${inscrits}`;
+
+    let progress = visiteurs > 0 ? Math.min((inscrits / visiteurs) * 100, 100) : 0;
+    document.getElementById('progressBar').style.width = progress + '%';
+  }
+
+  // Edition Footer
+  function chargerFooter()
