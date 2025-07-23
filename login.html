@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Connexion Admin - Ralph Xpert</title>
+<title>Login Admin Ralph Xpert</title>
 <style>
   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #121212;
     color: #ddd;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
   }
-  form {
+  .login-container {
     background: #1e1e1e;
     padding: 30px 40px;
     border-radius: 12px;
-    box-shadow: 0 0 15px #00cc66aa;
+    box-shadow: 0 0 10px #00cc66aa;
     width: 320px;
   }
   h2 {
@@ -29,81 +29,78 @@
   }
   label {
     display: block;
-    margin-top: 15px;
+    margin-bottom: 6px;
     font-weight: 600;
   }
-  input[type="text"],
-  input[type="password"] {
+  input[type="text"], input[type="password"] {
     width: 100%;
     padding: 10px 12px;
-    margin-top: 6px;
+    margin-bottom: 20px;
     border-radius: 8px;
     border: none;
     font-size: 1rem;
-    background: #222;
-    color: #ddd;
   }
   button {
-    margin-top: 25px;
     width: 100%;
     padding: 12px;
+    border-radius: 8px;
     border: none;
-    border-radius: 10px;
     background: #00cc66;
     color: #121212;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s ease;
   }
   button:hover {
     background: #009944;
   }
-  .error {
+  .error-msg {
     color: #cc3300;
-    margin-top: 15px;
     text-align: center;
-    font-weight: 700;
+    margin-bottom: 10px;
+    display: none;
   }
 </style>
 </head>
 <body>
-  <form id="loginForm">
+  <div class="login-container">
     <h2>Connexion Admin</h2>
+    <div class="error-msg" id="errorMsg"></div>
     <label for="username">Nom d'utilisateur</label>
-    <input type="text" id="username" required autocomplete="off" />
+    <input type="text" id="username" autocomplete="off" placeholder="Entrez le nom d'utilisateur" />
     <label for="password">Mot de passe</label>
-    <input type="password" id="password" required autocomplete="off" />
-    <button type="submit">Se connecter</button>
-    <div id="errorMsg" class="error"></div>
-  </form>
+    <input type="password" id="password" autocomplete="off" placeholder="Entrez le mot de passe" />
+    <button id="loginBtn">Se connecter</button>
+  </div>
 
 <script>
-  const loginForm = document.getElementById('loginForm');
+  const loginBtn = document.getElementById('loginBtn');
   const errorMsg = document.getElementById('errorMsg');
 
-  // Credentials hardcoded
-  const VALID_USERNAME = 'Ralph';
-  const VALID_PASSWORD = 'Ralph509';
-
-  loginForm.addEventListener('submit', e => {
-    e.preventDefault();
+  loginBtn.addEventListener('click', () => {
     const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
+    const password = document.getElementById('password').value.trim();
 
-    if (username === VALID_USERNAME && password === VALID_PASSWORD) {
-      // Successful login
+    // Remplacez ces identifiants par ceux que vous souhaitez
+    const validUsername = 'admin';
+    const validPassword = 'kerventz2000';
+
+    if(username === validUsername && password === validPassword) {
       localStorage.setItem('adminLoggedIn', 'true');
       window.location.href = 'admin.html';
     } else {
-      errorMsg.textContent = 'Nom d’utilisateur ou mot de passe incorrect.';
+      errorMsg.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+      errorMsg.style.display = 'block';
     }
   });
 
-  // Redirect to admin if already logged in
-  if(localStorage.getItem('adminLoggedIn') === 'true'){
-    window.location.href = 'admin.html';
-  }
+  // Optionnel: Enter pour valider
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') {
+      loginBtn.click();
+    }
+  });
 </script>
 </body>
 </html>
