@@ -3,84 +3,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Admin Ralph Xpert - Connexion</title>
+<title>Admin Ralph Xpert</title>
 <style>
-  /* Reset et styles globaux */
-  * { box-sizing: border-box; }
+  /* Styles de base et reset */
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin:0; padding:0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #121212;
     color: #ddd;
   }
-  a { color: #00cc66; text-decoration:none; }
-  a:hover { text-decoration: underline; }
-
-  /* --- LOGIN --- */
-  #loginPage {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #1e1e1e;
-  }
-  #loginForm {
-    background: #222;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 0 15px #00cc6611;
-    width: 320px;
-    color: #ddd;
-  }
-  #loginForm h2 {
-    margin-bottom: 20px;
+  a {
     color: #00cc66;
-    text-align: center;
+    text-decoration: none;
   }
-  #loginForm label {
-    display: block;
-    margin-top: 15px;
-    font-weight: 600;
-  }
-  #loginForm input[type="text"],
-  #loginForm input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-  }
-  #loginForm button {
-    margin-top: 25px;
-    width: 100%;
-    background: #00cc66;
-    border: none;
-    padding: 12px;
-    color: #121212;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  #loginForm button:hover {
-    background: #009944;
-  }
-  #loginError {
-    margin-top: 15px;
-    color: #cc3300;
-    text-align: center;
-    display: none;
-    font-weight: 600;
-  }
-
-  /* --- ADMIN --- */
-  #adminPage {
-    display: none;
-    max-width: 1000px;
-    margin: 20px auto 40px auto;
-    padding: 0 20px;
+  a:hover {
+    text-decoration: underline;
   }
   header {
     background: #1e1e1e;
@@ -89,14 +29,12 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 6px #00cc6611;
-    color: #ddd;
   }
   header nav a {
     margin: 0 15px;
     font-weight: 600;
     font-size: 1.1rem;
     cursor: pointer;
-    color: #bbb;
   }
   header nav a.active {
     color: #00cc66;
@@ -104,15 +42,24 @@
     padding-bottom: 3px;
   }
 
-  main section {
-    display: none;
-    margin-top: 25px;
+  main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 20px auto 40px auto;
   }
-  main section.active {
+
+  /* Sections - affichage */
+  section {
+    display: none;
+  }
+  section.active {
     display: block;
   }
 
-  /* Contact */
+  /* -- Contact Section -- */
+  #contactSection {
+    margin-bottom: 30px;
+  }
   #contactSearch {
     margin-bottom: 15px;
   }
@@ -120,21 +67,9 @@
     padding: 8px 12px;
     font-size: 1rem;
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     border-radius: 8px;
     border: none;
-    color: #121212;
-  }
-  #downloadAllVCFBtn {
-    margin: 15px 0;
-    background: #00cc66;
-    border: none;
-    color: #121212;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
   }
   table {
     width: 100%;
@@ -147,10 +82,11 @@
     padding: 12px 10px;
     border-bottom: 1px solid #333;
     text-align: left;
-    color: #ddd;
+    vertical-align: middle;
   }
   th {
     background: #007f3f;
+    color: #fff;
   }
   tr:hover {
     background: #004422aa;
@@ -180,8 +116,19 @@
   .action-btn:hover {
     opacity: 0.7;
   }
+  #downloadAllVCFBtn {
+    margin: 15px 0;
+    background: #00cc66;
+    border: none;
+    color: #121212;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+  }
 
-  /* Messages */
+  /* -- Messages Section -- */
   #messagesSection table {
     margin-top: 15px;
   }
@@ -189,7 +136,7 @@
     word-break: break-word;
   }
 
-  /* Statistiques */
+  /* -- Statistiques -- */
   #statsSection .stats-filters {
     margin-bottom: 20px;
     display: flex;
@@ -230,7 +177,7 @@
     transition: width 1s ease;
   }
 
-  /* Footer */
+  /* -- Footer Edition -- */
   #footerSection textarea {
     width: 100%;
     min-height: 150px;
@@ -274,112 +221,82 @@
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
-<div id="loginPage">
-  <form id="loginForm">
-    <h2>Connexion Admin</h2>
-    <label for="username">Nom d'utilisateur</label>
-    <input type="text" id="username" autocomplete="username" required />
-    <label for="password">Mot de passe</label>
-    <input type="password" id="password" autocomplete="current-password" required />
-    <button type="submit">Se connecter</button>
-    <div id="loginError">Nom d'utilisateur ou mot de passe incorrect.</div>
-  </form>
-</div>
+<header>
+  <div><strong>Admin Ralph Xpert</strong></div>
+  <nav>
+    <a href="#" id="navContact" class="active">Contacts</a>
+    <a href="#" id="navMessages">Messages</a>
+    <a href="#" id="navStats">Statistiques</a>
+    <a href="#" id="navFooter">Footer</a>
+  </nav>
+</header>
 
-<!-- ADMIN PAGE -->
-<div id="adminPage">
-  <header>
-    <div><strong>Admin Ralph Xpert</strong></div>
-    <nav>
-      <a href="#" id="navContact" class="active">Contacts</a>
-      <a href="#" id="navMessages">Messages</a>
-      <a href="#" id="navStats">Statistiques</a>
-      <a href="#" id="navFooter">Footer</a>
-    </nav>
-  </header>
+<main>
+  <!-- CONTACT -->
+  <section id="contactSection" class="active">
+    <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
+    <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Numéro</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="contactTableBody">
+        <!-- Liste des contacts -->
+      </tbody>
+    </table>
+  </section>
 
-  <main>
-    <!-- CONTACT -->
-    <section id="contactSection" class="active">
-      <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
-      <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Numéro</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="contactTableBody">
-          <!-- Liste des contacts -->
-        </tbody>
-      </table>
-    </section>
+  <!-- MESSAGES -->
+  <section id="messagesSection">
+    <h2>Messages reçus</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Sujet</th>
+          <th>Message</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="messagesTableBody">
+        <!-- Messages list -->
+      </tbody>
+    </table>
+  </section>
 
-    <!-- MESSAGES -->
-    <section id="messagesSection">
-      <h2>Messages reçus</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Email</th>
-            <th>Sujet</th>
-            <th>Message</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody id="messagesTableBody">
-          <!-- Messages list -->
-        </tbody>
-      </table>
-    </section>
+  <!-- STATISTIQUES -->
+  <section id="statsSection">
+    <div class="stats-filters">
+      <button class="active" data-filter="immediate">Immédiat</button>
+      <button data-filter="today">Aujourd'hui</button>
+      <button data-filter="week">Cette semaine</button>
+    </div>
+    <div class="stats-total" id="statsTotal">Total visiteurs: 0 | Total inscrits: 0</div>
+    <div class="progress-bar-container" title="Progression">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+  </section>
 
-    <!-- STATISTIQUES -->
-    <section id="statsSection">
-      <div class="stats-filters">
-        <button class="active" data-filter="immediate">Immédiat</button>
-        <button data-filter="today">Aujourd'hui</button>
-        <button data-filter="week">Cette semaine</button>
-      </div>
-      <div class="stats-total" id="statsTotal">Total visiteurs: 0 | Total inscrits: 0</div>
-      <div class="progress-bar-container" title="Progression">
-        <div class="progress-bar-fill" id="progressBar"></div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <section id="footerSection">
-      <h2>Modifier le Footer</h2>
-      <textarea id="footerTextArea"></textarea>
-      <button id="saveFooterBtn">Sauvegarder</button>
-    </section>
-  </main>
-</div>
+  <!-- FOOTER -->
+  <section id="footerSection">
+    <h2>Modifier le Footer</h2>
+    <textarea id="footerTextArea"></textarea>
+    <button id="saveFooterBtn">Sauvegarder</button>
+  </section>
+</main>
 
 <script>
-  // LOGIN
-  const loginPage = document.getElementById('loginPage');
-  const adminPage = document.getElementById('adminPage');
-  const loginForm = document.getElementById('loginForm');
-  const loginError = document.getElementById('loginError');
+  // Vérifier la connexion
+  if(sessionStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = 'login.html';
+  }
 
-  loginForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    if(user === 'Ralph' && pass === 'Ralph509') {
-      loginPage.style.display = 'none';
-      adminPage.style.display = 'block';
-      switchSection('contact');
-    } else {
-      loginError.style.display = 'block';
-    }
-  });
-
-  // NAVIGATION
+  // Navigation
   const navContact = document.getElementById('navContact');
   const navMessages = document.getElementById('navMessages');
   const navStats = document.getElementById('navStats');
@@ -393,6 +310,7 @@
   function switchSection(section) {
     [contactSection, messagesSection, statsSection, footerSection].forEach(s => s.classList.remove('active'));
     [navContact, navMessages, navStats, navFooter].forEach(n => n.classList.remove('active'));
+
     if (section === 'contact') {
       contactSection.classList.add('active');
       navContact.classList.add('active');
@@ -417,18 +335,21 @@
   navStats.addEventListener('click', e => { e.preventDefault(); switchSection('stats'); });
   navFooter.addEventListener('click', e => { e.preventDefault(); switchSection('footer'); });
 
-  // CONTACTS
+  // Gestion Contacts
   function getContacts() {
     return JSON.parse(localStorage.getItem('utilisateursRécents')) || [];
   }
   function saveContacts(contacts) {
     localStorage.setItem('utilisateursRécents', JSON.stringify(contacts));
   }
+
   function afficherContacts() {
-    const contacts = getContacts().slice().reverse();
+    const contacts = getContacts().slice().reverse(); // ordre monte (dernier en premier)
     const filter = document.getElementById('contactSearch').value.toLowerCase();
+
     const tbody = document.getElementById('contactTableBody');
     tbody.innerHTML = '';
+
     contacts.filter(c => c.nom.toLowerCase().includes(filter) || c.numeroComplet.includes(filter))
       .forEach((contact, idx) => {
         const tr = document.createElement('tr');
@@ -443,7 +364,10 @@
         tbody.appendChild(tr);
       });
   }
+
   document.getElementById('contactSearch').addEventListener('input', afficherContacts);
+
+  // Supprimer contact
   document.getElementById('contactTableBody').addEventListener('click', e => {
     if(e.target.classList.contains('delete')) {
       const index = parseInt(e.target.getAttribute('data-index'));
@@ -459,6 +383,8 @@
       alert('Fonction modifier pas encore implémentée.');
     }
   });
+
+  // Télécharger tous les contacts en VCF
   document.getElementById('downloadAllVCFBtn').addEventListener('click', () => {
     const contacts = getContacts();
     if(contacts.length === 0) {
@@ -484,18 +410,24 @@ END:VCARD
     URL.revokeObjectURL(url);
   });
 
-  // MESSAGES
+  // Gestion Messages
   function getMessages() {
     return JSON.parse(localStorage.getItem('messagesContact')) || [];
   }
+  function saveMessages(msgs) {
+    localStorage.setItem('messagesContact', JSON.stringify(msgs));
+  }
+
   function afficherMessages() {
     const messages = getMessages().slice().reverse();
     const tbody = document.getElementById('messagesTableBody');
     tbody.innerHTML = '';
+
     if(messages.length === 0){
       tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">Aucun message reçu.</td></tr>';
       return;
     }
+
     messages.forEach(msg => {
       const tr = document.createElement('tr');
       const date = new Date(msg.date || Date.now());
@@ -510,18 +442,22 @@ END:VCARD
     });
   }
 
-  // STATISTIQUES
+  // Statistiques (visiteurs et inscrits)
   function getVisiteurs() {
     return JSON.parse(localStorage.getItem('visiteursStats')) || [];
   }
   function compterVisiteurs(filter) {
     const visites = getVisiteurs();
+    const now = Date.now();
+
     if(filter === 'immediate') return visites.length;
+
     if(filter === 'today') {
       const startDay = new Date();
       startDay.setHours(0,0,0,0);
       return visites.filter(t => t >= startDay.getTime()).length;
     }
+
     if(filter === 'week') {
       const startWeek = new Date();
       const day = startWeek.getDay();
@@ -532,7 +468,47 @@ END:VCARD
     }
     return visites.length;
   }
+
   function afficherStats() {
     const contacts = getContacts();
     let activeFilter = 'immediate';
     updateStats(activeFilter, contacts);
+
+    const statsBtns = document.querySelectorAll('#statsSection .stats-filters button');
+    statsBtns.forEach(btn => {
+      btn.classList.remove('active');
+      if(btn.dataset.filter === activeFilter) btn.classList.add('active');
+
+      btn.onclick = () => {
+        activeFilter = btn.dataset.filter;
+        statsBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateStats(activeFilter, contacts);
+      };
+    });
+  }
+
+  function updateStats(filter, contacts) {
+    const visiteurs = compterVisiteurs(filter);
+    const inscrits = contacts.length;
+
+    document.getElementById('statsTotal').textContent = `Total visiteurs: ${visiteurs} | Total inscrits: ${inscrits}`;
+
+    let progress = visiteurs > 0 ? Math.min((inscrits / visiteurs) * 100, 100) : 0;
+    document.getElementById('progressBar').style.width = progress + '%';
+  }
+
+  // Footer edition
+  function chargerFooter() {
+    const contenu = localStorage.getItem('footerContent') || 
+`<p>© 2025 RALPH XPERT PROGRAMME. Tous droits réservés.</p>
+<p>Contactez-nous dès aujourd'hui : <a href="contact.html" style="color:#00cc66;">📞 Contacter nous / dès aujourd'hui</a></p>`;
+    document.getElementById('footerTextArea').value = contenu;
+  }
+
+  document.getElementById('saveFooterBtn').onclick = () => {
+    localStorage.setItem('footerContent', document.getElementById('footerTextArea').value);
+    alert('Footer sauvegardé !');
+  };
+
+  // Initialisation
