@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Admin Ralph Xpert</title>
 <style>
-  /* Styles de base et reset */
   * {
     box-sizing: border-box;
   }
@@ -15,47 +14,52 @@
     background: #121212;
     color: #ddd;
   }
-  a {
-    color: #00cc66;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
   header {
     background: #1e1e1e;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 6px #00cc6611;
   }
-  header nav a {
+  nav a {
+    color: #ccc;
+    text-decoration: none;
     margin: 0 15px;
     font-weight: 600;
-    font-size: 1.1rem;
     cursor: pointer;
   }
-  header nav a.active {
+  nav a.active {
     color: #00cc66;
     border-bottom: 2px solid #00cc66;
     padding-bottom: 3px;
   }
   main {
-    padding: 20px;
     max-width: 1000px;
-    margin: 20px auto 40px auto;
+    margin: 30px auto 50px auto;
+    padding: 0 20px;
   }
-  /* Sections - affichage */
+  /* Sections */
   section {
     display: none;
   }
   section.active {
     display: block;
   }
-  /* -- Contact Section -- */
-  #contactSection {
-    margin-bottom: 30px;
+
+  /* Contacts */
+  #contactSection button {
+    margin: 10px 10px 20px 0;
+    padding: 10px 20px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #121212;
+    background-color: #00cc66;
+    transition: background 0.3s ease;
+  }
+  #contactSection button:hover {
+    background-color: #009944;
   }
   #contactSearch {
     margin-bottom: 15px;
@@ -67,6 +71,8 @@
     max-width: 300px;
     border-radius: 8px;
     border: none;
+    background: #222;
+    color: #ddd;
   }
   table {
     width: 100%;
@@ -98,7 +104,6 @@
   .actions {
     display: flex;
     gap: 12px;
-    justify-content: center;
   }
   .action-btn {
     cursor: pointer;
@@ -112,48 +117,10 @@
   .action-btn:hover {
     opacity: 0.7;
   }
-  #downloadAllVCFBtn {
-    margin: 15px 0;
-    background: #00cc66;
-    border: none;
-    color: #121212;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  /* -- Messages Section -- */
-  #messagesSection table {
-    margin-top: 15px;
-  }
-  #messagesSection th, #messagesSection td {
-    word-break: break-word;
-  }
-  /* -- Statistiques -- */
-  #statsSection .stats-filters {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 15px;
-  }
-  #statsSection .stats-filters button {
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background: #333;
-    color: #eee;
-    font-weight: 600;
-    transition: background 0.3s ease;
-  }
-  #statsSection .stats-filters button.active {
-    background: #00cc66;
-    color: #121212;
-  }
-  #statsSection .stats-total {
-    font-size: 20px;
-    font-weight: 700;
-    color: #00cc66;
+
+  /* Statistiques */
+  #statsSection .stats-info {
+    font-size: 1.2rem;
     margin-bottom: 15px;
   }
   .progress-bar-container {
@@ -162,7 +129,6 @@
     overflow: hidden;
     height: 25px;
     max-width: 600px;
-    margin-bottom: 40px;
   }
   .progress-bar-fill {
     height: 100%;
@@ -170,7 +136,8 @@
     width: 0%;
     transition: width 1s ease;
   }
-  /* -- Footer Edition -- */
+
+  /* Footer */
   #footerSection textarea {
     width: 100%;
     min-height: 150px;
@@ -186,7 +153,7 @@
     margin-top: 10px;
     background: #00cc66;
     border: none;
-    padding: 12px 18px;
+    padding: 12px 20px;
     color: #121212;
     font-weight: 700;
     border-radius: 12px;
@@ -196,9 +163,10 @@
   #footerSection button:hover {
     background: #009944;
   }
+
   /* Responsive */
   @media(max-width: 600px) {
-    header nav a {
+    nav a {
       margin: 0 8px;
       font-size: 1rem;
     }
@@ -217,18 +185,19 @@
   <div><strong>Admin Ralph Xpert</strong></div>
   <nav>
     <a href="#" id="navContact" class="active">Contact</a>
-    <a href="#" id="navMessages">Messages</a>
-    <a href="#" id="navStats">Statistiques</a>
     <a href="#" id="navFooter">Footer</a>
-    <a href="#" id="logoutBtn" style="color:#cc3300; cursor:pointer; font-weight:700;">Déconnexion</a>
+    <a href="#" id="navStats">Statistiques</a>
   </nav>
 </header>
 
 <main>
-  <!-- CONTACT -->
+  <!-- Contact Section -->
   <section id="contactSection" class="active">
     <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
-    <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
+    <div style="margin: 10px 0;">
+      <button id="deleteAllBtn" title="Supprimer tous les contacts">🗑️ Supprimer tout</button>
+      <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tout (VCF)</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -238,104 +207,62 @@
         </tr>
       </thead>
       <tbody id="contactTableBody">
-        <!-- Liste des contacts -->
+        <!-- Contacts list -->
       </tbody>
     </table>
   </section>
 
-  <!-- MESSAGES -->
-  <section id="messagesSection">
-    <h2>Messages reçus</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Sujet</th>
-          <th>Message</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody id="messagesTableBody">
-        <!-- Messages list -->
-      </tbody>
-    </table>
+  <!-- Footer Section -->
+  <section id="footerSection">
+    <h2>Modifier le Footer</h2>
+    <textarea id="footerTextArea" placeholder="Éditez le contenu du footer ici..."></textarea>
+    <button id="saveFooterBtn">Sauvegarder</button>
   </section>
 
-  <!-- STATISTIQUES -->
+  <!-- Statistiques Section -->
   <section id="statsSection">
-    <div class="stats-filters">
-      <button class="active" data-filter="immediate">Immédiat</button>
-      <button data-filter="today">Aujourd'hui</button>
-      <button data-filter="week">Cette semaine</button>
-    </div>
-    <div class="stats-total" id="statsTotal">Total visiteurs: 0 | Total inscrits: 0</div>
+    <div class="stats-info" id="statsVisiteurs">Visiteurs : 0</div>
+    <div class="stats-info" id="statsInscrits">Inscriptions : 0</div>
     <div class="progress-bar-container" title="Progression">
       <div class="progress-bar-fill" id="progressBar"></div>
     </div>
   </section>
-
-  <!-- FOOTER -->
-  <section id="footerSection">
-    <h2>Modifier le Footer</h2>
-    <textarea id="footerTextArea"></textarea>
-    <button id="saveFooterBtn">Sauvegarder</button>
-  </section>
 </main>
 
 <script>
-  // Vérifier si admin connecté
-  if(localStorage.getItem('adminLoggedIn') !== 'true'){
-    alert('Veuillez vous connecter d\'abord.');
-    window.location.href = 'login.html';
-  }
-
-  // Déconnexion
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('adminLoggedIn');
-    window.location.href = 'login.html';
-  });
-
   // Navigation
   const navContact = document.getElementById('navContact');
-  const navMessages = document.getElementById('navMessages');
-  const navStats = document.getElementById('navStats');
   const navFooter = document.getElementById('navFooter');
+  const navStats = document.getElementById('navStats');
 
   const contactSection = document.getElementById('contactSection');
-  const messagesSection = document.getElementById('messagesSection');
-  const statsSection = document.getElementById('statsSection');
   const footerSection = document.getElementById('footerSection');
+  const statsSection = document.getElementById('statsSection');
 
   function switchSection(section) {
-    [contactSection, messagesSection, statsSection, footerSection].forEach(s => s.classList.remove('active'));
-    [navContact, navMessages, navStats, navFooter].forEach(n => n.classList.remove('active'));
+    [contactSection, footerSection, statsSection].forEach(s => s.classList.remove('active'));
+    [navContact, navFooter, navStats].forEach(n => n.classList.remove('active'));
 
-    if (section === 'contact') {
+    if(section === 'contact'){
       contactSection.classList.add('active');
       navContact.classList.add('active');
-      afficherContacts();
-    } else if (section === 'messages') {
-      messagesSection.classList.add('active');
-      navMessages.classList.add('active');
-      afficherMessages();
-    } else if (section === 'stats') {
-      statsSection.classList.add('active');
-      navStats.classList.add('active');
-      afficherStats();
-    } else if (section === 'footer') {
+      loadContacts();
+    } else if(section === 'footer'){
       footerSection.classList.add('active');
       navFooter.classList.add('active');
-      chargerFooter();
+      loadFooter();
+    } else if(section === 'stats'){
+      statsSection.classList.add('active');
+      navStats.classList.add('active');
+      loadStats();
     }
   }
 
   navContact.addEventListener('click', e => { e.preventDefault(); switchSection('contact'); });
-  navMessages.addEventListener('click', e => { e.preventDefault(); switchSection('messages'); });
-  navStats.addEventListener('click', e => { e.preventDefault(); switchSection('stats'); });
   navFooter.addEventListener('click', e => { e.preventDefault(); switchSection('footer'); });
+  navStats.addEventListener('click', e => { e.preventDefault(); switchSection('stats'); });
 
-  // Gestion Contacts
+  // Contacts
   function getContacts() {
     return JSON.parse(localStorage.getItem('utilisateursRécents')) || [];
   }
@@ -343,10 +270,9 @@
     localStorage.setItem('utilisateursRécents', JSON.stringify(contacts));
   }
 
-  function afficherContacts() {
-    const contacts = getContacts().slice().reverse(); // ordre monte (dernier en premier)
+  function loadContacts(){
+    const contacts = getContacts().slice().reverse();
     const filter = document.getElementById('contactSearch').value.toLowerCase();
-
     const tbody = document.getElementById('contactTableBody');
     tbody.innerHTML = '';
 
@@ -365,29 +291,38 @@
       });
   }
 
-  document.getElementById('contactSearch').addEventListener('input', afficherContacts);
+  document.getElementById('contactSearch').addEventListener('input', loadContacts);
 
-  // Supprimer contact
+  // Delete one contact
   document.getElementById('contactTableBody').addEventListener('click', e => {
-    if(e.target.classList.contains('delete')) {
+    if(e.target.classList.contains('delete')){
       const index = parseInt(e.target.getAttribute('data-index'));
       const contacts = getContacts();
-      if(confirm(`Voulez-vous vraiment supprimer ${contacts[index].nom} ?`)) {
+      if(confirm(`Voulez-vous vraiment supprimer ${contacts[index].nom} ?`)){
         contacts.splice(index, 1);
         saveContacts(contacts);
-        afficherContacts();
+        loadContacts();
         alert('Contact supprimé.');
       }
     }
-    if(e.target.classList.contains('edit')) {
+    if(e.target.classList.contains('edit')){
       alert('Fonction modifier pas encore implémentée.');
     }
   });
 
-  // Télécharger tous les contacts en VCF
+  // Delete all contacts
+  document.getElementById('deleteAllBtn').addEventListener('click', () => {
+    if(confirm('Voulez-vous vraiment supprimer tous les contacts ?')){
+      localStorage.removeItem('utilisateursRécents');
+      loadContacts();
+      alert('Tous les contacts ont été supprimés.');
+    }
+  });
+
+  // Download all contacts as VCF
   document.getElementById('downloadAllVCFBtn').addEventListener('click', () => {
     const contacts = getContacts();
-    if(contacts.length === 0) {
+    if(contacts.length === 0){
       alert('Aucun contact à télécharger.');
       return;
     }
@@ -410,24 +345,40 @@ END:VCARD
     URL.revokeObjectURL(url);
   });
 
-  // Gestion Messages
-  function getMessages() {
-    return JSON.parse(localStorage.getItem('messagesContact')) || [];
-  }
-  function saveMessages(msgs) {
-    localStorage.setItem('messagesContact', JSON.stringify(msgs));
+  // Footer
+  function loadFooter(){
+    const footerContent = localStorage.getItem('footerContent') || `<p>© 2025 RALPH XPERT PROGRAMME. Tous droits réservés.</p>`;
+    document.getElementById('footerTextArea').value = footerContent;
   }
 
-  function afficherMessages() {
-    const messages = getMessages().slice().reverse();
-    const tbody = document.getElementById('messagesTableBody');
-    tbody.innerHTML = '';
+  document.getElementById('saveFooterBtn').addEventListener('click', () => {
+    const val = document.getElementById('footerTextArea').value;
+    localStorage.setItem('footerContent', val);
+    alert('Footer sauvegardé !');
+  });
 
-    if(messages.length === 0){
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">Aucun message reçu.</td></tr>';
-      return;
-    }
+  // Statistiques
+  function getVisiteurs(){
+    return JSON.parse(localStorage.getItem('visiteursStats')) || [];
+  }
+  function compterVisiteurs(){
+    return getVisiteurs().length;
+  }
+  function getInscrits(){
+    return getContacts().length;
+  }
+  function loadStats(){
+    const visiteurs = compterVisiteurs();
+    const inscrits = getInscrits();
+    document.getElementById('statsVisiteurs').textContent = `Visiteurs : ${visiteurs}`;
+    document.getElementById('statsInscrits').textContent = `Inscriptions : ${inscrits}`;
+    let pct = visiteurs > 0 ? Math.min((inscrits / visiteurs) * 100, 100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+  }
 
-    messages.forEach(msg => {
-      const tr = document.createElement('tr');
-      const date = new Date(msg.date ||
+  // Initial load
+  switchSection('contact');
+</script>
+
+</body>
+</html>
