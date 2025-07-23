@@ -32,6 +32,7 @@ function loadContacts() {
     list.appendChild(item);
   });
 
+  
   // Update counters
   document.getElementById("totalCount").textContent = contacts.length;
   document.getElementById("statTotal").textContent = contacts.length;
@@ -130,3 +131,31 @@ function downloadVCF() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+// Ranmase kontak yo nan localStorage
+function loadContacts() {
+  const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+  const tableBody = document.getElementById("contact-list");
+  const countElement = document.getElementById("contact-count");
+
+  // Vider tab la
+  tableBody.innerHTML = "";
+
+  contacts.forEach((contact, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${contact.name}</td>
+      <td>${contact.phone}</td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  // Afiche kantite
+  if (countElement) {
+    countElement.textContent = contacts.length;
+  }
+}
+
+// Chaje kontak yo lè paj admin lan louvri
+window.addEventListener("DOMContentLoaded", loadContacts);
