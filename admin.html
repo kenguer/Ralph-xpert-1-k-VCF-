@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Admin Ralph Xpert</title>
 <style>
-  /* Styles de base et reset */
+  /* Reset & base */
   * {
     box-sizing: border-box;
   }
@@ -22,6 +22,8 @@
   a:hover {
     text-decoration: underline;
   }
+
+  /* Header */
   header {
     background: #1e1e1e;
     padding: 15px 20px;
@@ -48,7 +50,7 @@
     margin: 20px auto 40px auto;
   }
 
-  /* Sections - affichage */
+  /* Sections hidden by default */
   section {
     display: none;
   }
@@ -56,20 +58,20 @@
     display: block;
   }
 
-  /* -- Contact Section -- */
+  /* Contact Section */
   #contactSection {
     margin-bottom: 30px;
   }
   #contactSearch {
     margin-bottom: 15px;
-  }
-  #contactSearch input {
-    padding: 8px 12px;
-    font-size: 1rem;
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+    padding: 10px 15px;
+    font-size: 1rem;
     border-radius: 8px;
     border: none;
+    background: #222;
+    color: #ddd;
   }
   table {
     width: 100%;
@@ -82,7 +84,6 @@
     padding: 12px 10px;
     border-bottom: 1px solid #333;
     text-align: left;
-    vertical-align: middle;
   }
   th {
     background: #007f3f;
@@ -116,19 +117,25 @@
   .action-btn:hover {
     opacity: 0.7;
   }
+
   #downloadAllVCFBtn {
-    margin: 15px 0;
+    margin: 15px 0 25px 0;
     background: #00cc66;
     border: none;
     color: #121212;
-    padding: 12px 20px;
+    padding: 12px 25px;
     border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px #009933aa;
+    transition: background-color 0.3s ease;
+  }
+  #downloadAllVCFBtn:hover {
+    background-color: #009944;
   }
 
-  /* -- Messages Section -- */
+  /* Messages Section */
   #messagesSection table {
     margin-top: 15px;
   }
@@ -136,7 +143,7 @@
     word-break: break-word;
   }
 
-  /* -- Statistiques -- */
+  /* Stats Section */
   #statsSection .stats-filters {
     margin-bottom: 20px;
     display: flex;
@@ -151,10 +158,13 @@
     color: #eee;
     font-weight: 600;
     transition: background 0.3s ease;
+    box-shadow: 0 0 5px transparent;
   }
-  #statsSection .stats-filters button.active {
+  #statsSection .stats-filters button.active,
+  #statsSection .stats-filters button:hover {
     background: #00cc66;
     color: #121212;
+    box-shadow: 0 0 8px #00cc66;
   }
   #statsSection .stats-total {
     font-size: 20px;
@@ -177,7 +187,7 @@
     transition: width 1s ease;
   }
 
-  /* -- Footer Edition -- */
+  /* Footer Section */
   #footerSection textarea {
     width: 100%;
     min-height: 150px;
@@ -188,20 +198,90 @@
     border-radius: 12px;
     font-family: 'Segoe UI', sans-serif;
     font-size: 1rem;
+    resize: vertical;
+    box-shadow: inset 0 0 6px #00cc66aa;
   }
   #footerSection button {
-    margin-top: 10px;
+    margin-top: 12px;
     background: #00cc66;
     border: none;
-    padding: 12px 18px;
+    padding: 14px 22px;
     color: #121212;
     font-weight: 700;
     border-radius: 12px;
     cursor: pointer;
     transition: background 0.3s ease;
+    box-shadow: 0 4px 8px #009933cc;
   }
   #footerSection button:hover {
     background: #009944;
+  }
+
+  /* Login Modal */
+  #loginModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  #loginBox {
+    background: #1e1e1e;
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px #00cc66aa;
+    width: 320px;
+    max-width: 90%;
+  }
+  #loginBox h2 {
+    margin-bottom: 25px;
+    color: #00cc66;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  #loginBox label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ddd;
+  }
+  #loginBox input[type="text"],
+  #loginBox input[type="password"] {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    background: #222;
+    color: #ddd;
+    font-size: 1rem;
+    box-shadow: inset 0 0 6px #00cc66bb;
+  }
+  #loginBox button {
+    width: 100%;
+    padding: 12px 0;
+    background: #00cc66;
+    border: none;
+    color: #121212;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px #009933cc;
+    transition: background 0.3s ease;
+  }
+  #loginBox button:hover {
+    background: #009944;
+  }
+  #loginError {
+    color: #cc3300;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-align: center;
+    display: none;
   }
 
   /* Responsive */
@@ -216,22 +296,39 @@
     .action-btn {
       font-size: 16px;
     }
+    #loginBox {
+      width: 90%;
+      padding: 20px 25px;
+    }
   }
 </style>
 </head>
 <body>
 
-<header>
+<!-- Login Modal -->
+<div id="loginModal">
+  <div id="loginBox">
+    <h2>Connexion Admin</h2>
+    <div id="loginError">Identifiant ou mot de passe incorrect</div>
+    <label for="usernameInput">Nom d'utilisateur</label>
+    <input type="text" id="usernameInput" autocomplete="off" />
+    <label for="passwordInput">Mot de passe</label>
+    <input type="password" id="passwordInput" />
+    <button id="loginBtn">Se connecter</button>
+  </div>
+</div>
+
+<header style="display:none;">
   <div><strong>Admin Ralph Xpert</strong></div>
   <nav>
-    <a href="#" id="navContact" class="active">Contacts</a>
+    <a href="#" id="navContact" class="active">Contact</a>
     <a href="#" id="navMessages">Messages</a>
     <a href="#" id="navStats">Statistiques</a>
     <a href="#" id="navFooter">Footer</a>
   </nav>
 </header>
 
-<main>
+<main style="display:none;">
   <!-- CONTACT -->
   <section id="contactSection" class="active">
     <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
@@ -244,9 +341,7 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody id="contactTableBody">
-        <!-- Liste des contacts -->
-      </tbody>
+      <tbody id="contactTableBody"></tbody>
     </table>
   </section>
 
@@ -263,9 +358,7 @@
           <th>Date</th>
         </tr>
       </thead>
-      <tbody id="messagesTableBody">
-        <!-- Messages list -->
-      </tbody>
+      <tbody id="messagesTableBody"></tbody>
     </table>
   </section>
 
@@ -291,9 +384,44 @@
 </main>
 
 <script>
-  // Vérifier la connexion
-  if(sessionStorage.getItem('isLoggedIn') !== 'true') {
-    window.location.href = 'login.html';
+  // Admin Credentials
+  const ADMIN_USERNAME = 'Ralph';
+  const ADMIN_PASSWORD = 'Ralph509';
+
+  // Elements
+  const loginModal = document.getElementById('loginModal');
+  const usernameInput = document.getElementById('usernameInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginError = document.getElementById('loginError');
+
+  const header = document.querySelector('header');
+  const main = document.querySelector('main');
+
+  // On login button click
+  loginBtn.addEventListener('click', () => {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      // Save login status in sessionStorage
+      sessionStorage.setItem('adminLoggedIn', 'true');
+      loginModal.style.display = 'none';
+      header.style.display = 'flex';
+      main.style.display = 'block';
+      loginError.style.display = 'none';
+      initAdminPage();
+    } else {
+      loginError.style.display = 'block';
+    }
+  });
+
+  // Auto redirect if already logged in
+  if(sessionStorage.getItem('adminLoggedIn') === 'true') {
+    loginModal.style.display = 'none';
+    header.style.display = 'flex';
+    main.style.display = 'block';
+    initAdminPage();
   }
 
   // Navigation
@@ -344,7 +472,7 @@
   }
 
   function afficherContacts() {
-    const contacts = getContacts().slice().reverse(); // ordre monte (dernier en premier)
+    const contacts = getContacts().slice().reverse();
     const filter = document.getElementById('contactSearch').value.toLowerCase();
 
     const tbody = document.getElementById('contactTableBody');
@@ -404,111 +532,3 @@ END:VCARD
     const blob = new Blob([vcfAll], {type: 'text/vcard'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'contacts_all.vcf';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-
-  // Gestion Messages
-  function getMessages() {
-    return JSON.parse(localStorage.getItem('messagesContact')) || [];
-  }
-  function saveMessages(msgs) {
-    localStorage.setItem('messagesContact', JSON.stringify(msgs));
-  }
-
-  function afficherMessages() {
-    const messages = getMessages().slice().reverse();
-    const tbody = document.getElementById('messagesTableBody');
-    tbody.innerHTML = '';
-
-    if(messages.length === 0){
-      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">Aucun message reçu.</td></tr>';
-      return;
-    }
-
-    messages.forEach(msg => {
-      const tr = document.createElement('tr');
-      const date = new Date(msg.date || Date.now());
-      tr.innerHTML = `
-        <td>${msg.nom}</td>
-        <td>${msg.email}</td>
-        <td>${msg.sujet}</td>
-        <td>${msg.message}</td>
-        <td>${date.toLocaleString()}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  // Statistiques (visiteurs et inscrits)
-  function getVisiteurs() {
-    return JSON.parse(localStorage.getItem('visiteursStats')) || [];
-  }
-  function compterVisiteurs(filter) {
-    const visites = getVisiteurs();
-    const now = Date.now();
-
-    if(filter === 'immediate') return visites.length;
-
-    if(filter === 'today') {
-      const startDay = new Date();
-      startDay.setHours(0,0,0,0);
-      return visites.filter(t => t >= startDay.getTime()).length;
-    }
-
-    if(filter === 'week') {
-      const startWeek = new Date();
-      const day = startWeek.getDay();
-      const diff = startWeek.getDate() - day + (day === 0 ? -6 : 1);
-      startWeek.setDate(diff);
-      startWeek.setHours(0,0,0,0);
-      return visites.filter(t => t >= startWeek.getTime()).length;
-    }
-    return visites.length;
-  }
-
-  function afficherStats() {
-    const contacts = getContacts();
-    let activeFilter = 'immediate';
-    updateStats(activeFilter, contacts);
-
-    const statsBtns = document.querySelectorAll('#statsSection .stats-filters button');
-    statsBtns.forEach(btn => {
-      btn.classList.remove('active');
-      if(btn.dataset.filter === activeFilter) btn.classList.add('active');
-
-      btn.onclick = () => {
-        activeFilter = btn.dataset.filter;
-        statsBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        updateStats(activeFilter, contacts);
-      };
-    });
-  }
-
-  function updateStats(filter, contacts) {
-    const visiteurs = compterVisiteurs(filter);
-    const inscrits = contacts.length;
-
-    document.getElementById('statsTotal').textContent = `Total visiteurs: ${visiteurs} | Total inscrits: ${inscrits}`;
-
-    let progress = visiteurs > 0 ? Math.min((inscrits / visiteurs) * 100, 100) : 0;
-    document.getElementById('progressBar').style.width = progress + '%';
-  }
-
-  // Footer edition
-  function chargerFooter() {
-    const contenu = localStorage.getItem('footerContent') || 
-`<p>© 2025 RALPH XPERT PROGRAMME. Tous droits réservés.</p>
-<p>Contactez-nous dès aujourd'hui : <a href="contact.html" style="color:#00cc66;">📞 Contacter nous / dès aujourd'hui</a></p>`;
-    document.getElementById('footerTextArea').value = contenu;
-  }
-
-  document.getElementById('saveFooterBtn').onclick = () => {
-    localStorage.setItem('footerContent', document.getElementById('footerTextArea').value);
-    alert('Footer sauvegardé !');
-  };
-
-  // Initialisation
