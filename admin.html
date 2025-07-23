@@ -1,443 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Admin Ralph Xpert</title>
-<style>
-  /* Styles simplifiés pour clarté */
-  * { box-sizing: border-box; }
-  body {
-    margin:0; padding:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #ddd;
-  }
-  header {
-    background: #1e1e1e;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 6px #00cc6611;
-  }
-  header nav a {
-    margin: 0 15px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    cursor: pointer;
-    color: #aaa;
-    text-decoration: none;
-  }
-  header nav a.active, header nav a:hover {
-    color: #00cc66;
-    border-bottom: 2px solid #00cc66;
-    padding-bottom: 3px;
-  }
-  main {
-    padding: 20px;
-    max-width: 1000px;
-    margin: 20px auto 40px auto;
-  }
-  section {
-    display: none;
-  }
-  section.active {
-    display: block;
-  }
-  /* Contact */
-  #contactSection {
-    margin-bottom: 30px;
-  }
-  #contactSearch {
-    margin-bottom: 15px;
-    padding: 8px 12px;
-    font-size: 1rem;
-    width: 300px;
-    border-radius: 8px;
-    border: none;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #222;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  th, td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #333;
-    text-align: left;
-  }
-  th {
-    background: #007f3f;
-    color: #fff;
-  }
-  tr:hover {
-    background: #004422aa;
-  }
-  .num-box {
-    background: #333;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-family: monospace;
-    font-weight: 600;
-    width: fit-content;
-  }
-  .actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-  }
-  .action-btn {
-    cursor: pointer;
-    font-size: 18px;
-    color: #00cc66;
-    transition: color 0.2s ease;
-  }
-  .action-btn.delete {
-    color: #cc3300;
-  }
-  .action-btn:hover {
-    opacity: 0.7;
-  }
-  #downloadAllVCFBtn, #deleteAllContactsBtn {
-    margin: 15px 10px 15px 0;
-    background: #00cc66;
-    border: none;
-    color: #121212;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  /* Messages */
-  #messagesSection table {
-    margin-top: 15px;
-  }
-  #messagesSection th, #messagesSection td {
-    word-break: break-word;
-  }
-  /* Statistiques */
-  #statsSection .stats-filters {
-    margin-bottom: 20px;
-    display: flex;
-    gap: 15px;
-  }
-  #statsSection .stats-filters button {
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background: #333;
-    color: #eee;
-    font-weight: 600;
-    transition: background 0.3s ease;
-  }
-  #statsSection .stats-filters button.active {
-    background: #00cc66;
-    color: #121212;
-  }
-  #statsSection .stats-total {
-    font-size: 20px;
-    font-weight: 700;
-    color: #00cc66;
-    margin-bottom: 15px;
-  }
-  .progress-bar-container {
-    background: #333;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 25px;
-    max-width: 600px;
-    margin-bottom: 40px;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00cc66, #009944);
-    width: 0%;
-    transition: width 1s ease;
-  }
-  /* Footer */
-  #footerSection textarea {
-    width: 100%;
-    min-height: 150px;
-    background: #222;
-    color: #ddd;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 1rem;
-  }
-  #footerSection button {
-    margin-top: 10px;
-    background: #00cc66;
-    border: none;
-    padding: 12px 18px;
-    color: #121212;
-    font-weight: 700;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  #footerSection button:hover {
-    background: #009944;
-  }
-  /* Responsive */
-  @media(max-width: 600px) {
-    header nav a {
-      margin: 0 8px;
-      font-size: 1rem;
-    }
-    .actions {
-      gap: 8px;
-    }
-    .action-btn {
-      font-size: 16px;
-    }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel – Ralph Xpert</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-dark text-light">
 
-<header>
-  <div><strong>Admin Ralph Xpert</strong></div>
-  <nav>
-    <a href="#" id="navContact" class="active">Contact</a>
-    <a href="#" id="navStats">Statistiques</a>
-    <a href="#" id="navFooter">Footer</a>
-    <a href="#" id="logoutBtn" style="color:#cc3300; cursor:pointer;">Déconnexion</a>
+  <nav class="navbar navbar-dark bg-black px-4">
+    <span class="navbar-brand mb-0 h1">🔧 Ralph Xpert – Admin Panel</span>
+    <button class="btn btn-outline-light" onclick="logout()">Déconnexion</button>
   </nav>
-</header>
 
-<main>
-  <!-- CONTACT -->
-  <section id="contactSection" class="active">
-    <input type="text" id="contactSearch" placeholder="Rechercher par nom ou numéro..." />
-    <div>
-      <button id="downloadAllVCFBtn" title="Télécharger tous les contacts en VCF">📥 Télécharger tous les contacts (VCF)</button>
-      <button id="deleteAllContactsBtn" title="Supprimer tous les contacts">❌ Supprimer tous les contacts</button>
+  <div class="container mt-4">
+    <ul class="nav nav-tabs" id="adminTabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#contacts" data-bs-toggle="tab">📇 Contacts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#stats" data-bs-toggle="tab">📊 Statistiques</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#footer" data-bs-toggle="tab">⚙️ Footer</a>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-4">
+      <!-- CONTACTS TAB -->
+      <div class="tab-pane fade show active" id="contacts">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <input type="text" class="form-control w-50 me-2" placeholder="🔍 Rechercher..." onkeyup="searchContacts(this.value)">
+          <button class="btn btn-success" onclick="downloadVCF()">📥 Téléch. VCF (<span id="totalCount">0</span>)</button>
+        </div>
+        <div id="contactsList" class="list-group"></div>
+      </div>
+
+      <!-- STATISTIQUES TAB -->
+      <div class="tab-pane fade" id="stats">
+        <h4>Total Contacts: <span id="statTotal">0</span></h4>
+        <p>VCF à jour automatiquement.</p>
+      </div>
+
+      <!-- FOOTER CONFIG -->
+      <div class="tab-pane fade" id="footer">
+        <form onsubmit="saveFooter(); return false;">
+          <div class="mb-3"><label>Nom du site</label><input id="footerName" class="form-control" /></div>
+          <div class="mb-3"><label>Email support</label><input id="footerEmail" class="form-control" /></div>
+          <div class="mb-3"><label>WhatsApp</label><input id="footerWhatsapp" class="form-control" /></div>
+          <div class="mb-3"><label>Description</label><textarea id="footerDesc" class="form-control"></textarea></div>
+          <div class="mb-3"><label>Réseaux Sociaux</label>
+            <input id="footerInsta" placeholder="Instagram" class="form-control my-1"/>
+            <input id="footerFb" placeholder="Facebook" class="form-control my-1"/>
+            <input id="footerTwitter" placeholder="Twitter/X" class="form-control my-1"/>
+          </div>
+          <button type="submit" class="btn btn-primary">💾 Sauvegarder</button>
+        </form>
+      </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Numéro</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="contactTableBody">
-        <!-- Liste des contacts -->
-      </tbody>
-    </table>
-  </section>
+  </div>
 
-  <!-- STATISTIQUES -->
-  <section id="statsSection">
-    <div class="stats-filters">
-      <button class="active" data-filter="immediate">Immédiat</button>
-      <button data-filter="today">Aujourd'hui</button>
-      <button data-filter="week">Cette semaine</button>
-    </div>
-    <div class="stats-total" id="statsTotal">Total visiteurs: 0 | Total inscrits: 0</div>
-    <div class="progress-bar-container" title="Progression">
-      <div class="progress-bar-fill" id="progressBar"></div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <section id="footerSection">
-    <h2>Modifier le Footer</h2>
-    <textarea id="footerTextArea"></textarea>
-    <button id="saveFooterBtn">Sauvegarder</button>
-  </section>
-</main>
-
-<script>
-  // Vérification de connexion
-  if(localStorage.getItem('isAdminLoggedIn') !== 'true') {
-    // Rediriger vers login
-    window.location.href = 'login.html';
-  }
-
-  // Déconnexion
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('isAdminLoggedIn');
-    window.location.href = 'login.html';
-  });
-
-  // Navigation
-  const navContact = document.getElementById('navContact');
-  const navStats = document.getElementById('navStats');
-  const navFooter = document.getElementById('navFooter');
-
-  const contactSection = document.getElementById('contactSection');
-  const statsSection = document.getElementById('statsSection');
-  const footerSection = document.getElementById('footerSection');
-
-  function switchSection(section) {
-    [contactSection, statsSection, footerSection].forEach(s => s.classList.remove('active'));
-    [navContact, navStats, navFooter].forEach(n => n.classList.remove('active'));
-
-    if(section === 'contact') {
-      contactSection.classList.add('active');
-      navContact.classList.add('active');
-      afficherContacts();
-    } else if(section === 'stats') {
-      statsSection.classList.add('active');
-      navStats.classList.add('active');
-      afficherStats();
-    } else if(section === 'footer') {
-      footerSection.classList.add('active');
-      navFooter.classList.add('active');
-      chargerFooter();
+  <script src="admin.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("adminLoggedIn");
+      window.location.href = "login.html";
     }
-  }
-
-  navContact.addEventListener('click', e => { e.preventDefault(); switchSection('contact'); });
-  navStats.addEventListener('click', e => { e.preventDefault(); switchSection('stats'); });
-  navFooter.addEventListener('click', e => { e.preventDefault(); switchSection('footer'); });
-
-  // Gestion Contacts
-  function getContacts() {
-    return JSON.parse(localStorage.getItem('utilisateursRécents')) || [];
-  }
-  function saveContacts(contacts) {
-    localStorage.setItem('utilisateursRécents', JSON.stringify(contacts));
-  }
-
-  function afficherContacts() {
-    const contacts = getContacts().slice().reverse();
-    const filter = document.getElementById('contactSearch').value.toLowerCase();
-
-    const tbody = document.getElementById('contactTableBody');
-    tbody.innerHTML = '';
-
-    contacts.filter(c => c.nom.toLowerCase().includes(filter) || c.numeroComplet.includes(filter))
-      .forEach((contact, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${contact.nom}</strong></td>
-          <td><div class="num-box">${contact.numeroComplet}</div></td>
-          <td class="actions">
-            <span class="action-btn edit" title="Modifier" data-index="${contacts.length - 1 - idx}" style="color:#00cc66;">✏️</span>
-            <span class="action-btn delete" title="Supprimer" data-index="${contacts.length - 1 - idx}" style="color:#cc3300;">🗑️</span>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-  }
-
-  document.getElementById('contactSearch').addEventListener('input', afficherContacts);
-
-  // Supprimer contact individuel
-  document.getElementById('contactTableBody').addEventListener('click', e => {
-    if(e.target.classList.contains('delete')) {
-      const index = parseInt(e.target.getAttribute('data-index'));
-      const contacts = getContacts();
-      if(confirm(`Voulez-vous vraiment supprimer ${contacts[index].nom} ?`)) {
-        contacts.splice(index, 1);
-        saveContacts(contacts);
-        afficherContacts();
-        alert('Contact supprimé.');
-      }
-    }
-    if(e.target.classList.contains('edit')) {
-      alert('Fonction modifier pas encore implémentée.');
-    }
-  });
-
-  // Supprimer tous les contacts
-  document.getElementById('deleteAllContactsBtn').addEventListener('click', () => {
-    if(confirm('Voulez-vous vraiment supprimer tous les contacts ? Cette action est irréversible.')) {
-      localStorage.removeItem('utilisateursRécents');
-      afficherContacts();
-      alert('Tous les contacts ont été supprimés.');
-    }
-  });
-
-  // Télécharger tous les contacts en VCF
-  document.getElementById('downloadAllVCFBtn').addEventListener('click', () => {
-    const contacts = getContacts();
-    if(contacts.length === 0) {
-      alert('Aucun contact à télécharger.');
-      return;
-    }
-    let vcfAll = '';
-    contacts.forEach(c => {
-      vcfAll +=
-`BEGIN:VCARD
-VERSION:3.0
-FN:${c.nom}
-TEL;TYPE=CELL:${c.numeroComplet}
-END:VCARD
-`;
-    });
-    const blob = new Blob([vcfAll], {type: 'text/vcard'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'contacts_all.vcf';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-
-  // Statistiques
-  function getVisiteurs() {
-    return JSON.parse(localStorage.getItem('visiteursStats')) || [];
-  }
-  function compterVisiteurs(filter) {
-    const visites = getVisiteurs();
-
-    if(filter === 'immediate') return visites.length;
-
-    if(filter === 'today') {
-      const startDay = new Date();
-      startDay.setHours(0,0,0,0);
-      return visites.filter(t => t >= startDay.getTime()).length;
-    }
-
-    if(filter === 'week') {
-      const startWeek = new Date();
-      const day = startWeek.getDay();
-      const diff = startWeek.getDate() - day + (day === 0 ? -6 : 1);
-      startWeek.setDate(diff);
-      startWeek.setHours(0,0,0,0);
-      return visites.filter(t => t >= startWeek.getTime()).length;
-    }
-    return visites.length;
-  }
-
-  function afficherStats() {
-    const contacts = getContacts();
-    let activeFilter = 'immediate';
-    updateStats(activeFilter, contacts);
-
-    const statsBtns = document.querySelectorAll('#statsSection .stats-filters button');
-    statsBtns.forEach(btn => {
-      btn.classList.remove('active');
-      if(btn.dataset.filter === activeFilter) btn.classList.add('active');
-
-      btn.onclick = () => {
-        activeFilter = btn.dataset.filter;
-        statsBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        updateStats(activeFilter, contacts);
-      };
-    });
-  }
-
-  function updateStats(filter, contacts) {
-    const visiteurs = compterVisiteurs(filter);
-    const inscrits = contacts.length;
-
-    document.getElementById('statsTotal').textContent = `Total visiteurs: ${visiteurs} | Total inscrits: ${inscrits}`;
-
-    let progress = visiteurs > 0 ? Math.min((inscrits / visiteurs) * 100, 100) : 0;
-    document.getElementById('progressBar').style.width = progress + '%';
-  }
-
-  // Edition Footer
-  function chargerFooter()
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
